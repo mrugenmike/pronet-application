@@ -1,5 +1,6 @@
 app/node_modules*
 app/.idea*
-app/derby.log
-app/metastore_db/
+*derby.log
+*metastore_db
+
 
