@@ -11,14 +11,21 @@ function requireLogin (req, res, next) {
     }
 };
 
-router.get('/',function(req, res) {
-  res.redirect("/dashboard");
+router.get("/",function(req,res){
+    res.render("index.ejs");
 });
 
 router.get("/login",function(req,res){
     res.render("login.ejs",{error:"Please Login"});
 });
 
+router.get("/about",function(req,res){
+   res.render("about.ejs");
+});
+
+router.get("/signup",function(req,res){
+    res.render("signup.ejs");
+});
 
 var user = {uname:"mrugen",password:"password"};
 

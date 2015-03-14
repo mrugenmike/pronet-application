@@ -5,8 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
+//var signup=require('./routes/signup');
 
 var app = express();
 
@@ -32,6 +34,7 @@ app.use(session({
     duration: 30 * 60 * 1000,
     activeDuration: 5 * 60 * 1000
 }));
+
 app.use('/', routes);
 app.use('/users', users);
 
