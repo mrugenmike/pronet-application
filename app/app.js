@@ -4,6 +4,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var http = require('http');
+
+var Client = require('node-rest-client').Client;
+var client = new Client();
 
 
 var routes = require('./routes/index');
@@ -11,6 +15,7 @@ var users = require('./routes/users');
 //var signup=require('./routes/signup');
 
 var app = express();
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -86,7 +91,5 @@ app.use(function(err, req, res, next) {
         error: {}
     });
 });
-
-
 
 module.exports = app;

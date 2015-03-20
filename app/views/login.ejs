@@ -6,7 +6,7 @@
 	<meta name="description" content="">
 	<meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
 	
-	<title>Sign in - Progress</title>
+	<title>Pronet</title>
 
 	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
 	
@@ -22,7 +22,7 @@
 	<!--[if lt IE 9]>
 	<script src="assets/js/html5shiv.js"></script>
 	<script src="assets/js/respond.min.js"></script>
-	<![endif]-->
+    <![endif]-->
 </head>
 
 <body>
@@ -32,7 +32,7 @@
 			<div class="navbar-header">
 				<!-- Button for smallest screens -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-				<a class="navbar-brand" href="/"><img src="assets/images/logo.png" alt="Progressus HTML5 template"></a>
+				<a class="navbar-brand" href="/"><img src="assets/images/logo.png" alt="Pronet" width="50 px" height="50 px"></a>
 			</div>
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav pull-right">
@@ -49,12 +49,12 @@
 
 	<!-- container -->
 	<div class="container">
-
+<!--
 		<ol class="breadcrumb">
 			<li><a href="/">Home</a></li>
 			<li class="active">Sign in</li>
 		</ol>
-
+-->
 		<div class="row">
 			
 			<!-- Article main content -->
@@ -70,13 +70,17 @@
 							<hr>
 							
 							<form method="post" action="/auth">
+                                <div class="top-margin">
+                                    <span role="alert" class="text-danger" name="err"><%=error1%></span>
+                                </div>
+
 								<div class="top-margin">
 									<label>Username/Email <span class="text-danger">*</span></label>
-									<input type="text" class="form-control" name="uname">
+									<input type="email" class="form-control" name="uname" value=<%=email%>>
 								</div>
 								<div class="top-margin">
 									<label>Password <span class="text-danger">*</span></label>
-									<input type="password" class="form-control" name="password">
+									<input type="password" class="form-control" name="password" value=<%=password%>>
 								</div>
 
 								<hr>
