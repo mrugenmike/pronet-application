@@ -64,7 +64,7 @@ router.get("/login",function(req,res){
     res.render("login.ejs",{"error1":"" , "email" :"" , "password" :"" });
 });
 
-router.get("/template",function(req,res){
+router.get("/template",requireLogin,function(req,res){
     res.render("template.ejs");
 });
 
@@ -199,7 +199,8 @@ router.post("/jobpostrest",function(rest_req,rest_res){
 
 
 
-router.post('/logout', function (req, res) {
+router.get('/signout', function (req, res) {
+    req.session.reset();
     res.redirect('/');
 });
 
@@ -228,4 +229,18 @@ function randomValueHex (len) {
         .toString('hex') // convert to hexadecimal format
         .slice(0,len);   // return required number of characters
 }
+router.get("/jobs",requireLogin,function(req,res){
+   res.render("jobsearch")
+});
+
+router.get("/jobs/listings/:searchTerm",function(req,res){
+    client.get("http://localhost:8080/api/v1/jobs/listings?query="+req.param("searchTerm"),function(data){
+        console.log(data);
+        res.send(data);
+    })
+});
+
+router.get("/feeds",requireLogin,function(req,res){
+    res.render("feeds")
+})
 module.exports = router;
