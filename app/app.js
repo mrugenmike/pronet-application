@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var http = require('http');
-
+var express_sess = require('express-session');
 var Client = require('node-rest-client').Client;
 var client = new Client();
 
@@ -27,12 +27,15 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+//app.use(session({ secret: 'keyboard cat' ,resave:true, saveUninitialized:true}));
+
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 //Client Session
 const session = require("client-sessions");
 
-//https://stormpath.com/blog/everything-you-ever-wanted-to-know-about-node-dot-js-sessions/
+
 app.use(session({
     cookieName: 'session',
     secret: 'random_string_goes_here',

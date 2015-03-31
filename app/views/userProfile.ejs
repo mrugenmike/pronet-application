@@ -1,0 +1,229 @@
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+            <meta name="description" content="">
+            <meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+
+            <title>User Profile</title>
+
+            <link rel="shortcut icon" href="assets/images/gt_favicon.png">
+
+            <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+            <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+            <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+            <!-- Custom styles for our template -->
+            <link rel="stylesheet" href="assets/css/bootstrap-theme.css" media="screen" >
+            <link rel="stylesheet" href="assets/css/main.css">
+
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+            <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+            <script src="assets/js/headroom.min.js"></script>
+            <script src="assets/js/jQuery.headroom.min.js"></script>
+            <script src="assets/js/template.js"></script>
+            <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+            <script src="assets/js/mainscript.js"></script>
+
+            <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+            <!--[if lt IE 9]>
+            <script src="assets/js/html5shiv.js"></script>
+            <script src="assets/js/respond.min.js"></script>
+            <![endif]-->
+        </head>
+
+        <body>
+
+            <!-- Fixed navbar -->
+            <div class="navbar navbar-inverse navbar-fixed-top headroom" >
+                <div class="container">
+                    <div class="navbar-header">
+                        <!-- Button for smallest screens -->
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+                        <a class="navbar-brand" href="/"><img src="assets/images/logo.png" width="50 px" height="50 px" alt="Pronet" ></a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav pull-left">
+                            <li><a href="/userhome">Home</a></li>
+                            <li class="active"><a href="/userprofile">Profile</a></li>
+                            <li><a href="/userfollowing">Following</a></li>
+                            <li><a href="/userjobsearch">Jobs</a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav pull-right">
+                            <li>
+                                <div class="span12">
+                                    <form id="custom-search-form" class="form-search form-horizontal pull-right">
+                                        <div class="input-append span12">
+                                            <input type="text" class="search-query mac-style" placeholder="Search for ...">
+                                            <button type="submit" class="btn"><i class="glyphicon glyphicon-search"></i></button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </li>
+                            <li><a class="btn" href="/signout">Sign out</a></li>
+                        </ul>
+                    </div><!--/.nav-collapse -->
+                </div>
+            </div>
+            <!-- /.navbar -->
+            <header id="head" class="secondary"></header>
+            <form method="post" action="#" enctype="multipart/form-data">
+        <div class="container" margin-top="30px">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well well-sm">
+                        <div class="media">
+                            <div class="imgup">
+                                <a class="thumbnail pull-left" href="#">
+
+                                        <img id="userpic" class="media-object" src="assets/images/sample.jpg" width="200 px" height="200 px" >
+                                        <input type="file" id="changeimage" name="userimageinput">
+                                        <button id="imagesubmit" class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+
+                                </a>
+                            </div>
+
+                            <div class="col-sm-1 text-left">
+                            </div>
+                            <div class="media-body">
+                                <div class="editable">
+                                <h2><span role="alert" class="text media-heading ed" name="name">Name</span>
+                                 <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                 <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+                                </h2>
+                                </div>
+
+                                <div class="editable">
+                                <h4><span role="alert" class="text media-heading ed" name="role">Role</span>
+                                    <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                    <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+                                </h4>
+                                </div>
+
+                                <div class="editable">
+                                <h4>
+                                    <span role="alert" class="text media-heading ed" name="region">Region</span>
+                                    <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                    <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button></h4>
+                                </div>
+
+                                <div class="editable">
+                                <h4><span role="alert" class="text media-heading ed" name="education">Education</span>
+                                    <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                    <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+                                </h4>
+                                </div>
+
+                                <div class="editable">
+                                <h4><span role="alert" class="text media-heading ed" name="workex">Work experience</span>
+                                    <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                    <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+                                </h4>
+                                </div>
+
+                                 <p>
+                                    <a href="#" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span> Follow</a>
+                                    <a href="#" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-ban-circle"></span> Unfollow</a>
+                                </p>
+                                <br>
+                                <br>
+                                <p><span class="label label-warning pull-right">150 followers</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well well-sm">
+                        <div class="media"></div>
+                            <div class="media-body editable">
+                                <h4><span role="alert" class="text media-heading">Summary</span>
+                                </h4>
+
+                                <div class="editable">
+                                <br>
+                                <span class="textarea ed" name="summary" id="summ">Summary</span>
+                                    <button type="button" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                    <button class="btn btn-xs btn-action  pull-right" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+                                </div>
+
+                            </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well well-sm" width="1140px" height="99px">
+                        <div class="media">
+                            </div>
+                            <div class="media-body editable">
+                                <h4><span role="alert" class="text media-heading">Education</span>
+                                </h4>
+
+                                <div class="editable">
+                                <br>
+                                <span class="textarea ed" name="educationdetails">Education</span>
+                                    <button type="button" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                    <button class="btn btn-xs btn-action pull-right" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well well-sm">
+                        <div class="media">
+                            </div>
+                            <div class="media-body editable">
+                                <h4><span role="alert" class="text media-heading">Skills</span>
+                                </h4>
+
+                                <div class="editable">
+                                <br>
+                                <span class="textarea ed" name="skills">Skills</span>
+                                    <button type="button" class="btn btn-xs btn-default  pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                    <button class="btn btn-xs btn-action  pull-right" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well well-sm">
+                        <div class="media">
+                            </div>
+                            <div class="media-body" >
+                                <h4><span role="alert" class="text media-heading">Certifications</span>
+                                </h4>
+
+                                <div class="editable">
+                                <br>
+                                <span class="textarea ed" name="certification">Certification</span>
+                                    <button type="button" class="btn btn-xs btn-default  pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                    <button class="btn btn-xs btn-action  pull-right" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+        </form>
+
+        </body>
+        </html>
