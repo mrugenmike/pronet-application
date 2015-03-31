@@ -54,7 +54,7 @@ router.get("/login",function(req,res){
     res.render("login.ejs",{"error1":"" , "email" :"" , "password" :"" });
 });
 
-router.get("/template",function(req,res){
+router.get("/template",requireLogin,function(req,res){
     res.render("template.ejs");
 });
 
@@ -89,11 +89,26 @@ router.post('/auth',function(req,res1){
     });
 });
 
-router.post('/logout', function (req, res) {
+router.get('/signout', function (req, res) {
+    req.session.reset();
     res.redirect('/');
 });
 
 router.get("/dashboard",requireLogin,function(req,res){
     res.render("template");
+})
+
+router.get("/jobs",requireLogin,function(req,res){
+   res.render("jobsearch")
+});
+
+router.get("/jobs/listings/:searchTerm",requireLogin,function(req,res){
+    client.get("http://localhost:8080/api/v1/jobs?query="+req.param("searchTerm"),function(data){
+        res.send(data);
+    })
+});
+
+router.get("/feeds",requireLogin,function(req,res){
+    res.render("feeds")
 })
 module.exports = router;
