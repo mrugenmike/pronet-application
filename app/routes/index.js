@@ -102,8 +102,9 @@ router.get("/jobs",requireLogin,function(req,res){
    res.render("jobsearch")
 });
 
-router.get("/jobs/listings/:searchTerm",requireLogin,function(req,res){
-    client.get("http://localhost:8080/api/v1/jobs?query="+req.param("searchTerm"),function(data){
+router.get("/jobs/listings/:searchTerm",function(req,res){
+    client.get("http://localhost:8080/api/v1/jobs/listings?query="+req.param("searchTerm"),function(data){
+        console.log(data);
         res.send(data);
     })
 });

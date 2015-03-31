@@ -13,6 +13,7 @@ function renderJobListings(jobListings,searchTerm) {
     if(jobListings){
     var jobListingContainer = jQuery("#jobListingsContainer");
     jobListingContainer.css("display","");
+    jobListingContainer.empty(); // remove the existing jobs
     var searchTemplate = jQuery("#listingcount");
     searchTemplate.children("h4").text("Found "+20+" for search term");
     jobListings.forEach(function(listing){
