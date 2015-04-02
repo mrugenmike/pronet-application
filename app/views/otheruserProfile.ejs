@@ -24,7 +24,8 @@
             <script src="/assets/js/jQuery.headroom.min.js"></script>
             <script src="/assets/js/template.js"></script>
             <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-            <script src="/assets/js/mainscript.js"></script>
+            <script src="/javascript/mainscript.js"></script>
+
 
             <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
             <!--[if lt IE 9]>
@@ -113,11 +114,11 @@
                                 </div>
 
                                 <p>
-                                    <a href="#" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span><%=data.follow%></a>
+                                    <a href="#" class="btn btn-xs btn-default pull-right" id="foll"><span class="glyphicon glyphicon-circle"></span><%=data.follow%></a>
                                 </p>
                                 <br>
                                 <br>
-                                <p><span class="label label-warning pull-right"><%=data.numberOfFollowers%> followers</span></p>
+                                <p><span class="label label-warning pull-right"><%=data.followerCount%> followers</span></p>
                             </div>
                         </div>
                     </div>

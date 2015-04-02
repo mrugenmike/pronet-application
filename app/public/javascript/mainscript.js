@@ -1,9 +1,10 @@
 $(document).ready(
 
 function() {
+
     $("button[type='submit']").hide();
     $("#imagesubmit").show();
-
+    $("#foll").show();
     // Edit button
     $("button[type='button']").click(function () {
 

@@ -24,7 +24,7 @@
     <script src="/assets/js/jQuery.headroom.min.js"></script>
     <script src="/assets/js/template.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-    <script src="/assets/js/mainscript.js"></script>
+    <script src="/javascript/followerValidation.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -82,20 +82,25 @@
 <!-- /.navbar -->
 <header id="head" class="secondary"></header>
     <div class="container" margin-top="30px">
+        <form method="post" action="/follow">
         <div class="row">
             <div class="col-md-12">
                 <div class="well well-sm">
                     <div class="media">
-                        <div class="imgup">
-
+                        <form method="post" action="/follow">
+                            <input type="text" hidden="hidden" id="thisID" name="thisID" >
+                            <input type="text" hidden="hidden" id="sampleID" name="sampleID" value=<%=data.id%>|<%=data.Logo%>|<%=data.page%>|<%=data.name%>>
+                            <input type="text" hidden="hidden" id="followerCount" name="followerCount" value=<%=data.followerCount%>>
+                            <div class="imgup">
                             <a class="thumbnail pull-left" >
-                                <img id="userpic" class="media-object" src= <%=data.Logo%> width= "200px" height="200 px" >
+                                <img id="userpic" class="media-object" src= <%=data.Logo%> width= "300px" height="300 px" >
                                 <input type="file" id="changeimage" name="userimageinput">
                              </a>
                         </div>
 
                         <div class="col-sm-1 text-left">
                         </div>
+
                         <div class="media-body">
                             <div class="editable">
                                 <h2><span role="alert" class="text media-heading ed" name="name"><%=data.name%></span>
@@ -107,18 +112,16 @@
                                 </h5>
                             </div>
                             <div class="editable">
-
-
                                 <p>
-                                    <a href="#" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span> Follow</a>
-                                    <a href="#" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-ban-circle"></span> Unfollow</a>
+                                    <button id="foll" class="btn btn-xs btn-action pull-right" type="submit"><span class="glyphicon glyphicon-circle"></span><%=data.follow%></button>
                                 </p>
 
                                 <br>
                                 <br>
-                                <p><span class="label label-warning pull-right">150 followers</span></p>
+                                <p><span id="displayfc"class="label label-warning pull-right"><%=data.followerCount%> followers</span></p>
                             </div>
                         </div>
+                        </form>
                     </div>
                 </div>
             </div>

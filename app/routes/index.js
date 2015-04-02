@@ -114,27 +114,39 @@ router.post('/auth',function(req,res1){
 
 router.get("/user/:userID",requireLogin,function(req,res1){
     var id = req.param("userID");
-    client.get("http://localhost:8080/userprofile/"+id,function(data,res){
+    console.log(req.session.ID);
+    client.get("http://localhost:8080/userprofile/"+id+"/"+req.session.ID,function(data,res){
         console.log(res.statusCode);
-        //console.log(data);
-        if(id == req.session.ID )
-            res1.render("userProfile.ejs", {"data": data});
+        if(res.statusCode != 400)
+        {
+            if((id == req.session.ID) && (req.session.page =='U') )
+                res1.render("userProfile.ejs", {"data": data});
+            else
+                res1.render("otheruserProfile.ejs" , {"data" : data});
+        }
         else
-            res1.render("otheruserProfile.ejs" , {"data" : data});
-
+        {
+            res1.render("error.ejs",{"message" : "User not found"});
+        }
     });
 });
+
 
 router.get("/company/:companyID",requireLogin,function(req,res1){
     var id = req.param("companyID");
     console.log(id);
-    client.get("http://localhost:8080/companyprofile/"+id,function(data,res){
+    client.get("http://localhost:8080/companyprofile/"+id+"/"+req.session.ID,function(data,res){
         console.log(res.statusCode);
-        //console.log(data);
-        if(id == req.session.ID )
-            res1.render("companyprofile.ejs", {"data": data});
+        if(res.statusCode != 400) {
+            if ((id == req.session.ID) && (req.session.page =='C'))
+                res1.render("companyprofile.ejs", {"data": data});
+            else
+                res1.render("othercompanyprofile.ejs", {"data": data});
+        }
         else
-            res1.render("othercompanyprofile.ejs" , {"data" : data});
+        {
+            res1.render("error.ejs",{"message" : "Company not found"});
+        }
     });
 });
 
@@ -169,6 +181,7 @@ router.post("/user/:userID",function(req,res){
     client.put("http://localhost:8080/userprofile/"+req.session.ID,args,function(data,res)
     {
         console.log(res.statusCode);
+        //res1.redirect('/user/'+req.session.ID);
     });
 
 });
@@ -305,5 +318,40 @@ router.post("/companyprofile",function(req,res){
 router.get("/feeds",requireLogin,function(req,res){
     res.render("feeds")
 })
+
+
+router.post("/follow",requireLogin,function(req,res1) {
+    console.log("in follow route");
+    console.log(req.body.thisID);
+    var value = req.body.thisID.split('|');
+    var foll = value[4];
+
+    if(foll == "Follow")
+    {
+        args = {
+            data: {
+                followerId : value[0],
+                followerURL : value[1],
+                followerRole : value[2],
+                followerName : value[3]
+            },
+            headers: {"Content-Type": "application/json"}
+        };
+        console.log(args);
+        client.post("http://localhost:8080/follow/"+req.session.ID, args, function (data, res) {
+            console.log(res.statusCode);
+            console.log(data);
+        });
+    }
+    else
+    {
+        args = {
+            data: { FolloweeID: value[0]},
+            headers: {"Content-Type": "application/json"}
+        };
+        client.delete("http://localhost:8080/follow"+req.session.ID,function (data, res) {
+        });
+    }
+});
 
 module.exports = router;
