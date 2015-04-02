@@ -181,7 +181,10 @@ router.post("/user/:userID",function(req,res){
     client.put("http://localhost:8080/userprofile/"+req.session.ID,args,function(data,res)
     {
         console.log(res.statusCode);
-        //res1.redirect('/user/'+req.session.ID);
+        if(res.statusCode == 200)
+        {
+            redirect("/user/"+id);
+        }
     });
 
 });
@@ -272,11 +275,10 @@ router.get('/signout', function (req, res) {
 });
 
 router.get("/userfollowing",function(req,res){
-    //console.log("user: " + JSON.stringify(req.session.data));
-    //var data = req.session.data;
-    //res.render("following.ejs" , {"data" : data});
-    res.render("following.ejs");
-
+    client.get("http://localhost:8080/following/"+req.session.ID,function(data,res){
+        console.log(data);
+        res.render("following.ejs",{"data":data});
+    });
 });
 
 
