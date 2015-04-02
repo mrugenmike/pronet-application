@@ -4,7 +4,7 @@ var http = require('http');
 var Client = require('node-rest-client').Client;
 var client = new Client();
 var session= require('express-session');
-var sesion_var;
+
 var fs=require('fs');
 var multer  = require('multer');
 router.use(multer());
@@ -15,10 +15,9 @@ var crypto = require('crypto');
 
 aws.config.loadFromPath('AmazonCredentials/AccDetails.json');
 
-
 function requireLogin (req, res, next) {
     console.log("requirelogin");
-    if (!req.session.user) {
+    if (!req.session.ID) {
         console.log("req.user not found");
         res.redirect('/login');
     } else {
@@ -76,8 +75,6 @@ router.post('/userProf',function(req,res1) {
 });*/
 
 router.post('/auth',function(req,res1){
-   console.log("auth username: "+req.body.uname);
-    console.log("auth password: "+req.body.password);
     args={
         data:{email:req.body.uname , password:req.body.password},
         headers:{"Content-Type": "application/json"}
@@ -85,6 +82,7 @@ router.post('/auth',function(req,res1){
     client.post("http://localhost:8080/signin",args,function(data,res)
     {
         console.log(res.statusCode);
+        console.log(data);
         /*console.log(res.statusCode);
         if (res.statusCode != 200) {
             if (data.hasOwnProperty("error")) {
@@ -95,27 +93,84 @@ router.post('/auth',function(req,res1){
             }
         }*/
 
-        if(res.statusCode == 400) {
+        if(res.statusCode == 400)
+        {
             res1.render('login.ejs', {"error1":data.message , "email" :req.body.uname , "password" :req.body.password });
-
         }
         else
         {
-            //alert()
-            //req.session.user = req.body.uname;
-            //req.session.ID = req.body.uname;
-            res1.redirect('/login');
+            req.session.ID = data.id;
+            req.session.page = data.page;
+            if (req.session.page == 'U') {
+                res1.redirect('/user/'+data.id);
+            }
+            else {
+                res1.redirect('/company/' + data.id);
+            }
+
         }
     });
 });
 
-router.get("/company_home",function(req,res){
-    session.uname="xyz";
-    res.render("companyhome.ejs");
+router.get("/user/:userID",requireLogin,function(req,res1){
+    var id = req.param("userID");
+    client.get("http://localhost:8080/userprofile/"+id,function(data,res){
+        console.log(res.statusCode);
+        //console.log(data);
+        if(id == req.session.ID )
+            res1.render("userProfile.ejs", {"data": data});
+        else
+            res1.render("otheruserProfile.ejs" , {"data" : data});
+
+    });
 });
 
-router.get("/companyprofile",function(req,res){
-    res.render("companyprofile.ejs",{"error1":""});
+router.get("/company/:companyID",requireLogin,function(req,res1){
+    var id = req.param("companyID");
+    console.log(id);
+    client.get("http://localhost:8080/companyprofile/"+id,function(data,res){
+        console.log(res.statusCode);
+        //console.log(data);
+        if(id == req.session.ID )
+            res1.render("companyprofile.ejs", {"data": data});
+        else
+            res1.render("othercompanyprofile.ejs" , {"data" : data});
+    });
+});
+
+router.post("/user/:userID",function(req,res){
+    var id = req.param("userID");
+    console.log(id);
+    console.log(JSON.stringify(req.body));
+    console.log(JSON.stringify(req.files));
+
+    // function does not terminate - ask parin / mrugen
+    //TODO update an image
+    //console.log("req"+JSON.stringify(req.files.userimageinput.path));
+    //console.log("mime"+req.files.userimageinput.mimetype)
+    //console.log("img path"+req.files.userimageinput.path);
+    args={
+        data:{
+            id: req.session.ID,
+            name:req.body.name,
+            //imgURL:
+            role:req.body.role,
+            region:req.body.region,
+            education:req.body.education,
+            workExperience:req.body.workex,
+            summary:req.body.summary,
+            educationDetails:req.body.educationdetails,
+            skills:req.body.skills,
+            certifications:req.body.certification
+        },
+        headers:{"Content-Type": "application/json"}
+    };
+    console.log(req.session.ID);
+    client.put("http://localhost:8080/userprofile/"+req.session.ID,args,function(data,res)
+    {
+        console.log(res.statusCode);
+    });
+
 });
 
 router.post("/companyrest",function(req,res){
@@ -197,38 +252,27 @@ router.post("/jobpostrest",function(rest_req,rest_res){
 
 });
 
-
-
 router.get('/signout', function (req, res) {
+    //TODO update lastSeen !!
     req.session.reset();
     res.redirect('/');
 });
 
-//router.get("/dashboard",requireLogin,function(req,res){
-  //  res.render("userProfile.ejs");
-//})
+router.get("/userfollowing",function(req,res){
+    //console.log("user: " + JSON.stringify(req.session.data));
+    //var data = req.session.data;
+    //res.render("following.ejs" , {"data" : data});
+    res.render("following.ejs");
 
-router.get("/dashboard",function(req,res){
-    console.log("hi");
-    console.log(req.body);
-    res.render("userProfile.ejs");
-})
+});
 
-
-router.post("/dashboard",function(req,res){
-    console.log(JSON.stringify(req.body));
-    console.log(JSON.stringify(req.files));
-    //console.log("req"+JSON.stringify(req.files.userimageinput.path));
-    //console.log("mime"+req.files.userimageinput.mimetype)
-    //console.log("img path"+req.files.userimageinput.path);
-
-})
 
 function randomValueHex (len) {
     return crypto.randomBytes(Math.ceil(len/2))
         .toString('hex') // convert to hexadecimal format
         .slice(0,len);   // return required number of characters
 }
+
 router.get("/jobs",requireLogin,function(req,res){
    res.render("jobsearch")
 });
@@ -240,7 +284,26 @@ router.get("/jobs/listings/:searchTerm",function(req,res){
     })
 });
 
+
+router.post("/companyprofile",function(req,res){
+    var id= req.session.ID ;
+
+    args={
+        data:{name:req.body.name , url:req.body.url, id:id}, //take id from session,
+        headers:{"Content-Type": "application/json"}
+    };
+    console.log("args"+JSON.stringify(args));
+    client.put("http://localhost:8080/company/",args,function(data,rest_res)
+    {
+        //        console.log(JSON.stringify(data));
+        console.log(rest_res.statusCode);
+        if(rest_res.statusCode == 201)
+            res.redirect("/companyprofile");
+    });
+});
+
 router.get("/feeds",requireLogin,function(req,res){
     res.render("feeds")
 })
+
 module.exports = router;

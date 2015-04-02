@@ -81,7 +81,6 @@
 </div>
 <!-- /.navbar -->
 <header id="head" class="secondary"></header>
-<form method="post" action="/companyprofile" enctype="multipart/form-data">
     <div class="container" margin-top="30px">
         <div class="row">
             <div class="col-md-12">
@@ -90,16 +89,9 @@
                         <div class="imgup">
 
                             <a class="thumbnail pull-left" >
-
-                                <!--                                        <img id="userpic" class="media-object" src=<%=data.Logo%>  width="200 px" height="200 px" >
-                                        <input type="file" id="companyimage" name="companyimage">
--->
-                                <img id="userpic" class="media-object" src= <%=data.Logo%> width= "300px" height="300 px" >
+                                <img id="userpic" class="media-object" src= <%=data.Logo%> width= "200px" height="200 px" >
                                 <input type="file" id="changeimage" name="userimageinput">
-                                <button id="imagesubmit" class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
-
-
-                            </a>
+                             </a>
                         </div>
 
                         <div class="col-sm-1 text-left">
@@ -107,15 +99,11 @@
                         <div class="media-body">
                             <div class="editable">
                                 <h2><span role="alert" class="text media-heading ed" name="name"><%=data.name%></span>
-                                    <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                    <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
                                 </h2>
                             </div>
                             </br>
                             <div class="editable">
                                 <h5><span role="alert" class="text media-heading ed" name="url"><%=data.URL%></span>
-                                    <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                    <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
                                 </h5>
                             </div>
                             <div class="editable">
@@ -146,8 +134,6 @@
                         <div class="editable">
                             <br>
                                 <span class="textarea ed" name="overview"><%=data.Overview%></span>
-                                <button type="button" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                <button class="btn btn-xs btn-action pull-right" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
                         </div>
                     </div>
                 </div>
@@ -177,7 +163,6 @@
         </div>
     </div>
 
-    </div>
 </form>
 
 </body>

@@ -69,7 +69,6 @@
             </div>
             <!-- /.navbar -->
             <header id="head" class="secondary"></header>
-            <form method="post" action="#" enctype="multipart/form-data">
         <div class="container" margin-top="30px">
             <div class="row">
                 <div class="col-md-12">
@@ -80,7 +79,6 @@
 
                                         <img id="userpic" class="media-object" src= <%=data.img%> width= "200px" height="200 px" >
                                         <input type="file" id="changeimage" name="userimageinput">
-                                        <button id="imagesubmit" class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
 
                                 </a>
                             </div>
@@ -90,42 +88,36 @@
                             <div class="media-body">
                                 <div class="editable">
                                 <h2><span role="alert" class="text media-heading ed" name="name"><%=data.name%></span>
-                                 <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                 <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+
                                 </h2>
                                 </div>
 
                                 <div class="editable">
                                 <h4><span role="alert" class="text media-heading ed" name="role"><%=data.userrole%></span>
-                                    <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                    <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
-                                </h4>
+                                 </h4>
                                 </div>
 
                                 <div class="editable">
                                 <h4>
                                     <span role="alert" class="text media-heading ed" name="region"><%=data.region%></span>
-                                    <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                    <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button></h4>
-                                </div>
+                                 </div>
 
                                 <div class="editable">
                                 <h4><span role="alert" class="text media-heading ed" name="education"><%=data.education%></span>
-                                    <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                    <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
-                                </h4>
+                                 </h4>
                                 </div>
 
                                 <div class="editable">
                                 <h4><span role="alert" class="text media-heading ed" name="workex"><%=data.workex%></span>
-                                    <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                    <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
-                                </h4>
+                                 </h4>
                                 </div>
 
+                                <p>
+                                    <a href="#" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span><%=data.follow%></a>
+                                </p>
                                 <br>
                                 <br>
-                                <p><span class="label label-warning pull-right">150 followers</span></p>
+                                <p><span class="label label-warning pull-right"><%=data.numberOfFollowers%> followers</span></p>
                             </div>
                         </div>
                     </div>
@@ -144,8 +136,7 @@
                                 <div class="editable">
                                 <br>
                                 <span class="textarea ed" name="summary" id="summ"><%=data.summary%></span>
-                                    <button type="button" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                    <button class="btn btn-xs btn-action  pull-right" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+
                                 </div>
 
                             </div>
@@ -166,8 +157,6 @@
                                 <div class="editable">
                                 <br>
                                 <span class="textarea ed" name="educationdetails"><%=data.EducationDetails%></span>
-                                    <button type="button" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                    <button class="btn btn-xs btn-action pull-right" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
                                 </div>
 
                             </div>
@@ -188,8 +177,6 @@
                                 <div class="editable">
                                 <br>
                                 <span class="textarea ed" name="skills"><%=data.Skills%></span>
-                                    <button type="button" class="btn btn-xs btn-default  pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                    <button class="btn btn-xs btn-action  pull-right" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
                                 </div>
 
                             </div>
@@ -210,8 +197,6 @@
                                 <div class="editable">
                                 <br>
                                 <span class="textarea ed" name="certification"><%=data.Cerifications%></span>
-                                    <button type="button" class="btn btn-xs btn-default  pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                    <button class="btn btn-xs btn-action  pull-right" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
                                 </div>
                             </div>
                         </div>
