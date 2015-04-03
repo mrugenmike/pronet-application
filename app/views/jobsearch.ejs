@@ -26,6 +26,11 @@
     <![endif]-->
 
     <link rel="stylesheet" href="/stylesheets/search.css">
+    <!-- Custom JS for Ajax and Pagination-->
+
+    <script src="javascripts/class.js"></script>
+    <script src="javascript/jobsearch/JobSearch.js"> </script>
+    <script src="javascript/jobsearch/Pagination.js"> </script>
 </head>
 
 <body>
@@ -78,6 +83,12 @@
             </div>
         </form>
     </section>
+
+    <div  style="">
+        <ul class="pagination" style="display: none">
+
+        </ul>
+    </div>
     <section id="jobListingsContainer" style="display:none">
         <div class="row" id="listingcount"><h4></h4></div>
     </section>
@@ -86,16 +97,13 @@
 
 
 <!-- JavaScript libs are placed at the end of the document so the pages load faster -->
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 <script src="assets/js/headroom.min.js"></script>
 <script src="assets/js/jQuery.headroom.min.js"></script>
 <script src="assets/js/template.js"></script>
 
 
-<!-- Custom JS for Ajax-->
 
-<script src="/javascript/JobSearch.js"></script>
 
 </body>
 </html>

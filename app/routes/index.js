@@ -9,8 +9,6 @@ var fs=require('fs');
 var multer  = require('multer');
 router.use(multer());
 var aws=require('aws-sdk');
-var redis = require('redis');
-var client1 = redis.createClient(6379,'127.0.0.1');
 var crypto = require('crypto');
 
 aws.config.loadFromPath('AmazonCredentials/AccDetails.json');
@@ -189,39 +187,6 @@ router.post("/user/:userID",function(req,res){
 
 });
 
-router.post("/companyrest",function(req,res){
-    console.log("req"+JSON.stringify(req.files.file.path));
-    var imgUrl=req.files.file.path;
-    var companyId = randomValueHex(12);
-    console.log("img path"+req.files.file.path);
-
-    var s3bucket = new aws.S3({params: {Bucket: 'usergallery'}});
-    //console.log(JSON.stringify(req.body));
-    fs.readFile(imgUrl, function(err, data){
-        if (err) { console.log(err); }
-        else {
-            s3bucket.upload({Key: companyId, Body: data, ContentType: req.files.file.mimetype},function(err,data){
-                if (err) {
-                    console.log("Error uploading data: ", err);
-                }
-                else {
-                    console.log("Successfully uploaded data to bucket :"+JSON.stringify(data));
-
-                    var params = { Key: 'companyname'};
-                    var url = s3bucket.getSignedUrl('getObject', params);
-                    console.log("Got a signed URL:", url);
-
-                }
-                client1.set('company:'+companyId,url,function(){
-
-
-                });
-                res.status(200).send("Insertion successful");
-            });
-        }
-    });
-});
-
 
 router.get("/jobpost",function(req,res){
     res.render("jobpost.ejs",{"error1":""});
@@ -292,9 +257,15 @@ router.get("/jobs",requireLogin,function(req,res){
    res.render("jobsearch")
 });
 
-router.get("/jobs/listings/:searchTerm",function(req,res){
-    client.get("http://localhost:8080/api/v1/jobs/listings?query="+req.param("searchTerm"),function(data){
+router.get("/jobs/listings/:searchTerm/:skip/:limit",function(req,res){
+    var searchTerm = req.param("searchTerm");
+    var skip = req.param("skip");
+    var limit = req.param("limit");
+    client.get("http://localhost:8080/api/v1/jobs/listings?query="+ searchTerm+"&&skip="+ skip+"&&limit="+ limit,function(data,response){
         console.log(data);
+        res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+        res.header("Pragma", "no-cache");
+        res.header("Expires", 0);
         res.send(data);
     })
 });
