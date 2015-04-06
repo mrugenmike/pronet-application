@@ -38,7 +38,7 @@
 				<ul class="nav navbar-nav pull-right">
 					<li><a href="/">Home</a></li>
 					<li><a href="/about">About</a></li>
-					<li class="active"><a class="btn" href="/login">Sign in</a></li>
+					<li><a class="btn" href="/signin">Sign in</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>
@@ -69,7 +69,7 @@
 							<h3 class="thin text-center">Register a new account</h3>
 							<hr>
 
-							<form method="post" action="/signuprest">
+							<form method="post" action="/signup">
 
                                 <div class="top-margin">
                                     <span role="alert" class="text-danger" name="err"><%=error1%></span>
@@ -103,11 +103,8 @@
 								<hr>
 
 								<div class="row">
-									<div class="col-lg-4">
-										                       
-									</div>
-									<div class="col-lg-4 text-right">
-										<button class="btn btn-action" type="submit">Register</button>
+									<div class="col-lg-7 text-right">
+										<button class="btn btn-action" type="submit" >Register</button>
 									</div>
 								</div>
 							</form>

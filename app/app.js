@@ -46,7 +46,6 @@ app.use(session({
 app.use('/', routes);
 app.use('/users', users);
 
-var user = {uname:"mrugen",password:"password"};
 app.use(function(req, res, next) {
     if (req.session && req.session.user) {
         {
@@ -71,10 +70,6 @@ app.use(function(req, res, next) {
     next(err);
 });
 
-// error handlers
-
-// development error handler
-// will print stacktrace
 if (app.get('env') === 'development') {
     app.use(function(err, req, res, next) {
         res.status(err.status || 500);

@@ -49,27 +49,23 @@
                             <li class="active"><a href="/userprofile" >Profile</a></li>
                             <li><a href="/userfollowing">Following</a></li>
                             <li><a href="/jobs">Jobs</a></li>
+                            <li><a href="/applications">Applications</a></li>
                         </ul>
 
                         <ul class="nav navbar-nav pull-right">
                             <li>
-                                <div class="span12">
-                                    <form id="custom-search-form" class="form-search form-horizontal pull-right">
-                                        <div class="input-append span12">
-                                            <input type="text" class="search-query mac-style" placeholder="Search for ...">
-                                            <button type="submit" class="btn"><i class="glyphicon glyphicon-search"></i></button>
-                                        </div>
-                                    </form>
-                                </div>
+                                <a href="#"><span class="label label-default active" name="lastseen" id="lastSeen" >Last Seen: <%=lastseen%></span></a>
                             </li>
-                            <li><a class="btn" href="/signout">Sign out</a></li>
+                            <li>
+                                <a class="btn" href="/signout">Sign out</a>
+                            </li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
             </div>
             <!-- /.navbar -->
             <header id="head" class="secondary"></header>
-            <form method="post" action="#" enctype="multipart/form-data">
+
         <div class="container" margin-top="30px">
             <div class="row">
                 <div class="col-md-12">
@@ -77,14 +73,15 @@
                         <div class="media">
                             <div class="imgup">
                                 <a class="thumbnail pull-left" href="#">
-
+                                    <form method="post" action="/imgupload" enctype="multipart/form-data">
                                         <img id="userpic" class="media-object" src= <%=data.img%> width= "200px" height="200 px" >
                                         <input type="file" id="changeimage" name="userimageinput">
                                         <button id="imagesubmit" class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
-
+                                    </form>
                                 </a>
                             </div>
 
+                            <form method="post" action="/userDetails" enctype="multipart/form-data">
                             <div class="col-sm-1 text-left">
                             </div>
                             <div class="media-body">
@@ -152,8 +149,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="row">
                 <div class="col-md-12">
                     <div class="well well-sm" width="1140px" height="99px">
@@ -217,9 +212,7 @@
                         </div>
                     </div>
                 </div>
-
         </div>
         </form>
-
         </body>
         </html>
