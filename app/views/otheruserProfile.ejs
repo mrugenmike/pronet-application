@@ -24,7 +24,7 @@
             <script src="/assets/js/jQuery.headroom.min.js"></script>
             <script src="/assets/js/template.js"></script>
             <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-            <script src="/javascript/mainscript.js"></script>
+            <script src="/javascript/followerValidation.js"></script>
 
 
             <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -47,8 +47,8 @@
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav pull-left">
                             <li><a href="/feeds">Home</a></li>
-                            <li class="active"><a href="/userprofile">Profile</a></li>
-                            <li><a href="/userfollowing">Following</a></li>
+                            <li><a href="/userprofile">Profile</a></li>
+                            <li><a href="/following">Following</a></li>
                             <li><a href="/jobs">Jobs</a></li>
                         </ul>
 
@@ -75,7 +75,12 @@
                 <div class="col-md-12">
                     <div class="well well-sm">
                         <div class="media">
-                            <div class="imgup">
+                            <form method="post" action="/follow">
+                                <input type="text" hidden="hidden" id="thisID" name="thisID" >
+                                <input type="text" hidden="hidden" id="sampleID" name="sampleID" value=<%=data.id%>|<%=data.img%>|<%=data.page%>|<%=data.name%>>
+                                <input type="text" hidden="hidden" id="followerCount" name="followerCount" value=<%=data.followerCount%>>
+
+                                <div class="imgup">
                                 <a class="thumbnail pull-left" href="#">
 
                                         <img id="userpic" class="media-object" src= <%=data.img%> width= "200px" height="200 px" >
@@ -114,11 +119,11 @@
                                 </div>
 
                                 <p>
-                                    <a href="#" class="btn btn-xs btn-default pull-right" id="foll"><span class="glyphicon glyphicon-circle"></span><%=data.follow%></a>
+                                    <button id="foll" class="btn btn-xs btn-action pull-right" type="submit"><span class="glyphicon glyphicon-circle"></span><%=data.follow%></button>
                                 </p>
                                 <br>
                                 <br>
-                                <p><span class="label label-warning pull-right"><%=data.followerCount%> followers</span></p>
+                                <p><span id="displayfc"class="label label-warning pull-right"><%=data.followerCount%> followers</span></p>
                             </div>
                         </div>
                     </div>

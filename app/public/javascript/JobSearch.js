@@ -17,7 +17,13 @@ function renderJobListings(jobListings,searchTerm) {
     var searchTemplate = jQuery("#listingcount");
     searchTemplate.children("h4").text("Found "+20+" for search term");
     jobListings.forEach(function(listing){
-    var div = '<div class="row" name="listing" class="listingTemplate"><div class="blockquote-box blockquote-primary clearfix col-md-offset-2"> <div class="square pull-left" name="company-img-div"> <img src='+listing.companyLogoUrl+' class="img-thumbnail"/> </div> <h4 name="position-title">'+listing.positionTitle+'</h4> <p name="description">'+listing.description+'</p> </div> </div>';
+    var div = '<div class="row" name="listing" class="listingTemplate">' +
+        '<div class="blockquote-box blockquote-primary clearfix col-md-offset-2"> ' +
+        '<div class="square pull-left" name="company-img-div"> ' +
+        '<img src='+listing.companyLogoUrl+' class="img-thumbnail"/> </div> ' +
+        '<h4 name="position-title">'+listing.positionTitle+'</h4> ' +
+        '<p name="description">'+listing.description+'</p> </div> ' +
+        '</div>';
     jobListingContainer.append(div);
     });
     }

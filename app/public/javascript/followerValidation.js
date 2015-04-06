@@ -12,18 +12,20 @@ function() {
             f = "Follow";
             $("#foll").text("Unfollow");
 
-            var fc = $("#followerCount").val();
-            $("#followerCount").val(fc++);
-            console.log(fc);
+            var fc =parseInt($("#followerCount").val())+1;
+            //console.log(fc);
+            $("#followerCount").val(fc);
+            //console.log(fc);
             $("#displayfc").text(fc+" followers");
         }
         else
         {
             f = "UnFollow";
             $("#foll").text("Follow");
-            var fc = $("#followerCount").val();
-            $("#followerCount").val(fc--);
-            console.log(fc);
+            var fc =parseInt($("#followerCount").val())-1;
+            //console.log(fc);
+            $("#followerCount").val(fc);
+            //console.log(fc);
             $("#displayfc").text(fc+" followers");
         }
 

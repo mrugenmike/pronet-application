@@ -4,13 +4,13 @@ function() {
 
     $("button[type='submit']").hide();
     $("#imagesubmit").show();
-    $("#foll").show();
+    //$("#foll").show();
     // Edit button
     $("button[type='button']").click(function () {
 
         var parent = $(this).parent();
         var oldtext = $(parent).children(".ed").text();
-        var titles = ["Name", "Role", "Region", "Education", "Work experience", "Summary", "Education", "Skills", "Certification"];
+        var titles = ["Name", "Role", "Region", "Education", "Work Experience", "Summary", "Education Details", "Skills", "Certification"];
         var oldname = "";
 
         $(parent).children(".ed").each(function () {
@@ -24,23 +24,21 @@ function() {
             });
         });
 
-        console.log("Hi" + oldname);
+        console.log("Hi " + oldname + " "+oldtext);
         //$("#editedText").remove();
         if ($(parent).children("textarea").length == 0) {
             var newsum = document.createElement("textarea");
             $(newsum).attr("style", "width:70%;");
             $(newsum).insertBefore(this);
-
             $(newsum).attr("name", oldname);
-            if ($.inArray(oldtext, titles) == -1) {
-                $(textbox).text(oldtext);
-            }
-            else {
-                $(textbox).text("");
+            $(newsum).attr("value", oldtext);
+            $(newsum).text(oldtext);
+
+            if ($.inArray(oldtext, titles) != -1) {
+                $(newsum).text("");
+                //$(newsum).text(oldtext);
             }
 
-            $(newsum).attr("value", oldtext);
-            //$(newsum).text(oldtext);
         }
         else {
 

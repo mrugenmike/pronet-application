@@ -183,7 +183,7 @@ router.post("/user/:userID",function(req,res){
         console.log(res.statusCode);
         if(res.statusCode == 200)
         {
-            redirect("/user/"+id);
+            //redirect("/user/"+id);
         }
     });
 
@@ -274,10 +274,11 @@ router.get('/signout', function (req, res) {
     res.redirect('/');
 });
 
-router.get("/userfollowing",function(req,res){
+router.get("/userfollowing",function(req,res1){
     client.get("http://localhost:8080/following/"+req.session.ID,function(data,res){
         console.log(data);
-        res.render("following.ejs",{"data":data});
+        //res.send(data);
+        res1.render("following.ejs",{data:data});
     });
 });
 
@@ -319,6 +320,11 @@ router.post("/companyprofile",function(req,res){
 
 router.get("/feeds",requireLogin,function(req,res){
     res.render("feeds")
+});
+
+
+router.get("/userprofile",requireLogin,function(req,res){
+    res.redirect('/user/'+req.session.ID);
 })
 
 
@@ -348,10 +354,10 @@ router.post("/follow",requireLogin,function(req,res1) {
     else
     {
         args = {
-            data: { FolloweeID: value[0]},
+            data: { followerId : value[0]},
             headers: {"Content-Type": "application/json"}
         };
-        client.delete("http://localhost:8080/follow"+req.session.ID,function (data, res) {
+        client.delete("http://localhost:8080/follow/"+req.session.ID,args,function (data, res) {
         });
     }
 });
