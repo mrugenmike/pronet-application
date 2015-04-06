@@ -73,9 +73,9 @@ router.post('/signin',function(req,res1){
     };
     client.post(backendroute+"/signin",args,function(data,res)
     {
-        if(res.statusCode == 400)
+        if(res.statusCode !=200)
         {
-            res1.render('login.ejs', {"error1":data.message , "email" :req.body.uname , "password" :req.body.password });
+            res1.redirect("/signin");//redirect to the page when auth fails
         }
         else
         {
@@ -90,6 +90,9 @@ router.post('/signin',function(req,res1){
             }
 
         }
+    }).on("error",function(err){
+        console.info("error occured"+err);
+        res1.redirect("/signin");//redirect on sign in failure
     });
 });
 
