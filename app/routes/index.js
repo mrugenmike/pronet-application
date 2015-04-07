@@ -20,9 +20,9 @@ aws.config.loadFromPath('AmazonCredentials/AccDetails.json');
 var backendroute = "http://localhost:8080/api/v1";
 function requireLogin (req, res, next) {
     console.log("requirelogin");
-    if (!req.session.ID) {
+    if (!(req.session.ID && req.session.page && req.session.lastseen)) {
         console.log("req.user not found");
-        res.redirect('/login');
+        res.redirect('/signin');
     } else {
         next();
     }
@@ -73,6 +73,7 @@ router.post('/signin',function(req,res1){
     };
     client.post(backendroute+"/signin",args,function(data,res)
     {
+        console.log("response from server"+res.statusCode);
         if(res.statusCode !=200)
         {
             res1.redirect("/signin");//redirect to the page when auth fails
