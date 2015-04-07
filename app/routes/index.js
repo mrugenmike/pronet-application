@@ -52,10 +52,6 @@ router.get("/userfollowing",function(req,res1){
     res1.redirect('/following/'+req.session.ID);
 });
 
-router.get("/jobs",function(req,res1){
-    res1.redirect('/jobs/'+req.session.ID);
-});
-
 router.get("/applications",function(req,res1){
     res1.redirect('/applications/'+req.session.ID);
 });
