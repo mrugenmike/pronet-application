@@ -9,8 +9,6 @@ var fs=require('fs');
 var multer  = require('multer');
 router.use(multer());
 var aws=require('aws-sdk');
-var redis = require('redis');
-var client1 = redis.createClient(6379,'127.0.0.1');
 var crypto = require('crypto');
 var events = require('events');
 var EventEmitter = events.EventEmitter;
@@ -206,14 +204,10 @@ router.post("/imgupload",function(req,res1){
                     console.log("Successfully uploaded data to bucket :" + JSON.stringify(data));
                     var params = {Key: imagName};
                     var url = s3bucket.getSignedUrl('getObject', params);
-                    //console.log("Got a signed URL:", url);
-                    //eventOnUpload.emit('store',imagName,url);
-
                     args={
                         data:{img: url},
                         headers:{"Content-Type": "application/json"}
                     };
-                    console.log(req.session.ID);
 
                     if (req.session.page == 'U') {
                         client.put(backendroute + "/userprofile/" + req.session.ID, args, function (data, res) {
@@ -240,16 +234,6 @@ router.post("/imgupload",function(req,res1){
     });
 });
 
-
-eventOnUpload.on('store',function(name,url){
-    client1.set(name,url);
-    console.log(url);
-    client1.get(name,function(error,data){
-        console.log("DATA::"+data);
-    });
-
-    // image updation backend
-});
 
 router.post("/follow",requireLogin,function(req,res1) {
     console.log("in follow route");
