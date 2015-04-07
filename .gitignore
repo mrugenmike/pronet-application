@@ -3,5 +3,7 @@ app/.idea*
 *derby.log
 *metastore_db
 app/*.log
-
+.DS_Store
+app/.DS_Store
+app/dump.rdb
 
