@@ -81,59 +81,64 @@
                                 </a>
                             </div>
 
-                            <form method="post" action="/userDetails" enctype="multipart/form-data">
-                            <div class="col-sm-1 text-left">
-                            </div>
-                            <div class="media-body">
-                                <div class="editable">
-                                <h2><span role="alert" class="text media-heading ed" name="name"><%=data.name%></span>
-                                 <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                 <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
-                                </h2>
+                            <form method="post" action="/userDetails">
+
+                                <div class="col-sm-1 text-left">
                                 </div>
 
-                                <div class="editable">
-                                <h4><span role="alert" class="text media-heading ed" name="role"><%=data.userrole%></span>
-                                    <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                    <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
-                                </h4>
-                                </div>
+                                <div class="media-body">
+                                    <div class="editable">
+                                    <h2><span role="alert" class="text media-heading ed" name="user_name"><%=data.name%></span>
+                                     <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                     <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+                                    </h2>
+                                    </div>
 
-                                <div class="editable">
-                                <h4>
-                                    <span role="alert" class="text media-heading ed" name="region"><%=data.region%></span>
-                                    <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                    <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button></h4>
-                                </div>
+                                    <div class="editable">
+                                    <h4><span role="alert" class="text media-heading ed" name="role"><%=data.userrole%></span>
+                                        <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                        <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+                                    </h4>
+                                    </div>
 
-                                <div class="editable">
-                                <h4><span role="alert" class="text media-heading ed" name="education"><%=data.education%></span>
-                                    <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                    <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
-                                </h4>
-                                </div>
+                                    <div class="editable">
+                                    <h4>
+                                        <span role="alert" class="text media-heading ed" name="region"><%=data.region%></span>
+                                        <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                        <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button></h4>
+                                    </div>
 
-                                <div class="editable">
-                                <h4><span role="alert" class="text media-heading ed" name="workex"><%=data.workex%></span>
-                                    <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                    <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
-                                </h4>
-                                </div>
+                                    <div class="editable">
+                                    <h4><span role="alert" class="text media-heading ed" name="education"><%=data.education%></span>
+                                        <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                        <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+                                    </h4>
+                                    </div>
+
+                                    <div class="editable">
+                                    <h4><span role="alert" class="text media-heading ed" name="workex"><%=data.workex%></span>
+                                        <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                        <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+                                    </h4>
+                                    </div>
 
                                 <br>
                                 <br>
                                 <p><span class="label label-warning pull-right"><%=data.followerCount%> followers</span></p>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <form method="post" action="/userDetails">
 
             <div class="row">
                 <div class="col-md-12">
                     <div class="well well-sm">
                         <div class="media"></div>
+
                             <div class="media-body editable">
                                 <h4><span role="alert" class="text media-heading">Summary</span>
                                 </h4>
@@ -160,7 +165,7 @@
 
                                 <div class="editable">
                                 <br>
-                                <span class="textarea ed" name="educationdetails"><%=data.EducationDetails%></span>
+                                <span class="textarea ed" name="educationDetails"><%=data.EducationDetails%></span>
                                     <button type="button" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
                                     <button class="btn btn-xs btn-action pull-right" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
                                 </div>
@@ -204,7 +209,7 @@
 
                                 <div class="editable">
                                 <br>
-                                <span class="textarea ed" name="certification"><%=data.Cerifications%></span>
+                                <span class="textarea ed" name="certifications"><%=data.Certifications%></span>
                                     <button type="button" class="btn btn-xs btn-default  pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
                                     <button class="btn btn-xs btn-action  pull-right" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
                                 </div>
@@ -212,7 +217,8 @@
                         </div>
                     </div>
                 </div>
+            </form>
         </div>
-        </form>
+
         </body>
         </html>

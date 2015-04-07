@@ -66,6 +66,7 @@ router.get("/feeds",function(req,res1){
     res1.redirect('/feeds/'+req.session.ID);
 });
 
+
 router.post('/signin',function(req,res1){
     args={
         data:{email:req.body.uname , password:req.body.password},
@@ -126,6 +127,7 @@ router.get("/user/:userID",requireLogin,function(req,res1){
     var id = req.param("userID");
     console.log(req.session.ID);
     client.get(backendroute+"/userprofile/"+id+"/"+req.session.ID,function(data,res){
+        console.log(data);
         console.log(res.statusCode);
         if(res.statusCode != 400)
         {
@@ -170,35 +172,78 @@ router.get("/following/:userID",function(req,res1){
     });
 });
 
-router.post("/imgupload",function(req,res){
+router.post("/imgupload",function(req,res1){
 
     var imagName=req.session.ID;
-    var imgUrl=req.files.userimageinput.path;
+    var imgUrl;
+    var mimetype;
+
+    if (req.session.page == 'U')
+    {
+        imgUrl=req.files.userimageinput.path;
+        mimetype = req.files.userimageinput.mimetype;
+    }
+    else
+    {
+        imgUrl=req.files.imageinput.path;
+        mimetype = req.files.imageinput.mimetype;
+    }
+
     var s3bucket = new aws.S3({params: {Bucket: 'project.bucket1'}});
+
     fs.readFile(imgUrl, function(err, data){
         if (err) { console.log(err); }
+
         else {
             console.log(imagName);
             console.log(imgUrl);
-            s3bucket.upload({Key: imagName, Body: data, ContentType: req.files.userimageinput.mimetype},function(err,data){
+            s3bucket.upload({Key: imagName, Body: data, ContentType: mimetype},function(err,data){
                 if (err)
                 {
                     console.log("Error uploading data: ", err);
                 }
                 else {
-                    console.log("Successfully uploaded data to bucket :"+JSON.stringify(data));
-                    var params = { Key: imagName};
+                    console.log("Successfully uploaded data to bucket :" + JSON.stringify(data));
+                    var params = {Key: imagName};
                     var url = s3bucket.getSignedUrl('getObject', params);
                     //console.log("Got a signed URL:", url);
-                    eventOnUpload.emit('store',imagName,url);
+                    //eventOnUpload.emit('store',imagName,url);
+
+                    args={
+                        data:{img: url},
+                        headers:{"Content-Type": "application/json"}
+                    };
+                    console.log(req.session.ID);
+
+                    if (req.session.page == 'U') {
+                        client.put(backendroute + "/userprofile/" + req.session.ID, args, function (data, res) {
+                            console.log(res.statusCode);
+                            if (res.statusCode == 200) {
+                                res1.redirect("/user/"+req.session.ID);
+                            }
+                        });
+                    }
+                    else
+                    {
+                        //TODO Parin: company image upload route
+                        //client.put(backendroute + "/userprofile/" + req.session.ID, args, function (data, res) {
+                            console.log(res.statusCode);
+                            if (res.statusCode == 200) {
+                                //redirect("/user/"+id);
+                            }
+                        //});
+                    }
                 }
+
             });
         }
     });
 });
-eventOnUpload.on('store',function(name,url){
 
+
+eventOnUpload.on('store',function(name,url){
     client1.set(name,url);
+    console.log(url);
     client1.get(name,function(error,data){
         console.log("DATA::"+data);
     });
@@ -210,6 +255,8 @@ router.post("/follow",requireLogin,function(req,res1) {
     console.log("in follow route");
     console.log(req.body.thisID);
     var value = req.body.thisID.split('|');
+    var followeerole = value[2];
+    var followeeID = value[0];
     var foll = value[4];
     if(foll == "Follow")
     {
@@ -225,7 +272,15 @@ router.post("/follow",requireLogin,function(req,res1) {
         console.log(args);
         client.post(backendroute+"/follow/"+req.session.ID, args, function (data, res) {
             console.log(res.statusCode);
-            console.log(data);
+           if(res.statusCode == 201)
+           {
+               console.log(followeerole);
+               console.log(followeeID);
+               if(followeerole == "C")
+                   res1.redirect("/company/"+followeeID);
+               else
+                   res1.redirect("/user/"+followeeID);
+           }
         });
     }
     else
@@ -235,47 +290,32 @@ router.post("/follow",requireLogin,function(req,res1) {
             headers: {"Content-Type": "application/json"}
         };
         client.delete(backendroute+"/follow/"+req.session.ID,args,function (data, res) {
+            if(res.statusCode == 200) {
+                if (followeerole == "C")
+                    res1.redirect("/company/" + followeeID);
+                else
+                    res1.redirect("/user/" + followeeID);
+            }
         });
     }
 });
 
-router.post("/user/:userID",function(req,res){
-    var id = req.param("userID");
-    console.log(id);
+router.post("/userDetails",function(req,res1){
     console.log(JSON.stringify(req.body));
-    console.log(JSON.stringify(req.files));
-
-    // function does not terminate - ask parin / mrugen
-    //TODO update an image
-    //console.log("req"+JSON.stringify(req.files.userimageinput.path));
-    //console.log("mime"+req.files.userimageinput.mimetype)
-    //console.log("img path"+req.files.userimageinput.path);
     args={
-        data:{
-            id: req.session.ID,
-            name:req.body.name,
-            //imgURL:
-            role:req.body.role,
-            region:req.body.region,
-            education:req.body.education,
-            workExperience:req.body.workex,
-            summary:req.body.summary,
-            educationDetails:req.body.educationdetails,
-            skills:req.body.skills,
-            certifications:req.body.certification
-        },
+        data:req.body,
         headers:{"Content-Type": "application/json"}
     };
     console.log(req.session.ID);
+    console.log(args);
     client.put(backendroute+"/userprofile/"+req.session.ID,args,function(data,res)
     {
         console.log(res.statusCode);
         if(res.statusCode == 200)
         {
-            redirect("/user/"+id);
+            res1.redirect("/user/"+req.session.ID);
         }
     });
-
 });
 
 

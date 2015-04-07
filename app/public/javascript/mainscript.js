@@ -7,7 +7,6 @@ function() {
     //$("#foll").show();
     // Edit button
     $("button[type='button']").click(function () {
-
         var parent = $(this).parent();
         var oldtext = $(parent).children(".ed").text();
         var titles = ["Name", "Role", "Region", "Education", "Work Experience", "Summary", "Education Details", "Skills", "Certification"];
@@ -41,7 +40,6 @@ function() {
 
         }
         else {
-
             var textbox = $(parent).children("textarea");
             $(textbox).attr("name", oldname);
             console.log(titles.indexOf(oldtext));
@@ -72,14 +70,12 @@ function() {
         $(parent).children(".ed").show();
         $(this).hide();
         $("#imagesubmit").show();
-
         $(parent).children("button[type='button']").show();
     });
 
     $("#changeimage").change(function() {
 
         if (this.files && this.files[0]) {
-
             var reader = new FileReader();
             reader.onload = function (e) {
                 $('#userpic').attr('src', e.target.result);
@@ -92,7 +88,4 @@ function() {
     //$("input:file").change(function(){
     //    $('form').submit();
     //})
-}
-
-
-);
+});
