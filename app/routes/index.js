@@ -108,12 +108,15 @@ router.post("/signup",function(req,res1){
 
     client.post(backendroute+"/signup",args,function(data,res)
     {
-        if(res.statusCode == 400)
-            res1.render('signup.ejs', {"error1":data.message, "name" :req.body.name , "email" :req.body.email, "password" :req.body.password ,  "role" :req.body.role});
-        else
+        if(res.statusCode == 201){
+            res1.redirect('/signin'); // redirect user to sign in
+        } else // send him back to sign in page
         {
-            res1.redirect('/signin');
+            res1.render('signup.ejs', {"error1":data.message, "name" :req.body.name , "email" :req.body.email, "password" :req.body.password ,  "role" :req.body.role});
         }
+    }).on("error",function(err){
+        console.log("Error occured while signing up user");
+         res1.redirect("/signup");
     });
 
 });
