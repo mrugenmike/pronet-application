@@ -37,7 +37,7 @@ function renderJobListings(jobListings,searchTerm,totalTerms) {
         searchTemplate.children("h4").html("Found "+totalTerms+" results for <i>"+searchTerm+"</i>");
         jobListingContainer.append(searchTemplate);
         jobListings.forEach(function(listing){
-    var div = '<div class="row" name="listing" class="listingTemplate"><div class="blockquote-box blockquote-primary clearfix col-md-offset-2"> <div class="square pull-left" name="company-img-div"> <img src='+listing.companyLogoUrl+' class="img-thumbnail"/> </div> <h4 name="position-title">'+listing.positionTitle+'</h4> <p name="description">'+listing.description+'</p> </div> </div>';
+    var div = '<div class="row" name="listing" class="listingTemplate"><div class="blockquote-box blockquote-primary clearfix col-md-offset-2"> <div class="square pull-left" name="company-img-div"> <img src='+listing.companyLogoUrl+' class="img-thumbnail"/> </div> <h4 name="position-title"><a href="/jobs/'+listing.jobId+'">'+listing.positionTitle+'</a></h4> <p name="description">'+listing.description+'</p> </div> </div>';
     jobListingContainer.append(div);
     });
     }
