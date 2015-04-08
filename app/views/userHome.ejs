@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+
+    <title>User Profile</title>
+
+    <link rel="shortcut icon" href="/assets/images/gt_favicon.png">
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.1.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+
+    <!-- Custom styles for our template -->
+    <link rel="stylesheet" href="/assets/css/bootstrap-theme.css" media="screen" >
+    <link rel="stylesheet" href="/assets/css/main.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="/assets/js/headroom.min.js"></script>
+    <script src="/assets/js/jQuery.headroom.min.js"></script>
+    <script src="/assets/js/template.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <script src="/javascript/feeds.js"></script>
+
+    <script type="text/javascript">
+        var ID = <%-JSON.stringify(ID)%>;
+        var data1 =<%-JSON.stringify(data)%>;
+    </script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/assets/js/html5shiv.js"></script>
+    <script src="/assets/js/respond.min.js"></script>
+
+    <![endif]-->
+</head>
+
+<body>
+
+<!-- Fixed navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top headroom" >
+    <div class="container">
+        <div class="navbar-header">
+            <!-- Button for smallest screens -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+            <a class="navbar-brand" href="/"><img src="/assets/images/logo.png" width="50 px" height="50 px" alt="Pronet" ></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav pull-left">
+                <li class="active"><a href="/home">Home</a></li>
+                <li><a href="/userprofile" >Profile</a></li>
+                <li><a href="/userfollowing">Following</a></li>
+                <li><a href="/jobs">Jobs</a></li>
+                <li><a href="/applications">Applications</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav pull-right">
+                <li>
+                    <a href="#"><span class="label label-default active" name="lastseen" id="lastSeen" >Last Seen: <%=lastseen%></span></a>
+                </li>
+                <li>
+                    <a class="btn" href="/signout">Sign out</a>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+<!-- /.navbar -->
+<header id="head" class="secondary"></header>
+
+
+
+<div class="container" margin-top="30px">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well well-sm">
+                <div class="media">
+                    <div class="media block-update-card">
+                        <a class="pull-left" href="/userprofile">
+                            <img class="media-object update-card-MDimentions" src=<%=image%> >
+                        </a>
+                        <div class="media-body update-card-body">
+                            <h2 class="media-heading"><a href="/userprofile"><%=name%></a></h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container" margin-top="30px">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="well well-sm">
+                <div class="media">
+
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <button class="btn btn-primary" type="submit" id="postfeeds">Add a Post</button>
+                        </div>
+                    </div>
+
+                    <div class="row" id="posttext">
+                    <form method="post" action="/userposts">
+                        <div class="col-lg-12 text-center" id="postbox">
+                            <input type="textarea" class="form-control" name="postdescription" id="postdescription" style="height: 100px" >
+                            <button class="btn btn-xs btn-primary pull-right " type="submit" id="postsubmit">
+                                <span class="glyphicon glyphicon-circle"></span>Submit</button>
+                        </div>
+                    </form>
+                    </div>
+
+                    <div class="row">
+                    </div>
+                    <br>
+                    <div>
+                    </div>
+
+                    <form method="post" action="/deleteuserposts">
+                    <div id="postsfeeds">
+                    </div>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

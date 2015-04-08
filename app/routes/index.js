@@ -56,8 +56,8 @@ router.get("/applications",function(req,res1){
     res1.redirect('/applications/'+req.session.ID);
 });
 
-router.get("/feeds",function(req,res1){
-    res1.redirect('/feeds/'+req.session.ID);
+router.get("/home",function(req,res1){
+    res1.redirect('/home/'+req.session.ID);
 });
 
 
@@ -125,6 +125,10 @@ router.get("/user/:userID",requireLogin,function(req,res1){
         console.log(res.statusCode);
         if(res.statusCode != 400)
         {
+            //for feeds
+            req.session.name = data.name;
+            req.session.userImage = data.img;
+
             if((id == req.session.ID) && (req.session.page =='U') )
                 res1.render("userProfile.ejs", {"data": data , lastseen:req.session.lastseen });
             else
@@ -142,10 +146,11 @@ router.get("/company/:companyID",requireLogin,function(req,res1){
     var id = req.param("companyID");
     console.log(id);
     client.get(backendroute+"/companyprofile/"+id+"/"+req.session.ID,function(data,res){
+    //client.get(backendroute+"/profile/"+req.session.ID,function(data,res){
         console.log(res.statusCode);
         if(res.statusCode != 400) {
             if ((id == req.session.ID) && (req.session.page =='C'))
-                res1.render("companyprofile.ejs", {"data": data});
+                res1.render("companyhome.ejs", {"data": data});
             else
                 res1.render("othercompanyprofile.ejs", {"data": data});
         }
@@ -183,7 +188,7 @@ router.post("/imgupload",function(req,res1){
         mimetype = req.files.imageinput.mimetype;
     }
 
-    var s3bucket = new aws.S3({params: {Bucket: 'project.bucket1'}});
+    var s3bucket = new aws.S3({params: {Bucket: 'pronet'}});
 
     fs.readFile(imgUrl, function(err, data){
         if (err) { console.log(err); }
@@ -200,8 +205,12 @@ router.post("/imgupload",function(req,res1){
                     console.log("Successfully uploaded data to bucket :" + JSON.stringify(data));
                     var params = {Key: imagName};
                     var url = s3bucket.getSignedUrl('getObject', params);
+                    //console.log("Got a signed URL:", url);
+                    //eventOnUpload.emit('store',imagName,url);
+                    var finalURL= url.split('?');
+
                     args={
-                        data:{img: url},
+                        data:{img: finalURL[0]},
                         headers:{"Content-Type": "application/json"}
                     };
 
@@ -387,10 +396,48 @@ router.post("/companyprofile",function(req,res){
     });
 });
 
-router.get("/feeds",requireLogin,function(req,res){
-    res.render("feeds")
+router.get("/home/:userID",requireLogin,function(req,res1) {
+    var id = req.param("userID");
+    console.log(id);
+    client.get(backendroute + "/usersfeeds/" + id , function (data, res) {
+        console.log(res.statusCode);
+        console.log(data);
+        res1.render("userHome.ejs", {
+            "data": data,
+            lastseen: req.session.lastseen,
+            name: req.session.name,
+            image: req.session.userImage,
+            ID: req.session.ID
+        });
+
+    });
+});
+
+router.get("/home",requireLogin,function(req,res1) {
+    res1.redirect("/home/"+req.session.ID);
 });
 
 
+router.post("/userposts",function(req,res1){
+    console.log(JSON.stringify(req.body));
+    args={data :
+            {
+                feed_title:"",
+                feed_description: req.body.postdescription,
+                feed_role : "U",
+                feed_username : req.session.name,
+                feed_userimage : req.session.userImage
+            },
+           headers:{"Content-Type": "application/json"}
+    };
+    //console.log(req.session.ID);
+    console.log(args);
+    client.post(backendroute+"/userfeeds/"+req.session.ID,args,function(data,res)
+    {
+        console.log(res.statusCode);
+        res1.redirect("/home/"+req.session.ID);
+
+    });
+});
 
 module.exports = router;
