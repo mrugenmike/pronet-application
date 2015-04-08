@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d1d8bbff-d0ef-417f-b9cc-9fbda35f3da5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/public/javascript/feeds.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/userHome.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/companyhome.ejs" afterPath="$PROJECT_DIR$/app/views/companyhome.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/public/javascript/following.js" afterPath="$PROJECT_DIR$/app/public/javascript/following.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/careers.ejs" afterPath="$PROJECT_DIR$/app/views/careers.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/companyprofile.ejs" afterPath="$PROJECT_DIR$/app/views/companyprofile.ejs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/index.js" afterPath="$PROJECT_DIR$/app/routes/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/public/assets/css/main.css" afterPath="$PROJECT_DIR$/app/public/assets/css/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/userProfile.ejs" afterPath="$PROJECT_DIR$/app/views/userProfile.ejs" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/jobpost.ejs" afterPath="$PROJECT_DIR$/app/views/jobpost.ejs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="pronet-application.iws" />
@@ -33,28 +30,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="225" column="39" selection-start-line="225" selection-start-column="39" selection-end-line="225" selection-end-column="39" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="companyhome.ejs" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/views/companyhome.ejs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.2639594">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="posts.ejs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/posts.ejs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-11.875">
-              <caret line="103" column="60" selection-start-line="103" selection-start-column="60" selection-end-line="103" selection-end-column="60" />
+            <state vertical-scroll-proportion="-91.258064">
+              <caret line="224" column="13" selection-start-line="224" selection-start-column="13" selection-end-line="224" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -63,8 +40,8 @@
       <file leaf-file-name="careers.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/careers.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.75">
-              <caret line="131" column="82" selection-start-line="131" selection-start-column="82" selection-end-line="131" selection-end-column="82" />
+            <state vertical-scroll-proportion="-17.041666">
+              <caret line="151" column="0" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -73,38 +50,18 @@
       <file leaf-file-name="jobdescription.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/jobdescription.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.625">
-              <caret line="20" column="0" selection-start-line="19" selection-start-column="4" selection-end-line="20" selection-end-column="0" />
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="buttonstyle.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/public/assets/css/buttonstyle.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="jobpost.ejs" pinned="false" current-in-tab="false">
+      <file leaf-file-name="jobpost.ejs" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/jobpost.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="userProfile.ejs" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/userProfile.ejs">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="53" column="0" selection-start-line="45" selection-start-column="20" selection-end-line="53" selection-end-column="0" />
+            <state vertical-scroll-proportion="2.5126903">
+              <caret line="147" column="7" selection-start-line="147" selection-start-column="7" selection-end-line="147" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -113,8 +70,8 @@
       <file leaf-file-name="companyprofile.ejs" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/companyprofile.ejs">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-5.181818">
-              <caret line="180" column="55" selection-start-line="180" selection-start-column="55" selection-end-line="180" selection-end-column="55" />
+            <state vertical-scroll-proportion="-12.5">
+              <caret line="74" column="61" selection-start-line="74" selection-start-column="61" selection-end-line="74" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -153,14 +110,14 @@
         <option value="$PROJECT_DIR$/app/views/following.ejs" />
         <option value="$PROJECT_DIR$/app/public/javascript/following.js" />
         <option value="$PROJECT_DIR$/app/app.js" />
-        <option value="$PROJECT_DIR$/app/views/jobpost.ejs" />
         <option value="$PROJECT_DIR$/app/views/jobdescription.ejs" />
         <option value="$PROJECT_DIR$/app/views/posts.ejs" />
-        <option value="$PROJECT_DIR$/app/views/careers.ejs" />
         <option value="$PROJECT_DIR$/app/public/assets/css/buttonstyle.css" />
-        <option value="$PROJECT_DIR$/app/views/companyprofile.ejs" />
-        <option value="$PROJECT_DIR$/app/routes/index.js" />
         <option value="$PROJECT_DIR$/app/views/companyhome.ejs" />
+        <option value="$PROJECT_DIR$/app/views/jobpost.ejs" />
+        <option value="$PROJECT_DIR$/app/views/careers.ejs" />
+        <option value="$PROJECT_DIR$/app/routes/index.js" />
+        <option value="$PROJECT_DIR$/app/views/companyprofile.ejs" />
       </list>
     </option>
   </component>
@@ -814,6 +771,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="79" column="16" selection-start-line="79" selection-start-column="16" selection-end-line="79" selection-end-column="16" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -828,6 +786,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="27" column="45" selection-start-line="27" selection-start-column="45" selection-end-line="27" selection-end-column="45" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -835,6 +794,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.20765027">
           <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -857,6 +817,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="20" column="46" selection-start-line="20" selection-start-column="17" selection-end-line="20" selection-end-column="46" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -868,41 +829,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/jobpost.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="113" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/feeds.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-54.375">
           <caret line="108" column="34" selection-start-line="108" selection-start-column="34" selection-end-line="108" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/jobdescription.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.625">
-          <caret line="20" column="0" selection-start-line="19" selection-start-column="4" selection-end-line="20" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/posts.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.875">
-          <caret line="103" column="60" selection-start-line="103" selection-start-column="60" selection-end-line="103" selection-end-column="60" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/careers.ejs">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.75">
-          <caret line="131" column="82" selection-start-line="131" selection-start-column="82" selection-end-line="131" selection-end-column="82" />
           <folding />
         </state>
       </provider>
@@ -915,26 +845,58 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/companyprofile.ejs">
+    <entry file="file://$PROJECT_DIR$/app/views/posts.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.181818">
-          <caret line="180" column="55" selection-start-line="180" selection-start-column="55" selection-end-line="180" selection-end-column="55" />
+        <state vertical-scroll-proportion="1.2944162">
+          <caret line="103" column="60" selection-start-line="103" selection-start-column="60" selection-end-line="103" selection-end-column="60" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/routes/index.js">
+    <entry file="file://$PROJECT_DIR$/app/views/jobdescription.ejs">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="225" column="39" selection-start-line="225" selection-start-column="39" selection-end-line="225" selection-end-column="39" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/careers.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-17.041666">
+          <caret line="151" column="0" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/companyhome.ejs">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.2639594">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state vertical-scroll-proportion="-51.791668">
+          <caret line="133" column="8" selection-start-line="133" selection-start-column="8" selection-end-line="133" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/routes/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-91.258064">
+          <caret line="224" column="13" selection-start-line="224" selection-start-column="13" selection-end-line="224" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/companyprofile.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.5">
+          <caret line="74" column="61" selection-start-line="74" selection-start-column="61" selection-end-line="74" selection-end-column="61" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/jobpost.ejs">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.5126903">
+          <caret line="147" column="7" selection-start-line="147" selection-start-column="7" selection-end-line="147" selection-end-column="7" />
           <folding />
         </state>
       </provider>

@@ -149,14 +149,13 @@ router.get("/company/:companyID",requireLogin,function(req,res1){
     var id = req.param("companyID");
     console.log(id);
     console.log("URL "+backendroute+"/profile/"+req.session.ID);
-
+    //  localhost:8080/api/v1/profile/7
     client.get(backendroute+"/profile/"+req.session.ID,function(data,res){
-
         console.log(res.statusCode);
         console.log(data);
         if(res.statusCode != 400) {
             if ((id == req.session.ID) && (req.session.page =='C'))
-                res1.render("companyhome.ejs", {"data": data});
+                res1.render("companyprofile.ejs", {"data": data});
             else
                 res1.render("othercompanyprofile.ejs", {"data": data});
         }
@@ -174,9 +173,8 @@ router.get("/companyprofile",function(req,res){
 
 });
 
-
 //--------------------------------------------------------------------------------------------------
-
+//ADD NEWS FEEDS(GET//POST)
 
 router.get("/posts",function(req,res){
     res.render("posts.ejs",{"error1":""});
@@ -204,7 +202,7 @@ router.post("/posts",function(req,res){
 
 
 //----------------------------------------------------------------------------------------------------
-
+//POSTS JOBS (GET//POST)
 
 router.get("/careers",function(req,res){
     res.render("careers.ejs",{"error1":""});
@@ -223,15 +221,17 @@ router.post("/careers",function(rest_req,rest_res){
             skills:rest_req.body.skills,
             start_date:rest_req.body.startdate,
             ex_date:rest_req.body.exdate,
-            region:rest_req.body.region
-            //status:rest_req.body.status
+            job_region:rest_req.body.region,
+            status:""
             // company_name:session_var.uname
         },
         headers:{"Content-Type": "application/json"}
     };
 
     client.post(backendroute+"/jobs",args,function(data,res)
+
     {
+        console.log(JSON.stringify(args));
         console.log(res.statusCode);
         if(res.statusCode == 201)
             rest_res.redirect('/company/'+rest_req.session.ID);
@@ -245,6 +245,8 @@ router.post("/careers",function(rest_req,rest_res){
 });
 
 //---------------------------------------------------------------------------------------------
+
+//JOBS SEARCH FOR ONE JOB FROM JOBID
 
 router.get("/jobs/:jobId",function(req,res1){
     var jobId=req.param("jobId");
@@ -483,7 +485,7 @@ router.get("/jobs/listings/:searchTerm/:skip/:limit",function(req,res){
     })
 });
 
-
+/*
 router.post("/companyprofile",function(req,res){
     var id= req.session.ID ;
 
@@ -499,7 +501,7 @@ router.post("/companyprofile",function(req,res){
         if(rest_res.statusCode == 201)
             res.redirect("/companyprofile");
     });
-});
+});*/
 
 router.get("/home/:userID",requireLogin,function(req,res1) {
     var id = req.param("userID");
