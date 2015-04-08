@@ -6,6 +6,7 @@ var client = new Client();
 var session= require('express-session');
 var sesion_var;
 var fs=require('fs');
+var path = require('path');
 var multer  = require('multer');
 router.use(multer());
 var aws=require('aws-sdk');
@@ -13,7 +14,8 @@ var crypto = require('crypto');
 var events = require('events');
 var EventEmitter = events.EventEmitter;
 var eventOnUpload = new EventEmitter();
-aws.config.loadFromPath('AmazonCredentials/AccDetails.json');
+
+aws.config.loadFromPath('/home/parin/Desktop/project/pronet-application/app/AmazonCredentials/AccDetails.json');
 
 var backendroute = "http://localhost:8080/api/v1";
 function requireLogin (req, res, next) {
@@ -137,12 +139,16 @@ router.get("/user/:userID",requireLogin,function(req,res1){
     });
 });
 
+//---------------------------------------------------------------------------------------------
 
 router.get("/company/:companyID",requireLogin,function(req,res1){
     var id = req.param("companyID");
     console.log(id);
-    client.get(backendroute+"/companyprofile/"+id+"/"+req.session.ID,function(data,res){
+    console.log("URL "+backendroute+"/profile/"+req.session.ID);
+  //  localhost:8080/api/v1/profile/7
+    client.get(backendroute+"/profile/"+req.session.ID,function(data,res){
         console.log(res.statusCode);
+        console.log(data);
         if(res.statusCode != 400) {
             if ((id == req.session.ID) && (req.session.page =='C'))
                 res1.render("companyprofile.ejs", {"data": data});
@@ -157,6 +163,97 @@ router.get("/company/:companyID",requireLogin,function(req,res1){
 });
 
 
+//companyprofile
+router.get("/companyprofile",function(req,res){
+    res.redirect("/company/"+req.session.ID);
+
+});
+
+
+//--------------------------------------------------------------------------------------------------
+
+
+router.get("/posts",function(req,res){
+    res.render("posts.ejs",{"error1":""});
+});
+
+router.post("/posts",function(req,res){
+    var args={
+        data:{
+           feed_title:req.body.title,
+            feed_description:req.body.desc },
+
+        headers:{"Content-Type": "application/json"}
+    };
+    // take 10 as user_id from session
+    console.log("args"+JSON.stringify(args));
+    console.log("ID:::"+req.session.ID);
+    client.post(backendroute+"/feeds/company/"+req.session.ID,args,function(data,rest_res)
+    {
+        console.log("Post res::"+rest_res.status);
+        if(rest_res.statusCode == 201)
+            res.redirect("/company/"+req.session.ID);
+    });
+   // res.redirect("/company/"+req.session.ID);
+});
+
+
+//----------------------------------------------------------------------------------------------------
+
+
+router.get("/careers",function(req,res){
+    res.render("careers.ejs",{"error1":""});
+});
+
+router.post("/careers",function(rest_req,rest_res){
+    console.log("in post careers");
+	console.log("req"+JSON.stringify(rest_req.body));
+    console.log("request session"+rest_req.session.ID);
+
+    args={
+        data:{
+            id:rest_req.session.ID,
+            jtitle:rest_req.body.jtitle,
+            desc:rest_req.body.desc,
+            skills:rest_req.body.skills,
+            start_date:rest_req.body.startdate,
+            ex_date:rest_req.body.exdate,
+            region:rest_req.body.region,
+            //status:rest_req.body.status
+            // company_name:session_var.uname
+        },
+        headers:{"Content-Type": "application/json"}
+    };
+
+    client.post(backendroute+"/jobs",args,function(data,res)
+    {
+        console.log(res.statusCode);
+        if(res.statusCode == 201)
+            rest_res.redirect('/company/'+rest_req.session.ID);
+        else
+        {
+            rest_res.render('careers.ejs', {"error1":data.message});
+
+        }
+    });
+
+});
+
+//---------------------------------------------------------------------------------------------
+
+router.get("/jobs/:jobId",function(req,res1){
+    var jobId=req.param("jobId");
+    //var jobId=1415;
+    jobId="1415";
+    client.get(backendroute+"/jobs/"+jobId,function(data,res){
+        console.log(JSON.stringify(data));
+        res1.render("jobdescription",{data:data});
+    });
+});
+
+
+
+//-------------------------------------------------------------------------------------------------
 router.get("/following/:userID",function(req,res1){
     var followerid = req.param("userID");
     client.get(backendroute+"/following/"+followerid,function(data,res){
@@ -179,8 +276,8 @@ router.post("/imgupload",function(req,res1){
     }
     else
     {
-        imgUrl=req.files.imageinput.path;
-        mimetype = req.files.imageinput.mimetype;
+        imgUrl=req.files.companyimage.path;
+        mimetype = req.files.companyimage.mimetype;
     }
 
     var s3bucket = new aws.S3({params: {Bucket: 'project.bucket1'}});
@@ -216,12 +313,20 @@ router.post("/imgupload",function(req,res1){
                     else
                     {
                         //TODO Parin: company image upload route
-                        //client.put(backendroute + "/userprofile/" + req.session.ID, args, function (data, res) {
+                        /*client.put(backendroute + "/userprofile/" + req.session.ID, args, function (data, res) {
                             console.log(res.statusCode);
                             if (res.statusCode == 200) {
                                 //redirect("/user/"+id);
                             }
-                        //});
+                        //});*/
+
+                        client.put(backendroute + "/profile/" + req.session.ID, args, function (data, res) {
+                            console.log(res.statusCode);
+                            console.log("data::"+JSON.stringify(data));
+                            if (res.statusCode == 200) {
+                                res1.redirect("/companyprofile");
+                            }
+                        });
                     }
                 }
 
@@ -229,7 +334,7 @@ router.post("/imgupload",function(req,res1){
         }
     });
 });
-
+//----------------------------------------------------------------------------------------------------------------------------
 
 router.post("/follow",requireLogin,function(req,res1) {
     console.log("in follow route");

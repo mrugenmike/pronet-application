@@ -8,7 +8,7 @@
 
             <title>User Profile</title>
 
-            <link rel="shortcut icon" href="assets/images/gt_favicon.png">
+            <link rel="shortcut icon" href="/assets/images/gt_favicon.png">
 
             <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
             <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
@@ -44,43 +44,17 @@
   				}
 
   				if (file1) {
-  			//	alert("in if")
-    				reader.readAsDataURL(file);
+  				alert("in if")
+    				reader.readAsDataURL(file1);
 		
   				} else {
     				preview.src = "/assets/images/sample.jpg";
   				}
-				
-		
 				});
-			$(document).ready(function(){
 
-			$("#save").click(function(){
-			alert("in on click");
-			var file= document.querySelector('.companyimage').files[0];
-			
-			var data = new FormData();
-    		data.append('file', file);
-			alert(file.data);
-			alert(file.filename);
-			var url="/imgupload";
-				$.ajax({
-						type: "POST",
-						url: url,
-						data: data,
-						//contentType: 'multipart/form-data',
-						processData: false,
-						dataType: 'json',
-						success: function(result){
-						alert(result);
-					}
-	
-				});
-			
-			});
-});
-				
 </script>
+
+
 	
         </head>
 
@@ -96,8 +70,10 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav pull-left">
-                            <li class="active"><a href="/companyprofile">Home</a></li>
-                             <li><a href="/userfollowing">Careers</a></li>
+                            <li class="active"><a href="/companyprofile">Profile</a></li>
+                           	<li><a href="/careers">Careers</a></li>
+                            <li ><a href="/applications">Applications</a></li>
+                           
                             </ul>
 
                         <ul class="nav navbar-nav pull-right">
@@ -105,7 +81,6 @@
                                 <div class="span12">
                                     <form id="custom-search-form" class="form-search form-horizontal pull-right">
                                         <div class="input-append span12">
-                                            <input type="text" class="search-query mac-style" placeholder="Search for ...">
                                             <button type="submit" class="btn"><i class="glyphicon glyphicon-search"></i></button>
                                         </div>
                                     </form>
@@ -118,61 +93,70 @@
             </div>
             <!-- /.navbar -->
             <header id="head" class="secondary"></header>
-            <form method="post" action="/companyprofile" enctype="multipart/form-data">
-        <div class="container" margin-top="30px">
+              <div class="container" margin-top="30px">
             <div class="row">
                 <div class="col-md-12">
                     <div class="well well-sm">
                         <div class="media">
                             <div class="imgup">
-                            
+                            <form method="post" action="/imgupload" enctype="multipart/form-data">
                                 <div class="thumbnail pull-left" >
 									
                                         <img id="companypic" class="companypic" src="/assets/images/sample.jpg" width="200 px" height="200 px" >
                                        	<input type="file" class="companyimage" id="companyimage" name="companyimage">
-                                       	<input type=button id="save" value="Save">
+                                       	<input type="submit" id="save" value="Save">
 
                                 </div>
+                            </form>
                             </div>
 
                             <div class="col-sm-1 text-left">
                             </div>
-                            <div class="media-body">
-                                <div class="editable">
-                                <h5><span role="alert" class="text media-heading ed" name="name">Name</span>
-                                 <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                 <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+                             <form method="post" action="/companyprofile" >
+								<div class="media-body">
+								<div class="editable">
+                                    <h5><b>Company Name</b></h5>
+								<h5>
+									<span role="alert" class="text media-heading ed" name="name"><%=data.company_name%></span>
+                                    <button type="button" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                    <button class="btn btn-xs btn-action pull-right" type="submit" id="saveOverview"><span class="glyphicon glyphicon-circle"></span>Save</button>
+
                                 </h5>
-                                </div>
+								</div>
 								</br>
-                                <div class="editable">
-                                <h5><span role="alert" class="text media-heading ed" name="url">Company URL</span>
-                                    <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                    <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+   								<div class="editable">
+                                    <h5><b>Company Url</b></h5>
+   								<h5>
+   									<span role="alert" class="text media-heading ed" name="url"><%=data.url%></span>
+                                    <button type="button" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                    <button class="btn btn-xs btn-action pull-right" type="submit" id="saveOverview"><span class="glyphicon glyphicon-circle"></span>Save</button>
+
                                 </h5>
-                                </div>
-                                 <div class="editable">
+   								</div>
+   								<div class="editable">
                                  
                                 <br>
                                 <br>
                                 <p><span class="label label-warning pull-left">150 followers</span></p>
-                            </div>
-                        </div>
-                    </div>
+							     </div>
+
+                        		</div>
+                    	</div>
                 </div>
-            </div>
+           </div>
 
-
-            <div class="row">
+			 <div class="row">	
                 <div class="col-md-12">
                     <div class="well well-sm">
                         <div class="media"></div>
                             <div class="editable">
                                 <br>
+                                <h5><b>Overview</b></h5>
+
                                 <h4>
-                                <span class="textarea ed" name="overview">Overview</span>
+                                <span class="textarea ed" name="overview" id="overview"><%=data.overview%></span>
                                     <button type="button" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                    <button class="btn btn-xs btn-action pull-right" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+                                    <button class="btn btn-xs btn-action pull-right" type="submit" id="saveOverview"><span class="glyphicon glyphicon-circle"></span>Save</button>
                                 </h4>
                                 </div>
                     </div>
@@ -194,6 +178,7 @@
                                 
                                 <div class="editable">
                                 <br>
+                                    <h4><b>Recent Posts</b></h4>
                                 <span class="textarea ed" name="postfield">Recent Posts</span>
                                </div>
 

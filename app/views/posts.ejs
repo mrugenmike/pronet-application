@@ -13,6 +13,7 @@
 	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
 	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/buttonstyle.css">
 
 	<!-- Custom styles for our template -->
 	<link rel="stylesheet" href="assets/css/bootstrap-theme.css" media="screen" >
@@ -35,15 +36,17 @@
                         <a class="navbar-brand" href="/"><img src="assets/images/logo.png" width="50 px" height="50 px" alt="Pronet" ></a>
                     </div>
                     <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav pull-left">
-                            <li><a href="/companyprofile">Home</a></li>
-                             <li><a href="/userfollowing">Careers</a></li>
-                            </ul>
+						<ul class="nav navbar-nav pull-left">
+							<li class="active"><a href="/companyprofile">Profile</a></li>
+							<li><a href="/careers">Careers</a></li>
+							<li ><a href="/applications">Applications</a></li>
+
+						</ul>
 
                         <ul class="nav navbar-nav pull-right">
                             <li>
                                 <div class="span12">
-                                    <form id="custom-search-form" class="form-search form-horizontal pull-right">
+                                    <form method="post" action="/posts" id="custom-search-form" class="form-search form-horizontal pull-right">
                                         <div class="input-append span12">
                                             <input type="text" class="search-query mac-style" placeholder="Search for ...">
                                             <button type="submit" class="btn"><i class="glyphicon glyphicon-search"></i></button>
@@ -98,7 +101,7 @@
 										                       
 									</div>
 									<div class="col-lg-4 text-right">
-										<button class="btn btn-action" type="submit">Post</button>
+										<button class="apply" type="submit">Post</button>
 									</div>
 								</div>
 							</form>
