@@ -81,19 +81,19 @@
                     <hr>
                     <% for(var i=0; i < data.length; i++) { %>
                     <div class="container" margin-top="40px" width="700px">
-                        <form method="get" action="/<%=data[i].jid%>" >
+                        <form method="post" action="/deletejob/<%=data[i].jid%>" >
 
                             <div >
                                 <a href="/expand/<%= data[i].jid%>" >
-                                    <h5><b><%=data[i].jtitle%></b></h5></a>
+                                    <h4><b><%=data[i].jtitle%></b></h4></a>
 
-                                <h4>
+                                <h5><b><label>Description</label></b>
                                     <span class="textarea ed" name="overview" id="overview"><%=data[i].description%></span>
 
-                                </h4>
-                                <h4>
+                                </h5>
+                                <h5><b><label>Status</label></b>
                                     <span class="textarea ed" name="status" id="status"><%=data[i].job_status%></span>
-                                </h4>
+                                </h5>
                                 <input type="submit" value="Delete" name="<%=data[i].jid%>" class="apply" align="left">
                             </div>
                         </form>

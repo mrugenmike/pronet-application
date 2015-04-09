@@ -167,8 +167,8 @@ router.get("/company/:companyID",requireLogin,function(req,res1){
     });
 });
 
-
-//companyprofile
+//----------------------------------------------------------------------------------------------------------------------------------
+//    COMPANY PROFILE
 router.get("/companyprofile",function(req,res){
     res.redirect("/company/"+req.session.ID);
 
@@ -197,6 +197,7 @@ router.post("/companyprofile",function(req,res){
 });
 
 //--------------------------------------------------------------------------------------------------
+
 //ADD NEWS FEEDS(GET//POST)
 
 router.get("/posts",function(req,res){
@@ -266,7 +267,9 @@ router.post("/careers",function(rest_req,rest_res){
     });
 
 });
-
+//-----------------------------------------------------------------------------------------------------------------------------
+//LISTING ALL THE JOBS
+//------------------------------
 router.get("/jobs",function(req,res){
 
     client.get(backendroute+"/jobs/company/"+req.session.ID,function(data,res1){
@@ -279,11 +282,14 @@ router.get("/jobs",function(req,res){
 
 
 });
+//---------------------------------------------------------------------------------------------------------------------------
+//EXPAND JOB FROM A LIST
+//-------------------------------//
 
 router.get("/expand/:jobId",function(req,res){
     var jobId=req.param("jobId");
     console.log("JOB ID:"+jobId);
-    var data={"skills":"PYTHON",
+   /* var data={"skills":"PYTHON",
         "jid":"1888",
         "user_name":"Google",
         "job_region":"CA",
@@ -291,13 +297,32 @@ router.get("/expand/:jobId",function(req,res){
         "logo":"/assets/images/companylogo.jpg",
         "id":"7",
         "jtitle":"redis test"
-    };
-    res.render("expandjob.ejs",{data:data});
+    };*/
+    client.get(backendroute+"/jobs/"+jobId,function(data,res1){
+        console.log(JSON.stringify(data));
+
+        res.render("expandjob.ejs",{data:data});
+    });
 });
+//-----------------------------------------------------------------------------------------------------------------------------
+//DELETE JOB
+//----------------//
+
+router.post("/deletejob/:jobId",function(req,res){
+   var jobId=req.param("jobId");
+    console.log("jobId::"+jobId);
+    client.delete(backendroute+"/jobs/"+jobId,function(data,res1){
+        if(res1.statusCode==400)
+        {
+            res.redirect("/jobs");
+        }
+    });
+});
+
 
 //---------------------------------------------------------------------------------------------
 
-//JOBS SEARCH FOR ONE JOB FROM JOB_ID
+//JOBS SEARCH FOR ONE JOB FROM JOB_ID     [ USER SEARCH FOR JOB ]
 
 router.get("/jobs/:jobId",function(req,res1){
     var jobId=req.param("jobId");
