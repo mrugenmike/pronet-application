@@ -144,6 +144,7 @@ router.get("/user/:userID",requireLogin,function(req,res1){
 });
 
 //---------------------------------------------------------------------------------------------
+//COMPANY PAGE RENDERING(GET//PUT)
 
 router.get("/company/:companyID",requireLogin,function(req,res1){
     var id = req.param("companyID");
@@ -171,6 +172,28 @@ router.get("/company/:companyID",requireLogin,function(req,res1){
 router.get("/companyprofile",function(req,res){
     res.redirect("/company/"+req.session.ID);
 
+});
+
+
+router.post("/companyprofile",function(req,res){
+    console.log(JSON.stringify(req));
+    var args={
+        data:{
+            user_name:req.body.name,
+            url:req.body.url,
+            overview:req.body.overview,
+            id:req.session.ID,
+            logo:""
+            },
+        headers:{"Content-Type": "application/json"}
+   };
+    console.log("company put request"+JSON.stringify(args));
+    client.put(backendroute+"/company/update",args,function(data,res1){
+        if(res1.statusCode==200)
+        {
+            res.render("/company/"+req.session.ID);
+        }
+    });
 });
 
 //--------------------------------------------------------------------------------------------------
@@ -202,7 +225,7 @@ router.post("/posts",function(req,res){
 
 
 //----------------------------------------------------------------------------------------------------
-//POSTS JOBS (GET//POST)
+//COMPANY JOBS POSTS  (GET//POST)
 
 router.get("/careers",function(req,res){
     res.render("careers.ejs",{"error1":""});
@@ -217,12 +240,12 @@ router.post("/careers",function(rest_req,rest_res){
         data:{
             id:rest_req.session.ID,
             jtitle:rest_req.body.jtitle,
-            desc:rest_req.body.desc,
+            description:rest_req.body.desc,
             skills:rest_req.body.skills,
             start_date:rest_req.body.startdate,
             ex_date:rest_req.body.exdate,
             job_region:rest_req.body.region,
-            status:""
+            job_status:""
             // company_name:session_var.uname
         },
         headers:{"Content-Type": "application/json"}
@@ -244,14 +267,35 @@ router.post("/careers",function(rest_req,rest_res){
 
 });
 
+router.get("/jobs",function(req,res){
+    var json = [{
+        "id" : "1",
+        "msg"   : "hi",
+        "tid" : "2013-05-05 23:35",
+        "fromWho": "hello1@email.se"
+    },
+        {
+            "id" : "2",
+            "msg"   : "there",
+            "tid" : "2013-05-05 23:45",
+            "fromWho": "hello2@email.se"
+        }];
+   /* client.get(backendroute+"",function(data,res1){
+
+        if(res1.statusCode==201)
+  });
+*/res.render("jobslist.ejs",{data:json});
+
+});
+
 //---------------------------------------------------------------------------------------------
 
-//JOBS SEARCH FOR ONE JOB FROM JOBID
+//JOBS SEARCH FOR ONE JOB FROM JOB_ID
 
 router.get("/jobs/:jobId",function(req,res1){
     var jobId=req.param("jobId");
     //var jobId=1415;
-    jobId="1415";
+    //jobId="1415";
     client.get(backendroute+"/jobs/"+jobId,function(data,res){
         console.log(JSON.stringify(data));
         res1.render("jobdescription",{data:data});
@@ -261,6 +305,8 @@ router.get("/jobs/:jobId",function(req,res1){
 
 
 //-------------------------------------------------------------------------------------------------
+
+//IMAGE UPLOAD
 router.get("/following/:userID",function(req,res1){
     var followerid = req.param("userID");
     client.get(backendroute+"/following/"+followerid,function(data,res){
@@ -330,8 +376,8 @@ router.post("/imgupload",function(req,res1){
                                 //redirect("/user/"+id);
                             }
                         //});*/
-
-                        client.put(backendroute + "/profile/" + req.session.ID, args, function (data, res) {
+                    // ASK VARUNA IF SHE HAS MADE THE API FOR THIS
+                        client.put(backendroute + "/profile/updateImageURL" + req.session.ID, args, function (data, res) {
                             console.log(res.statusCode);
                             console.log("data::"+JSON.stringify(data));
                             if (res.statusCode == 200) {

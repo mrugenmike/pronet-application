@@ -33,31 +33,7 @@
     <script src="/assets/js/respond.min.js"></script>
     <![endif]-->
 
-    <script type="text/javascript">
-        $(document).on("change", "#companyimage", function(e){
-            var preview = document.querySelector('.companypic');
-            var file1    = document.querySelector('.companyimage').files[0];
-            alert(file1);
-            var reader  = new FileReader();
-            reader.onloadend = function () {
-                //	alert("onload")
-                preview.src = reader.result;
-            }
-
-            if (file1) {
-                alert("in if")
-                reader.readAsDataURL(file1);
-
-            } else {
-                preview.src = "/assets/images/sample.jpg";
-            }
-        });
-
-    </script>
-
-
-
-</head>
+   </head>
 
 <body>
 
@@ -104,7 +80,7 @@
                         <form method="post" action="/imgupload" enctype="multipart/form-data">
                             <div class="thumbnail pull-left" >
 
-                                <img id="companypic" class="companypic" src="/assets/images/sample.jpg" width="200 px" height="200 px" >
+                                <img id="companypic" class="companypic" src="<%=data.logo%>" width="200 px" height="200 px" >
 
                             </div>
                         </form>

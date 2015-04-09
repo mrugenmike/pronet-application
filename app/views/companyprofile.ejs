@@ -101,8 +101,8 @@
                             <div class="imgup">
                             <form method="post" action="/imgupload" enctype="multipart/form-data">
                                 <div class="thumbnail pull-left" >
-									
-                                        <img id="companypic" class="companypic" src="/assets/images/sample.jpg" width="200 px" height="200 px" >
+
+                                        <img id="companypic" class="companypic" src="<%=data.logo%>" width="200 px" height="200 px" >
                                        	<input type="file" class="companyimage" id="companyimage" name="companyimage">
                                        	<input type="submit" id="save" value="Save">
 
@@ -117,9 +117,7 @@
 								<div class="editable">
                                     <h5><b>Company Name</b></h5>
 								<h5>
-									<span role="alert" class="text media-heading ed" name="name"><%=data.company_name%></span>
-                                    <button type="button" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                    <button class="btn btn-xs btn-action pull-right" type="submit" id="saveOverview"><span class="glyphicon glyphicon-circle"></span>Save</button>
+									<span role="alert" class="text media-heading ed" id="name" name="name"><%=data.company_name%></span>
 
                                 </h5>
 								</div>
@@ -127,7 +125,7 @@
    								<div class="editable">
                                     <h5><b>Company Url</b></h5>
    								<h5>
-   									<span role="alert" class="text media-heading ed" name="url"><%=data.url%></span>
+   									<span role="alert" class="text media-heading ed" id="url" name="url"><%=data.url%></span>
                                     <button type="button" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
                                     <button class="btn btn-xs btn-action pull-right" type="submit" id="saveOverview"><span class="glyphicon glyphicon-circle"></span>Save</button>
 
@@ -137,7 +135,7 @@
                                  
                                 <br>
                                 <br>
-                                <p><span class="label label-warning pull-left">150 followers</span></p>
+                                <p><span class="label label-warning pull-left"><%=data.followerCount%> followers</span></p>
 							     </div>
 
                         		</div>
