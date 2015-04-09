@@ -268,18 +268,7 @@ router.post("/careers",function(rest_req,rest_res){
 });
 
 router.get("/jobs",function(req,res){
-    /*var json = [{
-        "id" : "1",
-        "msg"   : "hi",
-        "tid" : "2013-05-05 23:35",
-        "fromWho": "hello1@email.se"
-    },
-        {
-            "id" : "2",
-            "msg"   : "there",
-            "tid" : "2013-05-05 23:45",
-            "fromWho": "hello2@email.se"
-        }];*/
+
     client.get(backendroute+"/jobs/company/"+req.session.ID,function(data,res1){
 
         console.log(data);
@@ -289,6 +278,21 @@ router.get("/jobs",function(req,res){
   });
 
 
+});
+
+router.get("/expand/:jobId",function(req,res){
+    var jobId=req.param("jobId");
+    console.log("JOB ID:"+jobId);
+    var data={"skills":"PYTHON",
+        "jid":"1888",
+        "user_name":"Google",
+        "job_region":"CA",
+        "description":"new",
+        "logo":"/assets/images/companylogo.jpg",
+        "id":"7",
+        "jtitle":"redis test"
+    };
+    res.render("expandjob.ejs",{data:data});
 });
 
 //---------------------------------------------------------------------------------------------

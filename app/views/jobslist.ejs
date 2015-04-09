@@ -6,53 +6,41 @@
     <meta name="description" content="">
     <meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
 
-    <title>User Profile</title>
+    <title>Template</title>
 
-    <link rel="shortcut icon" href="/assets/images/gt_favicon.png">
+    <link rel="shortcut icon" href="assets/images/gt_favicon.png">
 
     <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <link rel="stylesheet" media="screen" href="/assets/css/divstyle.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/divstyle.css">
 
     <!-- Custom styles for our template -->
-    <link rel="stylesheet" href="/assets/css/bootstrap-theme.css" media="screen" >
-    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/bootstrap-theme.css" media="screen" >
+    <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/buttonstyle.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-    <script src="/assets/js/headroom.min.js"></script>
-    <script src="/assets/js/jQuery.headroom.min.js"></script>
-    <script src="/assets/js/template.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-    <script src="/javascript/mainscript.js"></script>
-    <script src="/assets/js/bootstrap-filestyle.min.js"> </script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="/assets/js/html5shiv.js"></script>
-    <script src="/assets/js/respond.min.js"></script>
-
-
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
     <![endif]-->
 </head>
 
 <body>
-
 <!-- Fixed navbar -->
 <div class="navbar navbar-inverse navbar-fixed-top headroom" >
     <div class="container">
         <div class="navbar-header">
             <!-- Button for smallest screens -->
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-            <a class="navbar-brand" href="/"><img src="/assets/images/logo.png" width="50 px" height="50 px" alt="Pronet" ></a>
+            <a class="navbar-brand" href="/"><img src="assets/images/logo.png" width="50 px" height="50 px" alt="Pronet" ></a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav pull-left">
-                <li class="active"><a href="/companyprofile">Profile</a></li>
-                <li><a href="/careers">Careers</a></li>
-                <li ><a href="/applications">Jobs</a></li>
+                <li ><a href="/companyprofile">Profile</a></li>
+                <li ><a href="/careers">Careers</a></li>
+                <li class="active"><a href="/jobs">Jobs</a></li>
 
             </ul>
 
@@ -61,6 +49,7 @@
                     <div class="span12">
                         <form id="custom-search-form" class="form-search form-horizontal pull-right">
                             <div class="input-append span12">
+                                <input type="text" class="search-query mac-style" placeholder="Search for ...">
                                 <button type="submit" class="btn"><i class="glyphicon glyphicon-search"></i></button>
                             </div>
                         </form>
@@ -72,30 +61,69 @@
     </div>
 </div>
 <!-- /.navbar -->
+
+
 <header id="head" class="secondary"></header>
-<br>
-<br>
-<% for(var i=0; i < data.length; i++) { %>
-<div class="container" margin-top="40px" width="700px">
-    <form method="get" action="/<%=data[i].id%>">
-               <div class="div_style">
-                           <h5><b><%=data[i].jtitle%></b></h5>
 
-                            <h4>
-                                <span class="textarea ed" name="overview" id="overview"><%=data[i].description%></span>
+<!-- container -->
+<div class="container">
+    <!--place code here-->
+    <div class="row">
 
-                            </h4>
-                            <h4>
-                                <span class="textarea ed" name="status" id="status"><%=data[i].job_status%></span>
-                            </h4>
-                            <input type="submit" value="Delete" name="<%=data[i].id%>" class="apply" align="left">
-               </div>
-    </form>
-    </div><br>
-<br>
-<%   }
-%>
+        <!-- Article main content -->
+        <article class="col-xs-12 maincontent">
+            <header class="page-header">
+                <h1 class="page-title">Job Listing</h1>
+            </header>
+            <div class="div_style" align="center">
+                <div class="panel-body">
+                    <h3 class="thin text-center">Posted Jobs</h3>
+                    <hr>
+                    <% for(var i=0; i < data.length; i++) { %>
+                    <div class="container" margin-top="40px" width="700px">
+                        <form method="get" action="/<%=data[i].jid%>" >
+
+                            <div >
+                                <a href="/expand/<%= data[i].jid%>" >
+                                    <h5><b><%=data[i].jtitle%></b></h5></a>
+
+                                <h4>
+                                    <span class="textarea ed" name="overview" id="overview"><%=data[i].description%></span>
+
+                                </h4>
+                                <h4>
+                                    <span class="textarea ed" name="status" id="status"><%=data[i].job_status%></span>
+                                </h4>
+                                <input type="submit" value="Delete" name="<%=data[i].jid%>" class="apply" align="left">
+                            </div>
+                        </form>
+                    </div><br>
+                    <br>
+                    <hr>
+                    <%   }
+                    %>
+
+                </div>
+            </div>
+        </article>
+    </div>
+
+    </article>
+    <!-- /Article -->
+
+</div>
+</div>
+<!-- /.container -->
+</div>
 
 
+
+
+<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="assets/js/headroom.min.js"></script>
+<script src="assets/js/jQuery.headroom.min.js"></script>
+<script src="assets/js/template.js"></script>
 </body>
 </html>

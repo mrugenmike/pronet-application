@@ -1,12 +1,10 @@
 .div_style
 {
-    width: 400px;
-    height: 154px;
-
+    alignment: center;
     padding: 9px;
 
-    margin: 0px;
-
+    margin: 0 auto;
+     width: 700px;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=63)";
     filter: alpha(opacity=63);
     -moz-opacity: 0.63;
