@@ -15,15 +15,14 @@
     <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" media="screen" href="/assets/css/divstyle.css">
 
     <!-- Custom styles for our template -->
     <link rel="stylesheet" href="/assets/css/bootstrap-theme.css" media="screen" >
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" href="/assets/css/buttonstyle.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
     <script src="/assets/js/headroom.min.js"></script>
     <script src="/assets/js/jQuery.headroom.min.js"></script>
     <script src="/assets/js/template.js"></script>
@@ -74,29 +73,29 @@
 </div>
 <!-- /.navbar -->
 <header id="head" class="secondary"></header>
+<br>
+<br>
 <% for(var i=0; i < data.length; i++) { %>
-
+<div class="container" margin-top="40px" width="700px">
     <form method="get" action="/<%=data[i].id%>">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="well well-sm" >
-                           <h5><b><%=data[i].msg%></b></h5>
+               <div class="div_style">
+                           <h5><b><%=data[i].jtitle%></b></h5>
 
                             <h4>
-                                <span class="textarea ed" name="overview" id="overview"><%=data[i].tid%></span>
-                                <button type="submit" class="btn btn-primary">Delete</button>
+                                <span class="textarea ed" name="overview" id="overview"><%=data[i].description%></span>
+
                             </h4>
-
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+                            <h4>
+                                <span class="textarea ed" name="status" id="status"><%=data[i].job_status%></span>
+                            </h4>
+                            <input type="submit" value="Delete" name="<%=data[i].id%>" class="apply" align="left">
+               </div>
     </form>
+    </div><br>
+<br>
 <%   }
 %>
-<br>
-<br>
+
 
 </body>
 </html>

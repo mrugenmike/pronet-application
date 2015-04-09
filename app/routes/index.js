@@ -268,7 +268,7 @@ router.post("/careers",function(rest_req,rest_res){
 });
 
 router.get("/jobs",function(req,res){
-    var json = [{
+    /*var json = [{
         "id" : "1",
         "msg"   : "hi",
         "tid" : "2013-05-05 23:35",
@@ -279,12 +279,15 @@ router.get("/jobs",function(req,res){
             "msg"   : "there",
             "tid" : "2013-05-05 23:45",
             "fromWho": "hello2@email.se"
-        }];
-   /* client.get(backendroute+"",function(data,res1){
+        }];*/
+    client.get(backendroute+"/jobs/company/"+req.session.ID,function(data,res1){
 
-        if(res1.statusCode==201)
+        console.log(data);
+        if(res1.statusCode==200){
+            res.render("jobslist.ejs",{data:data});
+        }
   });
-*/res.render("jobslist.ejs",{data:json});
+
 
 });
 

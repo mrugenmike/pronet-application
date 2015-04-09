@@ -1,0 +1,36 @@
+.div_style
+{
+    width: 400px;
+    height: 154px;
+
+    padding: 9px;
+
+    margin: 0px;
+
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=63)";
+    filter: alpha(opacity=63);
+    -moz-opacity: 0.63;
+    -khtml-opacity: 0.63;
+    opacity: 0.63;
+
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+
+    background: rgb(229, 231, 231);
+
+    color: rgb(2, 2, 2);
+    font-size: inherit;
+    font-weight: inherit;
+    font-family: Garamond, serif;
+    font-style: inherit;
+    text-decoration: inherit;
+    text-align: left;
+
+    line-height: 3.15em;
+    letter-spacing: 0em;
+    -moz-box-shadow:  -48px 10px 50px 0px rgb(128,128,128);
+    -webkit-box-shadow:  -48px 10px 50px 0px rgb(128,128,128);
+    box-shadow:  -48px 10px 50px 0px rgb(128,128,128);
+
+}
