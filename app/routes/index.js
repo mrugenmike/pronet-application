@@ -176,7 +176,7 @@ router.get("/companyprofile",function(req,res){
 
 
 router.post("/companyprofile",function(req,res){
-    console.log(JSON.stringify(req));
+    //console.log(JSON.stringify(req));
     var args={
         data:{
             user_name:req.body.name,
@@ -187,6 +187,7 @@ router.post("/companyprofile",function(req,res){
             },
         headers:{"Content-Type": "application/json"}
    };
+    console.log(backendroute+"/company/update");
     console.log("company put request"+JSON.stringify(args));
     client.put(backendroute+"/company/update",args,function(data,res1){
         if(res1.statusCode==200)
@@ -215,7 +216,7 @@ router.post("/posts",function(req,res){
     // take 10 as user_id from session
     console.log("args"+JSON.stringify(args));
     console.log("ID:::"+req.session.ID);
-    client.post(backendroute+"/feeds/company/"+req.session.ID,args,function(data,rest_res)
+    client.post(backendroute+"/company/feeds/"+req.session.ID,args,function(data,rest_res)
     {
         console.log("Post res::"+rest_res.status);
         if(rest_res.statusCode == 201)
@@ -318,6 +319,40 @@ router.post("/deletejob/:jobId",function(req,res){
         }
     });
 });
+//-------------------------------------------------------------------------------------------------------------------------------
+//JOB APPLICATION //
+// CHECK WITH VARUNA
+//-----------------------------
+
+router.post("/applyjob/:jobId",function(req,res){
+    var jobId=req.params.jobId;
+    console.log("jobid"+jobId);
+    console.log("req.body"+JSON.stringify(req.body));
+args={
+    data:{
+
+        "job_id":jobId,
+        "company_id":req.body.c_id,
+        "user_id":"4",//use session variable req.session.ID
+        "company_name":req.body.company_name,
+        "job_title":req.body.jtitle
+
+    },
+    headers:{"Content-Type": "application/json"}
+    };
+    console.log(JSON.stringify(args));
+    client.post(backendroute+"/jobs/apply", function (data,res1) {
+
+   // console.log(res1);
+        if(res1.statusCode==200)
+            res.render("/company/"+req.session.ID);
+
+
+        else
+            console.log(res1.statusCode);
+    })
+});
+
 
 
 //---------------------------------------------------------------------------------------------
@@ -329,7 +364,7 @@ router.get("/jobs/:jobId",function(req,res1){
     //var jobId=1415;
     //jobId="1415";
     client.get(backendroute+"/jobs/"+jobId,function(data,res){
-        console.log(JSON.stringify(data));
+        console.log("/jobs/jobid"+JSON.stringify(data));
         res1.render("jobdescription",{data:data});
     });
 });

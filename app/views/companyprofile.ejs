@@ -124,6 +124,7 @@
                                             <lable><b>Company Name</b></lable>
                                             <h5>
                                                 <span role="alert" class="text media-heading ed" id="name" name="name"><%=data.company_name%></span>
+                                                <input type="hidden" id="name" name="name" value="<%=data.company_name%>" >
 
                                             </h5>
                                         </div>
@@ -134,6 +135,7 @@
                                                 <span role="alert" class="text media-heading ed" id="url" name="url"><%=data.url%></span>
                                                 <button type="button" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
                                                 <button class="btn btn-xs btn-action pull-right" type="submit" id="saveOverview"><span class="glyphicon glyphicon-circle"></span>Save</button>
+                                                <input type="hidden" id="url" name="url" value="<%=data.url%>" >
 
                                             </h5>
                                         </div>
@@ -150,11 +152,13 @@
 
                                         <label><b>Overview</b></label>
 
-                                        <h4>
-                                            <span class="textarea ed" name="overview" id="overview"><%=data.overview%></span>
+                                        <h5>
+                                            <span role="alert" class="text media-heading ed" id="overview" name="overview"><%=data.overview%></span>
                                             <button type="button" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
                                             <button class="btn btn-xs btn-action pull-right" type="submit" id="saveOverview"><span class="glyphicon glyphicon-circle"></span>Save</button>
-                                        </h4>
+                                            <input type="hidden" id="overview" name="overview" value="<%=data.overview%>" >
+
+                                        </h5>
                                     </div>
                                 </div>
                             </form>

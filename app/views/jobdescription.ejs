@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/assets/css/bootstrap-theme.css" media="screen" >
     <link rel="stylesheet" href="/assets/css/main.css">
     <link rel="stylesheet" type="text/css" href="/assets/css/buttonstyle.css">
+    <link rel="stylesheet" href="/assets/css/divstyle.css">
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
@@ -72,94 +73,75 @@
 <!-- /.navbar -->
 <header id="head" class="secondary"></header>
 <div class="container" margin-top="30px">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="well well-sm">
-                <div class="media">
-                    <div class="imgup">
-                        <form method="post" action="/imgupload" enctype="multipart/form-data">
-                            <div class="thumbnail pull-left" >
 
-                                <img id="companypic" class="companypic" src="<%=data.logo%>" width="200 px" height="200 px" >
+        <div class="div_style">
+            <div class="imgup">
+                <div class="thumbnail pull-left" >
+                    <img id="companypic" class="companypic" src="<%=data.logo%>" width="200 px" height="200 px" >
 
-                            </div>
-                        </form>
-                    </div>
+                </div>
+            </div>
+            <div class="col-sm-1 text-left">
+            </div>
+            <form method="post" action="/applyjob/<%=data.jid%>" >
+            <div class="media-body">
 
-                    <div class="col-sm-1 text-left">
-                    </div>
-                        <form method="post" action="/redirect" >
-                            <div class="media-body">
-                                <div class="editable">
-                                    <h4>
-                                    <b>        Company Name</b>
-                                        </h4>
-                                    <br>
-                                    <h5>
-                                        <span role="alert" class="text media-heading ed"  name="company_name" ><%=data.user_name%></span>
-                                    </h5>
+                <h4>
+                 <b>        Company Name</b>
+                </h4>
 
-                                    <br>
+                <h5>
+                  <div  name="company_name" ><%=data.user_name%></div>
+                    <input type="hidden" name="company_name" value="<%=data.user_name%>">
 
-                                </div>
-                                </br>
-                                <div class="editable">
-                                    <h4>
-                                    <b>        Job Title</b>
-                                        </h4>
+                </h5>
+                    <br><h4>
+                <b>        Job Title</b>
+                </h4>
+                <h5>
+                     <div name="jtitle" ><%=data.jtitle%></div>
+                    <input type="hidden" name="jtitle" value="<%=data.jtitle%>">
 
-                                    <h5>
-                                        <span role="alert" class="text media-heading ed" name="jtitle" ><%=data.title%></span>
-
-                                    </h5>
-
-                                    <br>
-                                </div>
-                                <div class="editable">
-                                    <h4>
-                                            <b>Job Description</b>
-                                        </h4>
-                                    <br>
-
-                                    <h5>
-                                        <span role="alert" class="text media-heading ed"  name="desc" ><%=data.description%></span>
-                                    </h5>
-
-                                    <br>
-                                </div>
-
-                                <div class="editable">
-                                    <h4>
-                                            <b>Skills Required</b>
-                                        </h4>
-                                    <br>
-
-                                    <h5>
-                                        <span role="alert" class="text media-heading ed" name="skills" ><%=data.skills%></span>
-
-                                    </h5>
-                                    <br>
-                                    <br>
-                                </div><div class="editable">
-                                    <h4>
-                                           <b>Locaion</b></h4>
-                                    <br>
-
-                                    <h5>
-                                        <span role="alert" class="text media-heading ed" name="region" ><%=data.job_region%></span>
-                                    </h5>
-                                    <br>
-                                    <br>
-                                </div>
-                                <br>
-                                <br>
+                </h5>
 
 
-                                <button id="submit" class="apply">Delete</button>
-                            </div>
-                        </form>
+                    <br><h4>
+                <b>Job Description</b>
+                </h4>
+
+                <h5>
+                      <div name="desc" ><%=data.description%></div>
+                    <input type="hidden" name="desc" value="<%=data.description%>">
+
+                </h5>
+                <br><h4>
+                <b>Skills Required</b>
+                </h4>
+
+                <h5>
+                      <div name="skills" ><%=data.skills%></div>
+                    <input type="hidden" name="skills" value="<%=data.skills%>">
+
+                </h5>
+                <br><h4>
+                <b>Locaion</b></h4>
+
+                <h5>
+                    <div  name="region" ><%=data.job_region%></div>
+                    <input type="hidden" name="region" value="<%=data.job_region%>">
+
+                </h5>
+
+                    <input type="hidden" name="c_id" value="<%=data.id%>">
 
 
+                 <br>
+
+                 </div>
+
+            <button id="submit" class="btn-primary center-block">Apply</button>
+            </form>
+        </div>
 
 </body>
 </html>
