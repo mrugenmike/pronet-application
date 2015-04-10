@@ -345,7 +345,7 @@ args={
 
    // console.log(res1);
         if(res1.statusCode==200)
-            res.render("/company/"+req.session.ID);
+            res.render("/jobs/"+jobId);
 
 
         else
@@ -353,6 +353,21 @@ args={
     })
 });
 
+//-----------------------------------------------------------------------------------
+//LISTING ALL THE APPLICATIONS
+
+router.get("/applicants",function(req,res){
+console.log("in application get");
+    client.get(backendroute+"/jobs/apps/"+req.session.ID,function(data,res1){
+
+        console.log(data);
+        if(res1.statusCode==200){
+            res.render("applications.ejs",{data:data});
+        }
+    });
+
+
+});
 
 
 //---------------------------------------------------------------------------------------------

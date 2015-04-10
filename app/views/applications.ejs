@@ -38,10 +38,10 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav pull-left">
-                <li class="active"><a href="/companyprofile">Profile</a></li>
+                <li ><a href="/companyprofile">Profile</a></li>
                 <li><a href="/careers">Careers</a></li>
                 <li ><a href="/jobs">Jobs</a></li>
-                <li ><a href="/applicants">Applications</a></li>
+                <li class="active"><a href="/applicants">Applications</a></li>
 
             </ul>
 
@@ -66,31 +66,40 @@
     <!--place code here-->
     <div class="row">
 
-        <!-- Article main content -->
+        <!-- Article main content
+
+         job_app_id: 15,
+       company_id: 7,
+       user_id: 4,
+       job_id: 1113,
+       job_title: 'Engineer',
+       company_name: 'Google',
+       user_name: 'Mrugen Deshmukh',
+       user_email: 'mrugenmike@gmail.com',
+       app_date: 1428675199000 }
+        -->
         <article class="col-xs-12 maincontent">
             <header class="page-header">
-                <h1 class="page-title">Job Listing</h1>
+                <h1 class="page-title">Listing Applications</h1>
             </header>
             <div class="div_style" align="center">
                 <div class="panel-body">
-                    <h3 class="thin text-center">Posted Jobs</h3>
-                    <hr>
-                    <% for(var i=0; i < data.length; i++) { %>
+                    <h3 class="thin text-center">Applications for all Jobs</h3>
+                    <hr class="">
+                    <% for(var i=0; i < data.jobs.length; i++) { %>
                     <div class="container" margin-top="40px" width="700px">
-                        <form method="post" action="/deletejob/<%=data[i].jid%>" >
+                        <form method="post" >
+                            <div>
+                            <b><label>Applicant Name :</label></b> <%=data.jobs[i].user_name%>
+                            <br>
+                            <b><label>Applicant Email :</label></b><%=data.jobs[i].user_email%>
+                            <br>
+                            <b><label>Title :</label></b><%=data.jobs[i].job_title%>
+                            <br>
+                            <b><label>Application ID :</label></b><%=data.jobs[i].job_app_id%>
+                            <br>
+                            <b><label>Job ID :</label></b><%=data.jobs[i].job_id%>
 
-                            <div >
-                                <a href="/expand/<%= data[i].jid%>" >
-                                    <h4><b><%=data[i].jtitle%></b></h4></a>
-
-                                <h5><b><label>Description</label></b>
-                                    <span class="textarea ed" name="overview" id="overview"><%=data[i].description%></span>
-
-                                </h5>
-                                <h5><b><label>Status</label></b>
-                                    <span class="textarea ed" name="status" id="status"><%=data[i].job_status%></span>
-                                </h5>
-                                <input type="submit" class="btn-primary center-block" value="Delete" name="<%=data[i].jid%>" class="apply" align="left">
                             </div>
                         </form>
                     </div><br>
