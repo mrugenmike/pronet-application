@@ -2,15 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d1d8bbff-d0ef-417f-b9cc-9fbda35f3da5" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/views/applicants.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/applications.ejs" afterPath="$PROJECT_DIR$/app/views/applications.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/careers.ejs" afterPath="$PROJECT_DIR$/app/views/careers.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/companyhome.ejs" afterPath="$PROJECT_DIR$/app/views/companyhome.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/companyprofile.ejs" afterPath="$PROJECT_DIR$/app/views/companyprofile.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/expandjob.ejs" afterPath="$PROJECT_DIR$/app/views/expandjob.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/routes/index.js" afterPath="$PROJECT_DIR$/app/routes/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/jobslist.ejs" afterPath="$PROJECT_DIR$/app/views/jobslist.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/views/posts.ejs" afterPath="$PROJECT_DIR$/app/views/posts.ejs" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="pronet-application.iws" />
@@ -35,8 +26,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7002725">
-              <caret line="263" column="9" selection-start-line="263" selection-start-column="9" selection-end-line="263" selection-end-column="9" />
+            <state vertical-scroll-proportion="0.5776567">
+              <caret line="260" column="33" selection-start-line="260" selection-start-column="33" selection-end-line="260" selection-end-column="33" />
               <folding />
             </state>
           </provider>
@@ -817,8 +808,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7002725">
-          <caret line="263" column="9" selection-start-line="263" selection-start-column="9" selection-end-line="263" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.5776567">
+          <caret line="260" column="33" selection-start-line="260" selection-start-column="33" selection-end-line="260" selection-end-column="33" />
           <folding />
         </state>
       </provider>
