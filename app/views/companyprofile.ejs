@@ -173,21 +173,27 @@
                         </form>
                         <form>
                             <div class="row">
-                                <div class="col-md-12">
-                                    <div class="well well-sm" width="1140px" height="99px">
-                                        <div class="media">
-                                        </div>
-                                        <div class="media-body editable">
-
-                                            <div class="editable">
+                                    <div class="media-body editable">
+                                       <div class="editable">
                                                 <br>
                                                 <h4><b>Recent Posts</b></h4>
                                                 <span class="textarea ed" name="postfield">Recent Posts</span>
                                             </div>
-
-                                        </div>
                                     </div>
-                                </div>
+
                             </div>
-                        </form>
+                            <div>
+                                <%for(var i=0;data.feeds.length;i++){ %>
+                                <div class="media-body">
+                                    <h4>
+                                        <b><%=data.feeds[i].email%></b>
+                                    </h4>
+                                    <h5>
+                                        <span role="alert" class="text media-heading ed"  name="company_name" ><%=data.feeds[i].password%></span>
+                                    </h5>
+
+                                <%}%>
+                            </div>
+
+                             </form>
                     </div>

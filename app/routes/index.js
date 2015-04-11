@@ -158,7 +158,7 @@ router.get("/company/:companyID",requireLogin,function(req,res1){
             if ((id == req.session.ID) && (req.session.page =='C'))
                 res1.render("companyprofile.ejs", {"data": data});
             else
-                res1.render("othercompanyprofile.ejs", {"data": data});
+                res1.render("companyhome.ejs", {"data": data});
         }
         else
         {
@@ -283,6 +283,25 @@ router.get("/jobs",function(req,res){
 
 
 });
+//-----------------------------------------------------------------------------------------------------------------------------
+//List applicant for particular JID
+//----------------------------------
+
+router.get("/applicants/:jobId",function(req,res){
+var jobId=req.params.jobId;
+
+    client.get(backendroute+"/jobs/applist/"+jobId,function(data,res1){
+        console.log("data"+JSON.stringify(data));
+
+        if(res1.statusCode==200 && data!=[])
+            res.render("applicants.ejs",{data:data,"jid":jobId});
+        else
+            res.render("error.ejs",{"message" : "User not found"});
+    });
+});
+
+
+
 //---------------------------------------------------------------------------------------------------------------------------
 //EXPAND JOB FROM A LIST
 //-------------------------------//
@@ -313,7 +332,7 @@ router.post("/deletejob/:jobId",function(req,res){
    var jobId=req.param("jobId");
     console.log("jobId::"+jobId);
     client.delete(backendroute+"/jobs/"+jobId,function(data,res1){
-        if(res1.statusCode==400)
+        if(res1.statusCode==200)
         {
             res.redirect("/jobs");
         }
@@ -345,11 +364,9 @@ args={
 
    // console.log(res1);
         if(res1.statusCode==200)
-            res.render("/jobs/"+jobId);
-
-
+            res.redirect("/jobs/"+jobId);
         else
-            console.log(res1.statusCode);
+           res.render("error.ejs",{"message" : "Something went wrong"});
     })
 });
 
@@ -364,6 +381,8 @@ console.log("in application get");
         if(res1.statusCode==200){
             res.render("applications.ejs",{data:data});
         }
+        else
+            res.render("error.ejs",{"message" : "User not found"});
     });
 
 
@@ -384,7 +403,20 @@ router.get("/jobs/:jobId",function(req,res1){
     });
 });
 
+//----------------------------------------------------------------------------------------------------
+//GET COMPANY HOME BY USER
+//--------------------------
 
+
+router.get("/viewcompany/:companyId",function(req,res){
+    var company_id=req.params.companyId;
+    console.log("company_id"+company_id);
+    client.get(backendroute+"/profile/"+company_id,function(data,res1){
+        if(res1.statusCode==200){
+            res.render("companyhome.ejs",{data:data});
+        }
+    });
+});
 
 //-------------------------------------------------------------------------------------------------
 

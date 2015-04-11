@@ -108,7 +108,7 @@
                                 </h4>
 
                                 <h5>
-                                    <span role="alert" class="text media-heading ed" name="jtitle" ><%=data.title%></span>
+                                    <span role="alert" class="text media-heading ed" name="jtitle" ><%=data.jtitle%></span>
 
                                 </h5>
 
@@ -136,9 +136,14 @@
                                 </h5>
 
                                 </br>
-                            <button id="submit"  class="btn-primary center-block">Delete</button>
-                        </div>
-                    </form>
+                              </div>
+                        <button id="submit"  class="btn-primary center-block">Delete</button></form>
+                        <form method="get" action="/applicants/<%=data.jid%>">
+
+                        <button id="submit"  class="btn-primary center-block" >See Applications</button>
+                        </form>
+
+
 
 
 
