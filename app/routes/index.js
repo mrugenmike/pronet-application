@@ -351,8 +351,8 @@ args={
     data:{
 
         "job_id":jobId,
-        "company_id":req.body.c_id,
-        "user_id":"4",//use session variable req.session.ID
+        //"company_id":,
+        "user_id":req.session.ID,//use session variable req.session.ID
         "company_name":req.body.company_name,
         "job_title":req.body.jtitle
 
