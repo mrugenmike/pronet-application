@@ -147,7 +147,7 @@ router.get("/user/:userID",requireLogin,function(req,res1){
 //COMPANY PAGE RENDERING(GET//PUT)
 
 router.get("/company/:companyID",requireLogin,function(req,res1){
-    var id = req.param("companyID");
+    var id = req.params.companyID;
     console.log(id);
     console.log("URL "+backendroute+"/profile/"+req.session.ID);
     //  localhost:8080/api/v1/profile/7
@@ -176,12 +176,13 @@ router.get("/companyprofile",function(req,res){
 
 
 router.post("/companyprofile",function(req,res){
-    //console.log(JSON.stringify(req));
+
+    console.log(JSON.stringify(req.body));
     var args={
         data:{
             user_name:req.body.name,
             url:req.body.url,
-            overview:req.body.overview,
+            overview:"req.body.overview",
             id:req.session.ID,
             logo:""
             },
@@ -190,6 +191,7 @@ router.post("/companyprofile",function(req,res){
     console.log(backendroute+"/company/update");
     console.log("company put request"+JSON.stringify(args));
     client.put(backendroute+"/company/update",args,function(data,res1){
+        console.log(res1.statusCode);
         if(res1.statusCode==200)
         {
             res.render("/company/"+req.session.ID);
@@ -293,11 +295,9 @@ var jobId=req.params.jobId;
     client.get(backendroute+"/jobs/applist/"+jobId,function(data,res1){
         console.log("data"+JSON.stringify(data));
 
-        if(res1.statusCode==200 && data!=[])
+        if(res1.statusCode==200 )
             res.render("applicants.ejs",{data:data,"jid":jobId});
-        else
-            res.render("error.ejs",{"message" : "User not found"});
-    });
+        });
 });
 
 
@@ -340,7 +340,7 @@ router.post("/deletejob/:jobId",function(req,res){
 });
 //-------------------------------------------------------------------------------------------------------------------------------
 //JOB APPLICATION //
-// CHECK WITH VARUNA
+// CHECK WITH VARUNA// MRUGEN
 //-----------------------------
 
 router.post("/applyjob/:jobId",function(req,res){
@@ -491,7 +491,14 @@ router.post("/imgupload",function(req,res1){
                             }
                         //});*/
                     // ASK VARUNA IF SHE HAS MADE THE API FOR THIS
-                        client.put(backendroute + "/profile/updateImageURL" + req.session.ID, args, function (data, res) {
+                        args={
+                            data:{
+                                "id":req.session.ID,
+                                "logo":finalURL[0]
+                            },
+                            headers:{"Content-Type": "application/json"}
+                        };
+                        client.put(backendroute + "/profile/updateImageURL/", args, function (data, res) {
                             console.log(res.statusCode);
                             console.log("data::"+JSON.stringify(data));
                             if (res.statusCode == 200) {

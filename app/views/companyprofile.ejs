@@ -63,7 +63,7 @@
                     <div class="navbar-header">
                         <!-- Button for smallest screens -->
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                        <a class="navbar-brand" href="/"><img src="/assets/images/logo.png" width="50 px" height="50 px" alt="Pronet" ></a>
+                        <a class="navbar-brand" href="/"><img src="/assets/images/logo9.png" width="50 px" height="50 px" alt="Pronet" ></a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav pull-left">
@@ -133,37 +133,29 @@
                                         <div class="editable">
                                             <lable><b>Company Url</b></lable>
                                             <h5>
-                                                <span role="alert" class="text media-heading ed" id="url" name="url"><%=data.url%></span>
-                                                <button type="button" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                                <button class="btn btn-xs btn-action pull-right" type="submit" id="saveOverview"><span class="glyphicon glyphicon-circle"></span>Save</button>
-                                                <input type="hidden" id="url" name="url" value="<%=data.url%>" >
+                                                <span role="alert" class="text media-heading ed" name="url"><%=data.url%></span>
+                                                <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                                <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
 
                                             </h5>
                                         </div>
                                         <div class="editable">
                                                 <p><span class="label label-warning pull-left"><%=data.followerCount%> followers</span></p>
                                         </div>
-                                   </div>
-                            </div>
-                        </div>
-                        <br>
-                                <div class="div_style">
+                                        <br>
 
-                                    <div class="editable">
-
-                                        <label><b>Overview</b></label>
-
-                                        <h5>
-                                            <span role="alert" class="text media-heading ed" id="overview" name="overview"><%=data.overview%></span>
-                                            <button type="button" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                            <button class="btn btn-xs btn-action pull-right" type="submit" id="saveOverview"><span class="glyphicon glyphicon-circle"></span>Save</button>
-                                            <input type="hidden" id="overview" name="overview" value="<%=data.overview%>" >
-
-                                        </h5>
+                                        </div>
+                                        <div class="editable">
+                                            <label><b>Overview</b></label>
+                                            <h5>
+                                                <span role="alert" class="text media-heading ed" name="overview"><%=data.overview%></span>
+                                                <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                                <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+                                            </h5>
+                                        </div>
                                     </div>
-                                </div>
                             </form>
-
+                        </div>
 
                     <br>
                     <br>
@@ -172,28 +164,36 @@
                             </t></t><input type=submit class="btn-primary center-block" name=submit value="Add New Posts">
                         </form>
                         <form>
+                            <div class="panel-body">
+
                             <div class="row">
-                                    <div class="media-body editable">
                                        <div class="editable">
                                                 <br>
-                                                <h4><b>Recent Posts</b></h4>
-                                                <span class="textarea ed" name="postfield">Recent Posts</span>
-                                            </div>
+                                                <h3 class="page-title" align="center">Recent Posts</h3>
+                                                <hr>
+                                       </div>
                                     </div>
 
-                            </div>
-                            <div>
-                                <%for(var i=0;data.feeds.length;i++){ %>
-                                <div class="media-body">
-                                    <h4>
-                                        <b><%=data.feeds[i].email%></b>
-                                    </h4>
-                                    <h5>
-                                        <span role="alert" class="text media-heading ed"  name="company_name" ><%=data.feeds[i].password%></span>
-                                    </h5>
+                                    <% for(var i=0; i < data.feeds.length; i++) { %>
+                                        <div class="container" margin-top="40px" width="700px">
+                                            <form method="post" >
+                                                <div>
 
-                                <%}%>
-                            </div>
+                                                    <h5><b><%=data.feeds[i].email%></b></h5>
+                                                    <b><label></label></b><%=data.feeds[i].password%>
+                                                    <br>
+
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <hr>
+                                        <%   }
+                                        %>
+                                    </div>
 
                              </form>
                     </div>
+
+                    </article>
+                </div>
+            </div>
