@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Sergey Pozhilov (GetTemplate.com)">
+    <script src="javascripts/jquery-1.11.2.js"></script>
+
+    <title>Job Search</title>
+
+    <link rel="shortcut icon" href="assets/images/gt_favicon.png">
+
+    <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+    <!-- Custom styles for our template -->
+    <link rel="stylesheet" href="/assets/css/bootstrap-theme.css" media="screen">
+    <link rel="stylesheet" href="assets/css/main.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="/stylesheets/search.css">
+
+</head>
+
+<body>
+<!-- Fixed navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top headroom">
+    <div class="container">
+        <div class="navbar-header">
+            <!-- Button for smallest screens -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span
+                        class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button>
+            <a class="navbar-brand" href="/"><img src="assets/images/logo.png" width="50 px" height="50 px"
+                                                  alt="Pronet"></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav pull-left">
+                <li><a href="/feeds">Home</a></li>
+                <li class="active"><a href="/userprofile" >Profile</a></li>
+                <li><a href="/userfollowing">Following</a></li>
+                <li><a href="/search">Search</a></li>
+                <li><a href="/applications">Applications</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav pull-right">
+                <li><a class="btn" href="/signout">Sign out</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+<!-- /.navbar -->
+
+
+<header id="head" class="secondary"></header>
+
+<!-- container -->
+<div class="container">
+    <!--place code here-->
+    <section>
+        <h3>Start Your Job Search here</h3>
+        <div class="alert alert-danger" id="alert" role="alert" style="display:none">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            Please select a Search Category to Proceed.
+        </div>
+        <form class="form-control-static" id="searchForm" onsubmit="return false;">
+            <div class="row">
+                <div class="btn-group col-xs-1 col-md-2">
+                    <button type="button" id="categoryBtn" class="btn btn-default dropdown-toggle btn-lg" data-toggle="dropdown" aria-expanded="false">
+                        Choose Category <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="#" id="jobAction" class="search-actions">Jobs</a></li>
+                        <li><a href="#" id="userAction" class="search-actions">Users</a></li>
+                        <li><a href="#" id="companyAction" class="search-actions">Companies</a></li>
+                    </ul>
+                </div>
+                <div class="col-xs-6 col-md-5">
+                    <input type="text" class="form-control input-lg small box-shadow" id="searchBox"
+                           placeholder="Search by Job Title, keywords">
+                </div>
+                <div class="col-xs-5">
+                    <button type="submit" id="searchButton" class="btn btn-default btn-info btn-lg">
+                        Search
+                    </button>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <div  style="">
+        <ul class="pagination" style="display: none">
+
+        </ul>
+    </div>
+    <section id="jobListingsContainer" style="display:none">
+        <div class="row" id="listingcount"><h4></h4></div>
+    </section>
+    <section id="userListingsContainer" style="display:none">
+        <div class="row" id="userListingcount"><h4></h4></div>
+    </section>
+    <section id="companiesListingsContainer" style="display:none">
+        <div class="row" id="companiesListingcount"><h4></h4></div>
+    </section>
+    <!-- /.container -->
+</div>
+
+
+<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="assets/js/headroom.min.js"></script>
+<script src="assets/js/jQuery.headroom.min.js"></script>
+<script src="assets/js/template.js"></script>
+
+<!-- Custom JS for Ajax and Pagination-->
+
+<script src="javascripts/class.js"></script>
+<script src="javascript/jobsearch/JobSearch.js"> </script>
+<script src="javascript/jobsearch/Pagination.js"> </script>
+
+
+</body>
+</html>

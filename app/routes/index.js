@@ -651,7 +651,7 @@ function randomValueHex (len) {
 }
 
 router.get("/jobs",requireLogin,function(req,res){
-    res.render("jobsearch")
+    res.render("search")
 });
 
 router.get("/jobs/listings/:searchTerm/:skip/:limit",function(req,res){
@@ -706,27 +706,60 @@ router.get("/home",requireLogin,function(req,res1) {
     res1.redirect("/home/"+req.session.ID);
 });
 
+router.get("/connect",requireLogin,function(req,res){
+    res.render("usersearch");
+});
 
-router.post("/userposts",function(req,res1){
-    console.log(JSON.stringify(req.body));
-    args={data :
-            {
-                feed_title:"",
-                feed_description: req.body.postdescription,
-                feed_role : "U",
-                feed_username : req.session.name,
-                feed_userimage : req.session.userImage
-            },
-           headers:{"Content-Type": "application/json"}
-    };
-    //console.log(req.session.ID);
-    console.log(args);
-    client.post(backendroute+"/userfeeds/"+req.session.ID,args,function(data,res)
-    {
-        console.log(res.statusCode);
-        res1.redirect("/home/"+req.session.ID);
-
+router.get("/users/listings/:searchTerm/:skip/:limit",function(req,res){
+    var searchTerm = req.param("searchTerm");
+    var skip = req.param("skip");
+    var limit = req.param("limit");
+    client.get("http://localhost:8080/api/v1/users?query="+ searchTerm+"&&skip="+ skip+"&&limit="+ limit,function(data,response){
+        console.log(data);
+        res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+        res.header("Pragma", "no-cache");
+        res.header("Expires", 0);
+        res.send(data);
     });
 });
+
+router.get("/companies/listings/:searchTerm/:skip/:limit",function(req,res){
+    var searchTerm = req.param("searchTerm");
+    var skip = req.param("skip");
+    var limit = req.param("limit");
+    client.get("http://localhost:8080/api/v1/companies?query="+ searchTerm+"&&skip="+ skip+"&&limit="+ limit,function(data,response){
+        console.log(data);
+        res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+        res.header("Pragma", "no-cache");
+        res.header("Expires", 0);
+        res.send(data);
+    });
+});
+
+router.get("/search",requireLogin,function(req,res) {
+    res.render("search");
+});
+
+router.post("/userposts",function(req,res1){
+        console.log(JSON.stringify(req.body));
+        args={data :
+        {
+            feed_title:"",
+            feed_description: req.body.postdescription,
+            feed_role : "U",
+            feed_username : req.session.name,
+            feed_userimage : req.session.userImage
+        },
+            headers:{"Content-Type": "application/json"}
+        };
+        //console.log(req.session.ID);
+        console.log(args);
+        client.post(backendroute+"/userfeeds/"+req.session.ID,args,function(data,res)
+        {
+            console.log(res.statusCode);
+            res1.redirect("/home/"+req.session.ID);
+
+        });
+    });
 
 module.exports = router;
