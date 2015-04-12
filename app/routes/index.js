@@ -226,7 +226,21 @@ router.post("/posts",function(req,res){
     });
    // res.redirect("/company/"+req.session.ID);
 });
+///DELETE POSTS
 
+router.post("/deletefeeds/:feedId",function(req,res){
+    var feed_id=req.params.feedId;
+    console.log("in feed delete")
+    client.delete(backendroute+"/feeds/"+feed_id,function(data,res1){
+        console.log(res1.statusCode);
+        if(res1.statusCode==200)
+            res.redirect('/company/'+req.session.ID);
+    });
+
+});
+
+
+///feeds/{id}
 
 //----------------------------------------------------------------------------------------------------
 //COMPANY JOBS POSTS  (GET//POST)
@@ -351,7 +365,7 @@ args={
     data:{
 
         "job_id":jobId,
-        //"company_id":,
+        "company_id":req.body.c_id,
         "user_id":req.session.ID,//use session variable req.session.ID
         "company_name":req.body.company_name,
         "job_title":req.body.jtitle

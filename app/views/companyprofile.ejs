@@ -143,7 +143,7 @@
                                                 <p><span class="label label-warning pull-left"><%=data.followerCount%> followers</span></p>
                                         </div>
                                         <br>
-
+                                        <br>
                                         </div>
                                         <div class="editable">
                                             <label><b>Overview</b></label>
@@ -163,7 +163,7 @@
                         <form method="get" action="/posts">
                             </t></t><input type=submit class="btn-primary center-block" name=submit value="Add New Posts">
                         </form>
-                        <form>
+
                             <div class="panel-body">
 
                             <div class="row">
@@ -176,23 +176,21 @@
 
                                     <% for(var i=0; i < data.feeds.length; i++) { %>
                                         <div class="container" margin-top="40px" width="700px">
-                                            <form method="post" >
+                                            <form method="post" action="/deletefeeds/<%=data.feeds[i].id%>">
                                                 <div>
 
-                                                    <h5><b><%=data.feeds[i].email%></b></h5>
-                                                    <b><label></label></b><%=data.feeds[i].password%>
+                                                    <h4><b><%=data.feeds[i].email%></b></h4>
+                                                    <h5><%=data.feeds[i].password%></h5>
+                                                    <input type="submit" class="btn-primary center-block" value="Delete">
                                                     <br>
-
-                                                </div>
+                                                 </div>
                                             </form>
                                         </div>
                                         <hr>
                                         <%   }
                                         %>
                                     </div>
-
-                             </form>
-                    </div>
+                            </div>
 
                     </article>
                 </div>
