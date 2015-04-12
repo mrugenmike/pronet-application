@@ -391,6 +391,34 @@ router.get("/feeds",requireLogin,function(req,res){
     res.render("feeds")
 });
 
+router.get("/connect",requireLogin,function(req,res){
+    res.render("usersearch");
+});
 
+router.get("/users/listings/:searchTerm/:skip/:limit",function(req,res){
+    var searchTerm = req.param("searchTerm");
+    var skip = req.param("skip");
+    var limit = req.param("limit");
+    client.get("http://localhost:8080/api/v1/users?query="+ searchTerm+"&&skip="+ skip+"&&limit="+ limit,function(data,response){
+        console.log(data);
+        res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+        res.header("Pragma", "no-cache");
+        res.header("Expires", 0);
+        res.send(data);
+    });
+});
+
+router.get("/companies/listings/:searchTerm/:skip/:limit",function(req,res){
+    var searchTerm = req.param("searchTerm");
+    var skip = req.param("skip");
+    var limit = req.param("limit");
+    client.get("http://localhost:8080/api/v1/companies?query="+ searchTerm+"&&skip="+ skip+"&&limit="+ limit,function(data,response){
+        console.log(data);
+        res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+        res.header("Pragma", "no-cache");
+        res.header("Expires", 0);
+        res.send(data);
+    });
+});
 
 module.exports = router;
