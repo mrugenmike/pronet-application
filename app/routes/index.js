@@ -15,7 +15,7 @@ var events = require('events');
 var EventEmitter = events.EventEmitter;
 var eventOnUpload = new EventEmitter();
 
-aws.config.loadFromPath('/home/parin/Desktop/project/pronet-application/app/AmazonCredentials/AccDetails.json');
+aws.config.loadFromPath(path.join(__dirname, 'conf/AccDetails.json'));
 
 var backendroute = "http://localhost:8080/api/v1";
 function requireLogin (req, res, next) {
