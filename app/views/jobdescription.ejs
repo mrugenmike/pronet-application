@@ -81,7 +81,7 @@
             <h3 class="thin text-center">Job Description </h3>
             <hr >
 
-            
+
             <div class="imgup">
                 <div class="thumbnail pull-left" >
                     <img id="companypic" class="companypic" src="<%=data.logo%>" width="200 px" height="200 px" >
@@ -92,7 +92,11 @@
             </div>
             <form method="post" action="/applyjob/<%=data.jid%>" >
             <div class="media-body">
-
+                <%if (data.job_status=="INACTIVE"){%>
+                <label>This job is expired. No longer accepting applications...</label>
+                <%
+                }
+                %>
                 <h4>
                  <b>        Company Name</b>
                 </h4>
@@ -148,7 +152,7 @@
                 <%
                 if(data.job_status=="INACTIVE"){
                 %>
-                 <button id='submit' class='btn-primary center-block' disabled='disabled'>Apply</button>
+                 <button id='submit' class='btn-primary center-block'  disabled='disabled'>Apply</button>
                 <% }
                 else{
                 %>   <button id='submit' class='btn-primary center-block'>Apply</button>

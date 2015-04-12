@@ -7,3 +7,4 @@ app/*.log
 app/.DS_Store
 app/dump.rdb
 
+.elasticbeanstalk/
