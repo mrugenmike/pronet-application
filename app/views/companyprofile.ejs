@@ -6,13 +6,15 @@
             <meta name="description" content="">
             <meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
 
-            <title>User Profile</title>
+            <title>Company Profile</title>
 
-            <link rel="shortcut icon" href="assets/images/gt_favicon.png">
+            <link rel="shortcut icon" href="/assets/images/gt_favicon.png">
 
             <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
             <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
             <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+            <link rel="stylesheet" href="/assets/css/divstyle.css">
+            <link rel="stylesheet" href="/assets/css/buttonstyle.css">
 
             <!-- Custom styles for our template -->
             <link rel="stylesheet" href="/assets/css/bootstrap-theme.css" media="screen" >
@@ -31,7 +33,7 @@
             <script src="/assets/js/html5shiv.js"></script>
             <script src="/assets/js/respond.min.js"></script>
             <![endif]-->
-            
+
             <script type="text/javascript">
 			$(document).on("change", "#companyimage", function(e){
 				var preview = document.querySelector('.companypic');
@@ -44,49 +46,18 @@
   				}
 
   				if (file1) {
-  			//	alert("in if")
-    				reader.readAsDataURL(file);
-		
+  				alert("in if")
+    				reader.readAsDataURL(file1);
+
   				} else {
     				preview.src = "/assets/images/sample.jpg";
   				}
-				
-		
 				});
-			$(document).ready(function(){
 
-			$("#save").click(function(){
-			alert("in on click");
-			var file= document.querySelector('.companyimage').files[0];
-			
-			var data = new FormData();
-    		data.append('file', file);
-			alert(file.data);
-			alert(file.filename);
-			var url="/imgupload";
-				$.ajax({
-						type: "POST",
-						url: url,
-						data: data,
-						//contentType: 'multipart/form-data',
-						processData: false,
-						dataType: 'json',
-						success: function(result){
-						alert(result);
-					}
-	
-				});
-			
-			});
-});
-				
 </script>
-	
-        </head>
+       </head>
 
-        <body>
-
-            <!-- Fixed navbar -->
+        <body><!-- Fixed navbar -->
             <div class="navbar navbar-inverse navbar-fixed-top headroom" >
                 <div class="container">
                     <div class="navbar-header">
@@ -96,16 +67,18 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav pull-left">
-                            <li class="active"><a href="/companyprofile">Home</a></li>
-                             <li><a href="/userfollowing">Careers</a></li>
-                            </ul>
+                            <li class="active"><a href="/companyprofile">Profile</a></li>
+                           	<li><a href="/careers">Careers</a></li>
+                            <li ><a href="/jobs">Jobs</a></li>
+                            <li ><a href="/applicants">Applications</a></li>
+
+                        </ul>
 
                         <ul class="nav navbar-nav pull-right">
                             <li>
                                 <div class="span12">
                                     <form id="custom-search-form" class="form-search form-horizontal pull-right">
                                         <div class="input-append span12">
-                                            <input type="text" class="search-query mac-style" placeholder="Search for ...">
                                             <button type="submit" class="btn"><i class="glyphicon glyphicon-search"></i></button>
                                         </div>
                                     </form>
@@ -117,93 +90,108 @@
                 </div>
             </div>
             <!-- /.navbar -->
-            <header id="head" class="secondary"></header>
-            <form method="post" action="/companyprofile" enctype="multipart/form-data">
-        <div class="container" margin-top="30px">
+        <header id="head" class="secondary"></header>
+
+        <!-- container -->
+        <div class="container">
+            <!--place code here-->
             <div class="row">
-                <div class="col-md-12">
-                    <div class="well well-sm">
-                        <div class="media">
-                            <div class="imgup">
-                            
-                                <div class="thumbnail pull-left" >
-									
-                                        <img id="companypic" class="companypic" src="/assets/images/sample.jpg" width="200 px" height="200 px" >
-                                       	<input type="file" class="companyimage" id="companyimage" name="companyimage">
-                                       	<input type=button id="save" value="Save">
 
-                                </div>
-                            </div>
+                <!-- Article main content -->
+                <article class="col-xs-12 maincontent">
+                    <header class="page-header">
+                        <h1 class="page-title">Company Profile</h1>
+                    </header>
+                    <div class="div_style" align="center">
+                        <div class="panel-body">
+                            <hr>
 
-                            <div class="col-sm-1 text-left">
-                            </div>
-                            <div class="media-body">
-                                <div class="editable">
-                                <h5><span role="alert" class="text media-heading ed" name="name">Name</span>
-                                 <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                 <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
-                                </h5>
+                                <div class="imgup">
+                                    <form method="post" action="/imgupload" enctype="multipart/form-data">
+                                        <div class="thumbnail pull-left" >
+
+                                            <img id="companypic" class="companypic" src="<%=data.logo%>" width="200 px" height="200 px" >
+                                            <input type="file" class="companyimage" id="companyimage" name="companyimage">
+                                            <input type="submit" id="save" value="Save">
+
+                                        </div>
+                                    </form>
                                 </div>
-								</br>
-                                <div class="editable">
-                                <h5><span role="alert" class="text media-heading ed" name="url">Company URL</span>
-                                    <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                    <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
-                                </h5>
+                                <div class="col-sm-1 text-left">
                                 </div>
-                                 <div class="editable">
-                                 
-                                <br>
-                                <br>
-                                <p><span class="label label-warning pull-left">150 followers</span></p>
-                            </div>
+                                <form method="post" action="/companyprofile" >
+                                    <div class="media-body">
+                                        <div class="editable">
+                                            <lable><b>Company Name</b></lable>
+                                            <h5>
+                                                <span role="alert" class="text media-heading ed" id="name" name="name"><%=data.company_name%></span>
+                                                <input type="hidden" id="name" name="name" value="<%=data.company_name%>" >
+
+                                            </h5>
+                                        </div>
+
+                                        <div class="editable">
+                                            <lable><b>Company Url</b></lable>
+                                            <h5>
+                                                <span role="alert" class="text media-heading ed" name="url"><%=data.url%></span>
+                                                <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                                <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+
+                                            </h5>
+                                        </div>
+                                        <div class="editable">
+                                                <p><span class="label label-warning pull-left"><%=data.followerCount%> followers</span></p>
+                                        </div>
+                                        <br>
+                                        <br>
+                                        </div>
+                                        <div class="editable">
+                                            <label><b>Overview</b></label>
+                                            <h5>
+                                                <span role="alert" class="text media-heading ed" name="overview"><%=data.overview%></span>
+                                                <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                                <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+                                            </h5>
+                                        </div>
+                                    </div>
+                            </form>
                         </div>
-                    </div>
+
+                    <br>
+                    <br>
+                    <div class="div_style">
+                        <form method="get" action="/posts">
+                            </t></t><input type=submit class="btn-primary center-block" name=submit value="Add New Posts">
+                        </form>
+
+                            <div class="panel-body">
+
+                            <div class="row">
+                                       <div class="editable">
+                                                <br>
+                                                <h3 class="page-title" align="center">Recent Posts</h3>
+                                                <hr>
+                                       </div>
+                                    </div>
+
+                                    <% for(var i=0; i < data.feeds.length; i++) { %>
+                                        <div class="container" margin-top="40px" width="700px">
+                                            <form method="post" action="/deletefeeds/<%=data.feeds[i].id%>">
+                                                <div>
+
+                                                    <h4><b><%=data.feeds[i].email%></b></h4>
+                                                    <h5><%=data.feeds[i].password%></h5>
+                                                    <input type="submit" class="btn-primary center-block" value="Delete">
+                                                    <br>
+                                                 </div>
+                                            </form>
+                                        </div>
+                                        <hr>
+                                        <%   }
+                                        %>
+                                    </div>
+                            </div>
+
+                    </article>
                 </div>
             </div>
-
-
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="well well-sm">
-                        <div class="media"></div>
-                            <div class="editable">
-                                <br>
-                                <h4>
-                                <span class="textarea ed" name="overview">Overview</span>
-                                    <button type="button" class="btn btn-xs btn-default pull-right"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                    <button class="btn btn-xs btn-action pull-right" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
-                                </h4>
-                                </div>
-                    </div>
-                </div>
-            </div>
-            </form>
-<form method="get" action="/posts">
- <input type=submit name=submit value="Add New Posts">
- </form>
-   <br>                           
-	<br>
-	<form>
-	        <div class="row">
-                <div class="col-md-12">
-                    <div class="well well-sm" width="1140px" height="99px">
-                        <div class="media">
-                            </div>
-                            <div class="media-body editable">
-                                
-                                <div class="editable">
-                                <br>
-                                <span class="textarea ed" name="postfield">Recent Posts</span>
-                               </div>
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-        </div>
-        </form>
-
-        </body>
-        </html>

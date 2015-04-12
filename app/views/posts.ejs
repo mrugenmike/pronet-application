@@ -8,20 +8,22 @@
 	
 	<title>Template</title>
 
-	<link rel="shortcut icon" href="assets/images/gt_favicon.png">
+	<link rel="shortcut icon" href="/assets/images/gt_favicon.png">
 	
 	<link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-	<link rel="stylesheet" href="assets/css/bootstrap.min.css">
-	<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/assets/css/buttonstyle.css">
+	<link rel="stylesheet" href="/assets/css/divstyle.css">
 
 	<!-- Custom styles for our template -->
-	<link rel="stylesheet" href="assets/css/bootstrap-theme.css" media="screen" >
-	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="/assets/css/bootstrap-theme.css" media="screen" >
+	<link rel="stylesheet" href="/assets/css/main.css">
 
 	<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 	<!--[if lt IE 9]>
-	<script src="assets/js/html5shiv.js"></script>
-	<script src="assets/js/respond.min.js"></script>
+	<script src="/assets/js/html5shiv.js"></script>
+	<script src="/assets/js/respond.min.js"></script>
 	<![endif]-->
 </head>
 
@@ -32,23 +34,21 @@
                     <div class="navbar-header">
                         <!-- Button for smallest screens -->
                         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                        <a class="navbar-brand" href="/"><img src="assets/images/logo.png" width="50 px" height="50 px" alt="Pronet" ></a>
+                        <a class="navbar-brand" href="/"><img src="/assets/images/logo.png" width="50 px" height="50 px" alt="Pronet" ></a>
                     </div>
                     <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav pull-left">
-                            <li><a href="/companyprofile">Home</a></li>
-                             <li><a href="/userfollowing">Careers</a></li>
-                            </ul>
+						<ul class="nav navbar-nav pull-left">
+							<li class="active"><a href="/companyprofile">Profile</a></li>
+							<li><a href="/careers">Careers</a></li>
+							<li ><a href="/jobs">Jobs</a></li>
+							<li ><a href="/applicants">Applications</a></li>
+
+						</ul>
 
                         <ul class="nav navbar-nav pull-right">
                             <li>
                                 <div class="span12">
-                                    <form id="custom-search-form" class="form-search form-horizontal pull-right">
-                                        <div class="input-append span12">
-                                            <input type="text" class="search-query mac-style" placeholder="Search for ...">
-                                            <button type="submit" class="btn"><i class="glyphicon glyphicon-search"></i></button>
-                                        </div>
-                                    </form>
+
                                 </div>
                             </li>
                             <li><a class="btn" href="/signout">Sign out</a></li>
@@ -70,44 +70,31 @@
 					<h1 class="page-title">News Posting</h1>
 				</header>
 				
-				<div class="col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-					<div class="panel panel-default">
-						<div class="panel-body">
+						<div class="div_style">
 							<h3 class="thin text-center">Add Company Post</h3>
 							<hr>
 
 							<form method="post" action="/posts">
 
-                                <div class="top-margin">
+                                <div class="top-margin" >
                                     <span role="alert" class="text-danger" name="err"><%=error1%></span>
-                                </div>
-								<div class="top-margin">
+
+
 									<label>Job Title </label>
                                     <input type="text" class="form-control" name="title" >
-                                </div>
-								<div class="top-margin">
+
 									<label>Job Description </label>
                                   <textarea cols="25" rows="4" class="form-control" name="desc" ></textarea> 
-       
-								
-								</div>
-								<hr>
+       							<hr>
+								<button class="btn-primary center-block" type="submit">Post</button>
+									</div>
 
-								<div class="row">
-									<div class="col-lg-4">
-										                       
-									</div>
-									<div class="col-lg-4 text-right">
-										<button class="btn btn-action" type="submit">Post</button>
-									</div>
-								</div>
 							</form>
-						</div>
+							</div>
+						</article>
 					</div>
-
-				</div>
 				
-			</article>
+
 			<!-- /Article -->
 
 		</div>
@@ -121,8 +108,8 @@
 	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-	<script src="assets/js/headroom.min.js"></script>
-	<script src="assets/js/jQuery.headroom.min.js"></script>
-	<script src="assets/js/template.js"></script>
+	<script src="/assets/js/headroom.min.js"></script>
+	<script src="/assets/js/jQuery.headroom.min.js"></script>
+	<script src="/assets/js/template.js"></script>
 </body>
 </html>

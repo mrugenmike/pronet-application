@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+
+    <title>User Profile</title>
+
+    <link rel="shortcut icon" href="/assets/images/gt_favicon.png">
+
+    <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+
+    <!-- Custom styles for our template -->
+    <link rel="stylesheet" href="/assets/css/bootstrap-theme.css" media="screen" >
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/buttonstyle.css">
+    <link rel="stylesheet" href="/assets/css/divstyle.css">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="/assets/js/headroom.min.js"></script>
+    <script src="/assets/js/jQuery.headroom.min.js"></script>
+    <script src="/assets/js/template.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <script src="/javascript/mainscript.js"></script>
+    <script src="/assets/js/bootstrap-filestyle.min.js"> </script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/assets/js/html5shiv.js"></script>
+    <script src="/assets/js/respond.min.js"></script>
+    <![endif]-->
+
+   </head>
+
+<body>
+
+<!-- Fixed navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top headroom" >
+    <div class="container">
+        <div class="navbar-header">
+            <!-- Button for smallest screens -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+            <a class="navbar-brand" href="/"><img src="/assets/images/logo.png" width="50 px" height="50 px" alt="Pronet" ></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav pull-left">
+                <li><a href="/feeds">Home</a></li>
+                <li class="active"><a href="/userprofile" >Profile</a></li>
+                <li><a href="/userfollowing">Following</a></li>
+                <li><a href="/jobs">Jobs</a></li>
+                <li><a href="/applications">Applications</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav pull-right">
+                <li>
+                    <div class="span12">
+                        <form id="custom-search-form" class="form-search form-horizontal pull-right">
+                            <div class="input-append span12">
+                                <button type="submit" class="btn"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+                <li><a class="btn" href="/signout">Sign out</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+<!-- /.navbar -->
+<header id="head" class="secondary"></header>
+<div class="container" margin-top="30px">
+    <header class="page-header">
+        <h1 class="page-title">Apply for this job</h1>
+    </header>
+    <div class="div_style" align="center">
+        <div class="panel-body">
+            <h3 class="thin text-center">Job Description </h3>
+            <hr >
+
+            
+            <div class="imgup">
+                <div class="thumbnail pull-left" >
+                    <img id="companypic" class="companypic" src="<%=data.logo%>" width="200 px" height="200 px" >
+
+                </div>
+            </div>
+            <div class="col-sm-1 text-left">
+            </div>
+            <form method="post" action="/applyjob/<%=data.jid%>" >
+            <div class="media-body">
+
+                <h4>
+                 <b>        Company Name</b>
+                </h4>
+
+                <h5>
+                  <div  name="company_name" ><%=data.user_name%></div>
+                    <input type="hidden" name="company_name" value="<%=data.user_name%>">
+
+                </h5>
+                    <br><h4>
+                <b>        Job Title</b>
+                </h4>
+                <h5>
+                     <div name="jtitle" ><%=data.jtitle%></div>
+                    <input type="hidden" name="jtitle" value="<%=data.jtitle%>">
+
+                </h5>
+
+
+                    <br><h4>
+                <b>Job Description</b>
+                </h4>
+
+                <h5>
+                      <div name="desc" ><%=data.description%></div>
+                    <input type="hidden" name="desc" value="<%=data.description%>">
+
+                </h5>
+                <br><h4>
+                <b>Skills Required</b>
+                </h4>
+
+                <h5>
+                      <div name="skills" ><%=data.skills%></div>
+                    <input type="hidden" name="skills" value="<%=data.skills%>">
+
+                </h5>
+                <br><h4>
+                <b>Locaion</b></h4>
+
+                <h5>
+                    <div  name="region" ><%=data.job_region%></div>
+                    <input type="hidden" name="region" value="<%=data.job_region%>">
+
+                </h5>
+
+                    <input type="hidden" name="c_id" value="<%=data.id%>">
+
+
+                 <br>
+
+                 </div>
+                <%
+                if(data.job_status=="INACTIVE"){
+                %>
+                 <button id='submit' class='btn-primary center-block' disabled='disabled'>Apply</button>
+                <% }
+                else{
+                %>   <button id='submit' class='btn-primary center-block'>Apply</button>
+  <%              }
+                %>
+            </form>
+        </div>
+
+</body>
+</html>

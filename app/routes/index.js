@@ -6,6 +6,7 @@ var client = new Client();
 var session= require('express-session');
 var sesion_var;
 var fs=require('fs');
+var path = require('path');
 var multer  = require('multer');
 router.use(multer());
 var aws=require('aws-sdk');
@@ -13,7 +14,8 @@ var crypto = require('crypto');
 var events = require('events');
 var EventEmitter = events.EventEmitter;
 var eventOnUpload = new EventEmitter();
-aws.config.loadFromPath('AmazonCredentials/AccDetails.json');
+
+aws.config.loadFromPath('/home/parin/Desktop/project/pronet-application/app/AmazonCredentials/AccDetails.json');
 
 var backendroute = "http://localhost:8080/api/v1";
 function requireLogin (req, res, next) {
@@ -56,8 +58,8 @@ router.get("/applications",function(req,res1){
     res1.redirect('/applications/'+req.session.ID);
 });
 
-router.get("/feeds",function(req,res1){
-    res1.redirect('/feeds/'+req.session.ID);
+router.get("/home",function(req,res1){
+    res1.redirect('/home/'+req.session.ID);
 });
 
 
@@ -125,6 +127,10 @@ router.get("/user/:userID",requireLogin,function(req,res1){
         console.log(res.statusCode);
         if(res.statusCode != 400)
         {
+            //for feeds
+            req.session.name = data.name;
+            req.session.userImage = data.img;
+
             if((id == req.session.ID) && (req.session.page =='U') )
                 res1.render("userProfile.ejs", {"data": data , lastseen:req.session.lastseen });
             else
@@ -137,17 +143,22 @@ router.get("/user/:userID",requireLogin,function(req,res1){
     });
 });
 
+//---------------------------------------------------------------------------------------------
+//COMPANY PAGE RENDERING(GET//PUT)
 
 router.get("/company/:companyID",requireLogin,function(req,res1){
-    var id = req.param("companyID");
+    var id = req.params.companyID;
     console.log(id);
-    client.get(backendroute+"/companyprofile/"+id+"/"+req.session.ID,function(data,res){
+    console.log("URL "+backendroute+"/profile/"+req.session.ID);
+    //  localhost:8080/api/v1/profile/7
+    client.get(backendroute+"/profile/"+req.session.ID,function(data,res){
         console.log(res.statusCode);
+        console.log(data);
         if(res.statusCode != 400) {
             if ((id == req.session.ID) && (req.session.page =='C'))
                 res1.render("companyprofile.ejs", {"data": data});
             else
-                res1.render("othercompanyprofile.ejs", {"data": data});
+                res1.render("companyhome.ejs", {"data": data});
         }
         else
         {
@@ -156,7 +167,274 @@ router.get("/company/:companyID",requireLogin,function(req,res1){
     });
 });
 
+//----------------------------------------------------------------------------------------------------------------------------------
+//    COMPANY PROFILE
+router.get("/companyprofile",function(req,res){
+    res.redirect("/company/"+req.session.ID);
 
+});
+
+
+router.post("/companyprofile",function(req,res){
+
+    console.log(JSON.stringify(req.body));
+    var args={
+        data:{
+            user_name:req.body.name,
+            url:req.body.url,
+            overview:req.body.overview,
+            id:req.session.ID,
+            logo:""
+            },
+        headers:{"Content-Type": "application/json"}
+   };
+    console.log(backendroute+"/company/update");
+    console.log("company put request"+JSON.stringify(args));
+    client.put(backendroute+"/company/update",args,function(data,res1){
+        console.log(res1.statusCode);
+        if(res1.statusCode==201)
+        {
+            res.redirect("/company/"+req.session.ID);
+        }
+    });
+});
+
+//--------------------------------------------------------------------------------------------------
+
+//ADD NEWS FEEDS(GET//POST)
+
+router.get("/posts",function(req,res){
+    res.render("posts.ejs",{"error1":""});
+});
+
+router.post("/posts",function(req,res){
+    var args={
+        data:{
+           feed_title:req.body.title,
+            feed_description:req.body.desc },
+
+        headers:{"Content-Type": "application/json"}
+    };
+    // take 10 as user_id from session
+    console.log("args"+JSON.stringify(args));
+    console.log("ID:::"+req.session.ID);
+    client.post(backendroute+"/company/feeds/"+req.session.ID,args,function(data,rest_res)
+    {
+        console.log("Post res::"+rest_res.status);
+        if(rest_res.statusCode == 201)
+            res.redirect("/company/"+req.session.ID);
+    });
+   // res.redirect("/company/"+req.session.ID);
+});
+///DELETE POSTS
+
+router.post("/deletefeeds/:feedId",function(req,res){
+    var feed_id=req.params.feedId;
+    console.log("in feed delete")
+    client.delete(backendroute+"/feeds/"+feed_id,function(data,res1){
+        console.log(res1.statusCode);
+        if(res1.statusCode==200)
+            res.redirect('/company/'+req.session.ID);
+    });
+
+});
+
+
+///feeds/{id}
+
+//----------------------------------------------------------------------------------------------------
+//COMPANY JOBS POSTS  (GET//POST)
+
+router.get("/careers",function(req,res){
+    res.render("careers.ejs",{"error1":""});
+});
+
+router.post("/careers",function(rest_req,rest_res){
+    console.log("in post careers");
+	console.log("req"+JSON.stringify(rest_req.body));
+    console.log("request session"+rest_req.session.ID);
+
+    args={
+        data:{
+            id:rest_req.session.ID,
+            jtitle:rest_req.body.jtitle,
+            description:rest_req.body.desc,
+            skills:rest_req.body.skills,
+            start_date:rest_req.body.startdate,
+            ex_date:rest_req.body.exdate,
+            job_region:rest_req.body.region,
+            job_status:""
+            // company_name:session_var.uname
+        },
+        headers:{"Content-Type": "application/json"}
+    };
+
+    client.post(backendroute+"/jobs",args,function(data,res)
+
+    {
+        console.log(JSON.stringify(args));
+        console.log(res.statusCode);
+        if(res.statusCode == 201)
+            rest_res.redirect('/company/'+rest_req.session.ID);
+        else
+        {
+            rest_res.render('careers.ejs', {"error1":data.message});
+
+        }
+    });
+
+});
+//-----------------------------------------------------------------------------------------------------------------------------
+//LISTING ALL THE JOBS
+//------------------------------
+router.get("/jobs",function(req,res){
+
+    client.get(backendroute+"/jobs/company/"+req.session.ID,function(data,res1){
+
+        console.log(data);
+        if(res1.statusCode==200){
+            res.render("jobslist.ejs",{data:data});
+        }
+  });
+
+
+});
+//-----------------------------------------------------------------------------------------------------------------------------
+//List applicant for particular JID
+//----------------------------------
+
+router.get("/applicants/:jobId",function(req,res){
+var jobId=req.params.jobId;
+
+    client.get(backendroute+"/jobs/applist/"+jobId,function(data,res1){
+        console.log("data"+JSON.stringify(data));
+
+        if(res1.statusCode==200 )
+            res.render("applicants.ejs",{data:data,"jid":jobId});
+        });
+});
+
+
+
+//---------------------------------------------------------------------------------------------------------------------------
+//EXPAND JOB FROM A LIST
+//-------------------------------//
+
+router.get("/expand/:jobId",function(req,res){
+    var jobId=req.param("jobId");
+    console.log("JOB ID:"+jobId);
+   /* var data={"skills":"PYTHON",
+        "jid":"1888",
+        "user_name":"Google",
+        "job_region":"CA",
+        "description":"new",
+        "logo":"/assets/images/companylogo.jpg",
+        "id":"7",
+        "jtitle":"redis test"
+    };*/
+    client.get(backendroute+"/jobs/"+jobId,function(data,res1){
+        console.log(JSON.stringify(data));
+
+        res.render("expandjob.ejs",{data:data});
+    });
+});
+//-----------------------------------------------------------------------------------------------------------------------------
+//DELETE JOB
+//----------------//
+
+router.post("/deletejob/:jobId",function(req,res){
+   var jobId=req.param("jobId");
+    console.log("jobId::"+jobId);
+    client.delete(backendroute+"/jobs/"+jobId,function(data,res1){
+        if(res1.statusCode==200)
+        {
+            res.redirect("/jobs");
+        }
+    });
+});
+//-------------------------------------------------------------------------------------------------------------------------------
+//JOB APPLICATION //
+// CHECK WITH VARUNA// MRUGEN
+//-----------------------------
+
+router.post("/applyjob/:jobId",function(req,res){
+    var jobId=req.params.jobId;
+    console.log("jobid"+jobId);
+    console.log("req.body"+JSON.stringify(req.body));
+args={
+    data:{
+
+        "job_id":jobId,
+        "company_id":req.body.c_id,
+        "user_id":req.session.ID,//use session variable req.session.ID
+        "company_name":req.body.company_name,
+        "job_title":req.body.jtitle
+
+    },
+    headers:{"Content-Type": "application/json"}
+    };
+    console.log(JSON.stringify(args));
+    client.post(backendroute+"/jobs/apply", function (data,res1) {
+
+   // console.log(res1);
+        if(res1.statusCode==200)
+            res.redirect("/jobs/"+jobId);
+        else
+           res.render("error.ejs",{"message" : "Something went wrong"});
+    })
+});
+
+//-----------------------------------------------------------------------------------
+//LISTING ALL THE APPLICATIONS
+
+router.get("/applicants",function(req,res){
+console.log("in application get");
+    client.get(backendroute+"/jobs/apps/"+req.session.ID,function(data,res1){
+
+        console.log(data);
+        if(res1.statusCode==200){
+            res.render("applications.ejs",{data:data});
+        }
+        else
+            res.render("error.ejs",{"message" : "User not found"});
+    });
+
+
+});
+
+
+//---------------------------------------------------------------------------------------------
+
+//JOBS SEARCH FOR ONE JOB FROM JOB_ID     [ USER SEARCH FOR JOB ]
+
+router.get("/jobs/:jobId",function(req,res1){
+    var jobId=req.params.jobId;
+    //var jobId=1415;
+    //jobId="1415";
+    client.get(backendroute+"/jobs/"+jobId,function(data,res){
+        console.log("get /jobs/jobid:"+JSON.stringify(data));
+        res1.render("jobdescription",{data:data});
+    });
+});
+
+//----------------------------------------------------------------------------------------------------
+//GET COMPANY HOME BY USER
+//--------------------------
+
+
+router.get("/viewcompany/:companyId",function(req,res){
+    var company_id=req.params.companyId;
+    console.log("company_id"+company_id);
+    client.get(backendroute+"/profile/"+company_id,function(data,res1){
+        if(res1.statusCode==200){
+            res.render("companyhome.ejs",{data:data});
+        }
+    });
+});
+
+//-------------------------------------------------------------------------------------------------
+
+//IMAGE UPLOAD
 router.get("/following/:userID",function(req,res1){
     var followerid = req.param("userID");
     client.get(backendroute+"/following/"+followerid,function(data,res){
@@ -179,11 +457,11 @@ router.post("/imgupload",function(req,res1){
     }
     else
     {
-        imgUrl=req.files.imageinput.path;
-        mimetype = req.files.imageinput.mimetype;
+        imgUrl=req.files.companyimage.path;
+        mimetype = req.files.companyimage.mimetype;
     }
 
-    var s3bucket = new aws.S3({params: {Bucket: 'project.bucket1'}});
+    var s3bucket = new aws.S3({params: {Bucket: 'pronet'}});
 
     fs.readFile(imgUrl, function(err, data){
         if (err) { console.log(err); }
@@ -200,8 +478,13 @@ router.post("/imgupload",function(req,res1){
                     console.log("Successfully uploaded data to bucket :" + JSON.stringify(data));
                     var params = {Key: imagName};
                     var url = s3bucket.getSignedUrl('getObject', params);
+                    //console.log("Got a signed URL:", url);
+                    //eventOnUpload.emit('store',imagName,url);
+                    console.log("url"+url);
+                    var finalURL= url.split('?');
+
                     args={
-                        data:{img: url},
+                        data:{img: finalURL[0]},
                         headers:{"Content-Type": "application/json"}
                     };
 
@@ -216,12 +499,27 @@ router.post("/imgupload",function(req,res1){
                     else
                     {
                         //TODO Parin: company image upload route
-                        //client.put(backendroute + "/userprofile/" + req.session.ID, args, function (data, res) {
+                        /*client.put(backendroute + "/userprofile/" + req.session.ID, args, function (data, res) {
                             console.log(res.statusCode);
                             if (res.statusCode == 200) {
                                 //redirect("/user/"+id);
                             }
-                        //});
+                        //});*/
+                    // ASK VARUNA IF SHE HAS MADE THE API FOR THIS
+                        args={
+                            data:{
+                                "id":req.session.ID,
+                                "logo":url
+                            },
+                            headers:{"Content-Type": "application/json"}
+                        };
+                        client.put(backendroute + "/profile/updateImageURL/", args, function (data, res) {
+                            console.log(res.statusCode);
+                            console.log("data::"+JSON.stringify(data));
+                            if (res.statusCode == 200) {
+                                res1.redirect("/companyprofile");
+                            }
+                        });
                     }
                 }
 
@@ -229,7 +527,7 @@ router.post("/imgupload",function(req,res1){
         }
     });
 });
-
+//----------------------------------------------------------------------------------------------------------------------------
 
 router.post("/follow",requireLogin,function(req,res1) {
     console.log("in follow route");
@@ -369,7 +667,7 @@ router.get("/jobs/listings/:searchTerm/:skip/:limit",function(req,res){
     })
 });
 
-
+/*
 router.post("/companyprofile",function(req,res){
     var id= req.session.ID ;
 
@@ -385,10 +683,27 @@ router.post("/companyprofile",function(req,res){
         if(rest_res.statusCode == 201)
             res.redirect("/companyprofile");
     });
+});*/
+
+router.get("/home/:userID",requireLogin,function(req,res1) {
+    var id = req.param("userID");
+    console.log(id);
+    client.get(backendroute + "/usersfeeds/" + id , function (data, res) {
+        console.log(res.statusCode);
+        console.log(data);
+        res1.render("userHome.ejs", {
+            "data": data,
+            lastseen: req.session.lastseen,
+            name: req.session.name,
+            image: req.session.userImage,
+            ID: req.session.ID
+        });
+
+    });
 });
 
-router.get("/feeds",requireLogin,function(req,res){
-    res.render("feeds")
+router.get("/home",requireLogin,function(req,res1) {
+    res1.redirect("/home/"+req.session.ID);
 });
 
 router.get("/connect",requireLogin,function(req,res){
@@ -421,8 +736,30 @@ router.get("/companies/listings/:searchTerm/:skip/:limit",function(req,res){
     });
 });
 
-router.get("/search",requireLogin,function(req,res){
-    res.render("search")
+router.get("/search",requireLogin,function(req,res) {
+    res.render("search");
 });
+
+router.post("/userposts",function(req,res1){
+        console.log(JSON.stringify(req.body));
+        args={data :
+        {
+            feed_title:"",
+            feed_description: req.body.postdescription,
+            feed_role : "U",
+            feed_username : req.session.name,
+            feed_userimage : req.session.userImage
+        },
+            headers:{"Content-Type": "application/json"}
+        };
+        //console.log(req.session.ID);
+        console.log(args);
+        client.post(backendroute+"/userfeeds/"+req.session.ID,args,function(data,res)
+        {
+            console.log(res.statusCode);
+            res1.redirect("/home/"+req.session.ID);
+
+        });
+    });
 
 module.exports = router;

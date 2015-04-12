@@ -9,6 +9,7 @@ $(document).ready(
             else
                 ahref = ' <a href="/user/'+ data1[i].followeeID+'">';
 
+
             var divTag = '<div class="col-lg-2 col-sm-5 text-center">' + ahref +
                 '<img class="img-circle img-responsive img-center" style = "width: 100px; height:100px;" src="'+ data1[i].followeeImgURL + '" alt=""></a>' +
                 '<h4> ' + data1[i].followeeName + '</h4>' +
