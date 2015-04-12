@@ -353,7 +353,7 @@ function randomValueHex (len) {
 }
 
 router.get("/jobs",requireLogin,function(req,res){
-    res.render("jobsearch")
+    res.render("search")
 });
 
 router.get("/jobs/listings/:searchTerm/:skip/:limit",function(req,res){
@@ -419,6 +419,10 @@ router.get("/companies/listings/:searchTerm/:skip/:limit",function(req,res){
         res.header("Expires", 0);
         res.send(data);
     });
+});
+
+router.get("/search",requireLogin,function(req,res){
+    res.render("search")
 });
 
 module.exports = router;
