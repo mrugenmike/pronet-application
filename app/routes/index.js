@@ -408,11 +408,11 @@ console.log("in application get");
 //JOBS SEARCH FOR ONE JOB FROM JOB_ID     [ USER SEARCH FOR JOB ]
 
 router.get("/jobs/:jobId",function(req,res1){
-    var jobId=req.param("jobId");
+    var jobId=req.params.jobId;
     //var jobId=1415;
     //jobId="1415";
     client.get(backendroute+"/jobs/"+jobId,function(data,res){
-        console.log("/jobs/jobid"+JSON.stringify(data));
+        console.log("get /jobs/jobid:"+JSON.stringify(data));
         res1.render("jobdescription",{data:data});
     });
 });

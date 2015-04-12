@@ -138,8 +138,15 @@
                  <br>
 
                  </div>
-
-            <button id="submit" class="btn-primary center-block">Apply</button>
+                <%
+                if(data.job_status=="INACTIVE"){
+                %>
+                 <button id='submit' class='btn-primary center-block' disabled='disabled'>Apply</button>
+                <% }
+                else{
+                %>   <button id='submit' class='btn-primary center-block'>Apply</button>
+  <%              }
+                %>
             </form>
         </div>
 
