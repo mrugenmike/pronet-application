@@ -182,7 +182,7 @@ router.post("/companyprofile",function(req,res){
         data:{
             user_name:req.body.name,
             url:req.body.url,
-            overview:"req.body.overview",
+            overview:req.body.overview,
             id:req.session.ID,
             logo:""
             },
@@ -192,9 +192,9 @@ router.post("/companyprofile",function(req,res){
     console.log("company put request"+JSON.stringify(args));
     client.put(backendroute+"/company/update",args,function(data,res1){
         console.log(res1.statusCode);
-        if(res1.statusCode==200)
+        if(res1.statusCode==201)
         {
-            res.render("/company/"+req.session.ID);
+            res.redirect("/company/"+req.session.ID);
         }
     });
 });
@@ -480,6 +480,7 @@ router.post("/imgupload",function(req,res1){
                     var url = s3bucket.getSignedUrl('getObject', params);
                     //console.log("Got a signed URL:", url);
                     //eventOnUpload.emit('store',imagName,url);
+                    console.log("url"+url);
                     var finalURL= url.split('?');
 
                     args={
@@ -508,7 +509,7 @@ router.post("/imgupload",function(req,res1){
                         args={
                             data:{
                                 "id":req.session.ID,
-                                "logo":finalURL[0]
+                                "logo":url
                             },
                             headers:{"Content-Type": "application/json"}
                         };
