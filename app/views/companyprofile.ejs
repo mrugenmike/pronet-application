@@ -1,205 +1,197 @@
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="utf-8">
-            <meta name="viewport"    content="width=device-width, initial-scale=1.0">
-            <meta name="description" content="">
-            <meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
 
-            <title>Company Profile</title>
+    <title>Company Profile</title>
 
-            <link rel="shortcut icon" href="/assets/images/gt_favicon.png">
+    <link rel="shortcut icon" href="/assets/images/gt_favicon.png">
 
-            <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
-            <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-            <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
-            <link rel="stylesheet" href="/assets/css/divstyle.css">
-            <link rel="stylesheet" href="/assets/css/buttonstyle.css">
+    <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/divstyle.css">
+    <link rel="stylesheet" href="/assets/css/buttonstyle.css">
 
-            <!-- Custom styles for our template -->
-            <link rel="stylesheet" href="/assets/css/bootstrap-theme.css" media="screen" >
-            <link rel="stylesheet" href="/assets/css/main.css">
+    <!-- Custom styles for our template -->
+    <link rel="stylesheet" href="/assets/css/bootstrap-theme.css" media="screen" >
+    <link rel="stylesheet" href="/assets/css/main.css">
 
-            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-            <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-            <script src="/assets/js/headroom.min.js"></script>
-            <script src="/assets/js/jQuery.headroom.min.js"></script>
-            <script src="/assets/js/template.js"></script>
-            <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-            <script src="/javascript/mainscript.js"></script>
-			<script src="/assets/js/bootstrap-filestyle.min.js"> </script>
-            <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-            <!--[if lt IE 9]>
-            <script src="/assets/js/html5shiv.js"></script>
-            <script src="/assets/js/respond.min.js"></script>
-            <![endif]-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script src="/assets/js/headroom.min.js"></script>
+    <script src="/assets/js/jQuery.headroom.min.js"></script>
+    <script src="/assets/js/template.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <script src="/javascript/mainscript.js"></script>
+    <script src="/assets/js/bootstrap-filestyle.min.js"> </script>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/assets/js/html5shiv.js"></script>
+    <script src="/assets/js/respond.min.js"></script>
+    <![endif]-->
 
-            <script type="text/javascript">
-			$(document).on("change", "#companyimage", function(e){
-				var preview = document.querySelector('.companypic');
-  				var file1    = document.querySelector('.companyimage').files[0];
-				alert(file1);
-  				var reader  = new FileReader();
-				reader.onloadend = function () {
-				//	alert("onload")
-    				preview.src = reader.result;
-  				}
+    <script type="text/javascript">
+        $(document).on("change", "#companyimage", function(e){
+            var preview = document.querySelector('.companypic');
+            var file1    = document.querySelector('.companyimage').files[0];
+            alert(file1);
+            var reader  = new FileReader();
+            reader.onloadend = function () {
+                //	alert("onload")
+                preview.src = reader.result;
+            }
 
-  				if (file1) {
-  				alert("in if")
-    				reader.readAsDataURL(file1);
+            if (file1) {
+                alert("in if")
+                reader.readAsDataURL(file1);
 
-  				} else {
-    				preview.src = "/assets/images/sample.jpg";
-  				}
-				});
+            } else {
+                preview.src = "/assets/images/sample.jpg";
+            }
+        });
 
-</script>
-       </head>
+    </script>
+</head>
 
-        <body><!-- Fixed navbar -->
-            <div class="navbar navbar-inverse navbar-fixed-top headroom" >
-                <div class="container">
-                    <div class="navbar-header">
-                        <!-- Button for smallest screens -->
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                        <a class="navbar-brand" href="/"><img src="/assets/images/logo.png" width="50 px" height="50 px" alt="Pronet" ></a>
-                    </div>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav pull-left">
-                            <li class="active"><a href="/companyprofile">Profile</a></li>
-                           	<li><a href="/careers">Careers</a></li>
-                            <li ><a href="/jobs">Jobs</a></li>
-                            <li ><a href="/applicants">Applications</a></li>
+<body><!-- Fixed navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top headroom" >
+    <div class="container">
+        <div class="navbar-header">
+            <!-- Button for smallest screens -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+            <a class="navbar-brand" href="/"><img src="/assets/images/logo.png" width="50 px" height="50 px" alt="Pronet" ></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav pull-left">
+                <li class="active"><a href="/companyprofile">Profile</a></li>
+                <li><a href="/careers">Careers</a></li>
+                <li ><a href="/jobs">Jobs</a></li>
+                <li ><a href="/applicants">Applications</a></li>
 
-                        </ul>
+            </ul>
 
-                        <ul class="nav navbar-nav pull-right">
-                            <li>
-                                <div class="span12">
-                                    <form id="custom-search-form" class="form-search form-horizontal pull-right">
-                                        <div class="input-append span12">
-                                            <button type="submit" class="btn"><i class="glyphicon glyphicon-search"></i></button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </li>
-                            <li><a class="btn" href="/signout">Sign out</a></li>
-                        </ul>
-                    </div><!--/.nav-collapse -->
-                </div>
-            </div>
-            <!-- /.navbar -->
-        <header id="head" class="secondary"></header>
-
-        <!-- container -->
-        <div class="container">
-            <!--place code here-->
-            <div class="row">
-
-                <!-- Article main content -->
-                <article class="col-xs-12 maincontent">
-                    <header class="page-header">
-                        <h1 class="page-title">Company Profile</h1>
-                    </header>
-                    <div class="div_style" align="center">
-                        <div class="panel-body">
-                            <hr>
-
-                                <div class="imgup">
-                                    <form method="post" action="/imgupload" enctype="multipart/form-data">
-                                        <div class="thumbnail pull-left" >
-
-                                            <img id="companypic" class="companypic" src="<%=data.logo%>" width="200 px" height="200 px" >
-                                            <input type="file" class="companyimage" id="companyimage" name="companyimage">
-                                            <input type="submit" id="save" value="Save">
-
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="col-sm-1 text-left">
-                                </div>
-                                <form method="post" action="/companyprofile" >
-                                    <div class="media-body">
-                                        <div class="editable">
-                                            <lable><b>Company Name</b></lable>
-                                            <h5>
-                                                <span role="alert" class="text media-heading ed" id="name" name="name"><%=data.company_name%></span>
-                                                <input type="hidden" id="name" name="name" value="<%=data.company_name%>" >
-
-                                            </h5>
-                                        </div>
-
-                                        <div class="editable">
-                                            <lable><b>Company Url</b></lable>
-                                            <h5>
-                                                <span role="alert" class="text media-heading ed" name="url"><%=data.url%></span>
-                                                <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                                <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
-
-                                            </h5>
-                                        </div>
-                                        <div class="editable">
-                                                <p><span class="label label-warning pull-left"><%=data.followerCount%> followers</span></p>
-                                        </div>
-                                        <br>
-
-                                        </div>
-                                    <br>
-                                    <br>
-                                    <br>
-                                    <br>
-                                        <div class="editable">
-                                            <label><b>Overview</b></label>
-                                            <h5>
-                                                <span role="alert" class="text media-heading ed" name="overview"><%=data.overview%></span>
-                                                <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
-                                                <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
-                                            </h5>
-                                        </div>
-                                    </div>
-                        <br>
-                        <br>
-                            </form>
-                        </div>
-
-                    <br>
-                    <br>
-                    <div class="div_style">
-                        <form method="get" action="/posts">
-                            </t></t><input type=submit class="btn-primary center-block" name=submit value="Add New Posts">
+            <ul class="nav navbar-nav pull-right">
+                <li>
+                    <div class="span12">
+                        <form id="custom-search-form" class="form-search form-horizontal pull-right">
+                            <div class="input-append span12">
+                                <button type="submit" class="btn"><i class="glyphicon glyphicon-search"></i></button>
+                            </div>
                         </form>
-                        <form>
-                            <div class="panel-body">
+                    </div>
+                </li>
+                <li><a class="btn" href="/signout">Sign out</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+<!-- /.navbar -->
+<header id="head" class="secondary"></header>
 
-                            <div class="row">
-                                       <div class="editable">
-                                                <br>
-                                                <h3 class="page-title" align="center">Recent Posts</h3>
-                                                <hr>
-                                       </div>
-                                    </div>
+<!-- container -->
+<div class="container">
+    <!--place code here-->
+    <div class="row">
 
-                                    <% for(var i=0; i < data.feeds.length; i++) { %>
-                                        <div class="container" margin-top="40px" width="700px">
-                                            <form method="post" >
-                                                <div>
+        <!-- Article main content -->
+        <article class="col-xs-12 maincontent">
+            <header class="page-header">
+                <h1 class="page-title">Company Profile</h1>
+            </header>
+            <div class="div_style" align="center">
+                <div class="panel-body">
+                    <hr>
 
-                                                    <h5><b><%=data.feeds[i].email%></b></h5>
-                                                    <b><label></label></b><%=data.feeds[i].password%>
-                                                    <br>
+                    <div class="imgup">
+                        <form method="post" action="/imgupload" enctype="multipart/form-data">
+                            <div class="thumbnail pull-left" >
 
-                                                </div>
-                                            </form>
-                                        </div>
-                                        <hr>
-                                        <%   }
-                                        %>
-                                    </div>
+                                <img id="companypic" class="companypic" src="<%=data.logo%>" width="200 px" height="200 px" >
+                                <input type="file" class="companyimage" id="companyimage" name="companyimage">
+                                <input type="submit" id="save" value="Save">
 
-                             </form>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-sm-1 text-left">
+                    </div>
+                    <form method="post" action="/companyprofile" >
+                        <div class="media-body">
+                            <div class="editable">
+                                <lable><b>Company Name</b></lable>
+                                <h5>
+                                    <span role="alert" class="text media-heading ed" id="name" name="name"><%=data.company_name%></span>
+                                    <input type="hidden" id="name" name="name" value="<%=data.company_name%>" >
+
+                                </h5>
+                            </div>
+
+                            <div class="editable">
+                                <lable><b>Company Url</b></lable>
+                                <h5>
+                                    <span role="alert" class="text media-heading ed" name="url"><%=data.url%></span>
+                                    <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                    <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+
+                                </h5>
+                            </div>
+                            <div class="editable">
+                                <p><span class="label label-warning pull-left"><%=data.followerCount%> followers</span></p>
+                            </div>
+                            <br>
+                            <br>
+                        </div>
+                        <div class="editable">
+                            <label><b>Overview</b></label>
+                            <h5>
+                                <span role="alert" class="text media-heading ed" name="overview"><%=data.overview%></span>
+                                <button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-circle"></span>Edit</button>
+                                <button class="btn btn-xs btn-action" type="submit"><span class="glyphicon glyphicon-circle"></span>Save</button>
+                            </h5>
+                        </div>
+                </div>
+                </form>
+            </div>
+
+            <br>
+            <br>
+            <div class="div_style">
+                <form method="get" action="/posts">
+                    </t></t><input type=submit class="btn-primary center-block" name=submit value="Add New Posts">
+                </form>
+
+                <div class="panel-body">
+
+                    <div class="row">
+                        <div class="editable">
+                            <br>
+                            <h3 class="page-title" align="center">Recent Posts</h3>
+                            <hr>
+                        </div>
                     </div>
 
-                    </article>
+                    <% for(var i=0; i < data.feeds.length; i++) { %>
+                    <div class="container" margin-top="40px" width="700px">
+                        <form method="post" action="/deletefeeds/<%=data.feeds[i].id%>">
+                            <div>
+
+                                <h4><b><%=data.feeds[i].email%></b></h4>
+                                <h5><%=data.feeds[i].password%></h5>
+                                <input type="submit" class="btn-primary center-block" value="Delete">
+                                <br>
+                            </div>
+                        </form>
+                    </div>
+                    <hr>
+                    <%   }
+                    %>
                 </div>
             </div>
+
+        </article>
+    </div>
+</div>
