@@ -26,7 +26,6 @@
     <script src="/assets/js/jQuery.headroom.min.js"></script>
     <script src="/assets/js/template.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-    <script src="/javascript/mainscript.js"></script>
     <script src="/assets/js/bootstrap-filestyle.min.js"> </script>
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -151,10 +150,12 @@
                 <%
                 if(data.job_status=="INACTIVE"){
                 %>
-                 <button id='submit' class='btn-primary center-block'  disabled='disabled'>Apply</button>
+                <button id="submit" class="btn  btn-action btn-primary center-block" disabled="disabled" type="submit"><span class="glyphicon glyphicon-circle"></span><%=data.apply%></button>
                 <% }
                 else{
-                %>   <button id='submit' class='btn-primary center-block'>Apply</button>
+
+                %>  <button id="submit" class="btn btn-action btn-primary center-block" type="submit"><span class="glyphicon glyphicon-circle"></span><%=data.apply%></button>
+
   <%              }
                 %>
             </form>

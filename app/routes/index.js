@@ -17,7 +17,8 @@ var eventOnUpload = new EventEmitter();
 
 aws.config.loadFromPath(path.join(__dirname, 'conf/AccDetails.json'));
 
-var backendroute = "http://52.8.8.245:8080/api/v1";
+//var backendroute = "http://52.8.8.245:8080/api/v1";
+var backendroute = "http://localhost:8080/api/v1";
 function requireLogin (req, res, next) {
     console.log("requirelogin");
     if (!(req.session.ID && req.session.page && req.session.lastseen)) {
@@ -349,7 +350,7 @@ router.get("/expand/:jobId",function(req,res){
         "id":"7",
         "jtitle":"redis test"
     };*/
-    client.get(backendroute+"/jobs/"+jobId,function(data,res1){
+    client.get(backendroute+"/jobs/"+jobId+"/"+req.session.ID,function(data,res1){
         console.log(JSON.stringify(data));
 
         res.render("expandjob.ejs",{data:data});
@@ -374,7 +375,7 @@ router.post("/deletejob/:jobId",function(req,res){
 // CHECK WITH VARUNA// MRUGEN
 //-----------------------------
 
-router.post("/applyjob/:jobId",function(req,res){
+router.post("/applyjob/:jobId",function(req,res2){
     var jobId=req.params.jobId;
     console.log("jobid"+jobId);
     console.log("req.body"+JSON.stringify(req.body));
@@ -391,14 +392,15 @@ args={
     headers:{"Content-Type": "application/json"}
     };
     console.log(JSON.stringify(args));
-    client.post(backendroute+"/jobs/apply", function (data,res1) {
-
-   // console.log(res1);
+    //client.post("http://localhost:8080/api/v1/jobs/apply", function (data,res1) {
+    //console.log(backendroute+"/jobs/apply");
+    client.post(backendroute+"/jobs/apply",args,function (data,res1) {
+    console.log("res from apply:::"+res1.statusCode);
         if(res1.statusCode==200)
-            res.redirect("/jobs/"+jobId);
+           res2.redirect("/search");
         else
-           res.render("error.ejs",{"message" : "Something went wrong"});
-    })
+           res2.render("error.ejs",{"message" : "Something went wrong"});
+    });
 });
 
 //-----------------------------------------------------------------------------------
@@ -428,7 +430,7 @@ router.get("/jobs/:jobId",function(req,res1){
     var jobId=req.params.jobId;
     //var jobId=1415;
     //jobId="1415";
-    client.get(backendroute+"/jobs/"+jobId,function(data,res){
+    client.get(backendroute+"/jobs/"+jobId+"/"+req.session.ID,function(data,res){
         console.log("get /jobs/jobid:"+JSON.stringify(data));
         res1.render("jobdescription",{data:data});
     });
