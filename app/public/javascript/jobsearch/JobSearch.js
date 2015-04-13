@@ -194,7 +194,7 @@ function renderCompaniesListing(companiesListing,searchTerm,totalTerms) {
         searchTemplate.children("h4").html("Found "+totalTerms+" results for <i>"+searchTerm+"</i>");
         companiesListingContainer.append(searchTemplate);
         companiesListing.forEach(function(listing){
-            var div = '<div class="row" name="listing" class="listingTemplate"><div class="blockquote-box blockquote-primary clearfix col-md-offset-2"> <div class="square pull-left" name="company-img-div"> <img src='+listing.logo+' class="img-thumbnail"/> </div> <h4 name="position-title"><a href="/companies/'+listing.id+'">'+listing.companyName+'</a></h4> <p name="description">'+listing.description+'</p> </div> </div>';
+            var div = '<div class="row" name="listing" class="listingTemplate"><div class="blockquote-box blockquote-primary clearfix col-md-offset-2"> <div class="square pull-left" name="company-img-div"> <img src='+listing.logo+' class="img-thumbnail"/> </div> <h4 name="position-title"><a href="/viewcompany/'+listing.id+'">'+listing.companyName+'</a></h4> <p name="description">'+listing.description+'</p> </div> </div>';
             companiesListingContainer.append(div);
         });
     }
