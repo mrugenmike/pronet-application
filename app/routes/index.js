@@ -668,7 +668,7 @@ router.get("/jobs/listings/:searchTerm/:skip/:limit",function(req,res){
     var searchTerm = req.param("searchTerm");
     var skip = req.param("skip");
     var limit = req.param("limit");
-    client.get("http://localhost:8080/api/v1/jobs/listings?query="+ searchTerm+"&&skip="+ skip+"&&limit="+ limit,function(data,response){
+    client.get(backendroute+"/jobs/listings?query="+ searchTerm+"&&skip="+ skip+"&&limit="+ limit,function(data,response){
         console.log(data);
         res.header("Cache-Control", "no-cache, no-store, must-revalidate");
         res.header("Pragma", "no-cache");
@@ -724,7 +724,7 @@ router.get("/users/listings/:searchTerm/:skip/:limit",function(req,res){
     var searchTerm = req.param("searchTerm");
     var skip = req.param("skip");
     var limit = req.param("limit");
-    client.get("http://localhost:8080/api/v1/users?query="+ searchTerm+"&&skip="+ skip+"&&limit="+ limit,function(data,response){
+    client.get(backendroute+"/users?query="+ searchTerm+"&&skip="+ skip+"&&limit="+ limit,function(data,response){
         console.log(data);
         res.header("Cache-Control", "no-cache, no-store, must-revalidate");
         res.header("Pragma", "no-cache");
@@ -737,7 +737,7 @@ router.get("/companies/listings/:searchTerm/:skip/:limit",function(req,res){
     var searchTerm = req.param("searchTerm");
     var skip = req.param("skip");
     var limit = req.param("limit");
-    client.get("http://localhost:8080/api/v1/companies?query="+ searchTerm+"&&skip="+ skip+"&&limit="+ limit,function(data,response){
+    client.get(backendroute+"/companies?query="+ searchTerm+"&&skip="+ skip+"&&limit="+ limit,function(data,response){
         console.log(data);
         res.header("Cache-Control", "no-cache, no-store, must-revalidate");
         res.header("Pragma", "no-cache");
