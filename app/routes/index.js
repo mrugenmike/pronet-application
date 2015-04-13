@@ -17,7 +17,7 @@ var eventOnUpload = new EventEmitter();
 
 aws.config.loadFromPath(path.join(__dirname, 'conf/AccDetails.json'));
 
-var backendroute = "http://localhost:8080/api/v1";
+var backendroute = "http://52.8.8.245:8080/api/v1";
 function requireLogin (req, res, next) {
     console.log("requirelogin");
     if (!(req.session.ID && req.session.page && req.session.lastseen)) {
