@@ -185,9 +185,9 @@ router.post("/companyprofile",function(req,res){
             overview:req.body.overview,
             id:req.session.ID,
             logo:""
-            },
+        },
         headers:{"Content-Type": "application/json"}
-   };
+    };
     console.log(backendroute+"/company/update");
     console.log("company put request"+JSON.stringify(args));
     client.put(backendroute+"/company/update",args,function(data,res1){
@@ -198,7 +198,6 @@ router.post("/companyprofile",function(req,res){
         }
     });
 });
-
 //--------------------------------------------------------------------------------------------------
 
 //ADD NEWS FEEDS(GET//POST)
