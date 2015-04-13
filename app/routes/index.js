@@ -17,8 +17,8 @@ var eventOnUpload = new EventEmitter();
 
 aws.config.loadFromPath(path.join(__dirname, 'conf/AccDetails.json'));
 
-//var backendroute = "http://52.8.8.245:8080/api/v1";
-var backendroute = "http://localhost:8080/api/v1";
+var backendroute = "http://52.8.8.245:8080/api/v1";
+//var backendroute = "http://localhost:8080/api/v1";
 function requireLogin (req, res, next) {
     console.log("requirelogin");
     if (!(req.session.ID && req.session.page && req.session.lastseen)) {
@@ -74,7 +74,9 @@ router.post('/signin',function(req,res1){
         console.log("response from server"+res.statusCode);
         if(res.statusCode !=200)
         {
-            res1.redirect("/signin");//redirect to the page when auth fails
+            //res1.redirect("/signin");//redirect to the page when auth fails
+            res1.render('login.ejs', {"error1":data.message, "email" :req.body.email, "password" :req.body.password });
+
         }
         else
         {
@@ -124,6 +126,7 @@ router.post("/signup",function(req,res1){
             res1.render('signup.ejs', {"error1":data.message, "firstname": req.body.firstName , "lastname" :req.body.lastName , "companyname" :req.body.companyName , "email" :req.body.email, "password" :req.body.password ,  "role" :req.body.role});
         }
     });
+
     /*.on("error",function(err){
      console.log("Error occured while signing up user");
      res1.redirect("/signup");
@@ -146,7 +149,7 @@ router.get("/user/:userID",requireLogin,function(req,res1){
                 res1.render("userProfile.ejs", {"data": data , lastseen:req.session.lastseen });
             }
             else
-                res1.render("otheruserProfile.ejs" , {"data" : data});
+                res1.render("otheruserProfile.ejs" , {"data" : data , lastseen:req.session.lastseen });
         }
         else
         {
@@ -296,7 +299,7 @@ router.post("/careers",function(rest_req,rest_res){
             rest_res.redirect('/company/'+rest_req.session.ID);
         else
         {
-            rest_res.render('careers.ejs', {"error1":data.message});
+            rest_res.redirect('/jobs');
 
         }
     });
@@ -461,7 +464,7 @@ router.get("/following/:userID",function(req,res1){
     client.get(backendroute+"/following/"+followerid,function(data,res){
         console.log(data);
         //res.send(data);
-        res1.render("following.ejs",{data:data});
+        res1.render("following.ejs",{data:data , lastseen:req.session.lastseen });
     });
 });
 

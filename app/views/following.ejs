@@ -46,7 +46,7 @@
 				<a class="navbar-brand" href="/"><img src="/assets/images/logo.png" width="50 px" height="50 px" alt="Pronet" ></a>
 			</div>
 			<div class="navbar-collapse collapse">
-				<ul class="nav navbar-nav pull-left">
+                <ul class="nav navbar-nav pull-left">
                     <li><a href="/home">Home</a></li>
                     <li ><a href="/userprofile" >Profile</a></li>
                     <li class="active"><a href="/userfollowing">Following</a></li>
@@ -54,8 +54,13 @@
                 </ul>
 
                 <ul class="nav navbar-nav pull-right">
-                    <li><a class="btn" href="/signout">Sign out</a></li>
-				</ul>
+                    <li>
+                        <a href="#"><span class="label label-default active" name="lastseen" id="lastSeen" >Last Seen: <%=lastseen%></span></a>
+                    </li>
+                    <li>
+                        <a class="btn" href="/signout">Sign out</a>
+                    </li>
+                </ul>
 			</div><!--/.nav-collapse -->
 		</div>
 	</div> 

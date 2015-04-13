@@ -49,19 +49,16 @@
                             <li><a href="/userprofile" >Profile</a></li>
                             <li><a href="/userfollowing">Following</a></li>
                             <li><a href="/search">Search</a></li>
+                            </ul>
+
                         <ul class="nav navbar-nav pull-right">
-                            <!--<li>
-                                <div class="span12">
-                                    <form id="custom-search-form" class="form-search form-horizontal pull-right">
-                                        <div class="input-append span12">
-                                            <input type="text" class="search-query mac-style" placeholder="Search for ...">
-                                            <button type="submit" class="btn"><i class="glyphicon glyphicon-search"></i></button>
-                                        </div>
-                                    </form>
-                                </div>
+                            <li>
+                                <a href="#"><span class="label label-default active" name="lastseen" id="lastSeen" >Last Seen: <%=lastseen%></span></a>
                             </li>
-                            -->
-                            <li><a class="btn" href="/signout">Sign out</a></li>
+                            <li>
+                                <a class="btn" href="/signout">Sign out</a>
+                            </li>
+                        </ul>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div>
@@ -199,7 +196,7 @@
 
                                 <div class="editable">
                                 <br>
-                                <span class="textarea ed" name="certification"><%=data.Cerifications%></span>
+                                <span class="textarea ed" name="certifications"><%=data.certifications%></span>
                                 </div>
                             </div>
                         </div>
