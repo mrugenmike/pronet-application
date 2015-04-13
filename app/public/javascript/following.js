@@ -5,7 +5,7 @@ $(document).ready(
         {
             var ahref;
             if(data1[i].followeeRole == 'C')
-                ahref = ' <a href="/company/'+ data1[i].followeeID+'">';
+                ahref = ' <a href="/viewcompany/'+ data1[i].followeeID+'">';
             else
                 ahref = ' <a href="/user/'+ data1[i].followeeID+'">';
 

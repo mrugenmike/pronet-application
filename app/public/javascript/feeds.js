@@ -19,8 +19,8 @@ $(document).ready(function(){
         var namehref;
         if(data1[i].feed_role == 'C')
         {
-            ahref = ' <a class="pull-left" href="/company/'+ data1[i].user_id+'">';
-            namehref = '<a href="/company/'+ data1[i].user_id+'">';
+            ahref = ' <a class="pull-left" href="/viewcompany/'+ data1[i].user_id+'">';
+            namehref = '<a href="/viewcompany/'+ data1[i].user_id+'">';
         }
         else
         {

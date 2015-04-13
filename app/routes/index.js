@@ -167,7 +167,12 @@ router.get("/company/:companyID",requireLogin,function(req,res1){
         console.log(data);
         if(res.statusCode != 400) {
             if ((id == req.session.ID) && (req.session.page =='C'))
+            {
+                //for feeds
+                req.session.companyName=data.company_name;
+                req.session.companyImage=data.logo;
                 res1.render("companyprofile.ejs", {"data": data});
+            }
             else
                 res1.render("companyhome.ejs", {"data": data});
         }
@@ -186,7 +191,7 @@ router.get("/companyprofile",function(req,res){
 });
 
 
-router.post("/companyprofile",function(req,res){
+router.post("/companyprofile",function(req,res2){
 
     console.log(JSON.stringify(req.body));
     var args={
@@ -205,7 +210,7 @@ router.post("/companyprofile",function(req,res){
         console.log(res1.statusCode);
         if(res1.statusCode==201)
         {
-            res.redirect("/company/"+req.session.ID);
+            res2.redirect("/company/"+req.session.ID);
         }
     });
 });
@@ -220,6 +225,8 @@ router.get("/posts",function(req,res){
 router.post("/posts",function(req,res){
     var args={
         data:{
+            feed_username : req.session.companyName,
+            feed_userimage : req.session.companyImage,
            feed_title:req.body.title,
             feed_description:req.body.desc },
 
@@ -434,10 +441,12 @@ router.get("/jobs/:jobId",function(req,res1){
 
 router.get("/viewcompany/:companyId",function(req,res){
     var company_id=req.params.companyId;
-    console.log("company_id"+company_id);
-    client.get(backendroute+"/profile/"+company_id,function(data,res1){
+    //console.log("company_id"+company_id);
+   // client.get(backendroute+"/profile/"+company_id,function(data,res1){
+    client.get(backendroute+"/companyprofile/"+company_id+"/"+req.session.ID,function(data,res1){
+        console.log(data);
         if(res1.statusCode==200){
-            res.render("companyhome.ejs",{data:data});
+            res.render("companyhome.ejs",{data:data, c_id:company_id,page:'C'});
         }
     });
 });
@@ -519,7 +528,7 @@ router.post("/imgupload",function(req,res1){
                         args={
                             data:{
                                 "id":req.session.ID,
-                                "logo":url
+                                "logo":finalURL[0]
                             },
                             headers:{"Content-Type": "application/json"}
                         };
@@ -565,7 +574,7 @@ router.post("/follow",requireLogin,function(req,res1) {
                console.log(followeerole);
                console.log(followeeID);
                if(followeerole == "C")
-                   res1.redirect("/company/"+followeeID);
+                   res1.redirect("/viewcompany/"+followeeID);
                else
                    res1.redirect("/user/"+followeeID);
            }
@@ -580,7 +589,7 @@ router.post("/follow",requireLogin,function(req,res1) {
         client.delete(backendroute+"/follow/"+req.session.ID,args,function (data, res) {
             if(res.statusCode == 200) {
                 if (followeerole == "C")
-                    res1.redirect("/company/" + followeeID);
+                    res1.redirect("/viewcompany/" + followeeID);
                 else
                     res1.redirect("/user/" + followeeID);
             }

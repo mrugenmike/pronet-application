@@ -38,7 +38,6 @@
     $(document).on("change", "#companyimage", function(e){
       var preview = document.querySelector('.companypic');
       var file1    = document.querySelector('.companyimage').files[0];
-      alert(file1);
       var reader  = new FileReader();
       reader.onloadend = function () {
         //	alert("onload")
@@ -46,7 +45,6 @@
       }
 
       if (file1) {
-        alert("in if")
         reader.readAsDataURL(file1);
 
       } else {
@@ -71,7 +69,6 @@
         <li><a href="/careers">Careers</a></li>
         <li ><a href="/jobs">Jobs</a></li>
         <li ><a href="/applicants">Applications</a></li>
-
       </ul>
 
       <ul class="nav navbar-nav pull-right">
@@ -142,8 +139,6 @@
               <div class="editable">
                 <p><span class="label label-warning pull-left"><%=data.followerCount%> followers</span></p>
               </div>
-              <br>
-              <br>
               <br>
               <br>
               <br>

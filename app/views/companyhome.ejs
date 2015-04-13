@@ -6,7 +6,7 @@
     <meta name="description" content="">
     <meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
 
-    <title>User Profile</title>
+    <title>Company Profile</title>
 
     <link rel="shortcut icon" href="/assets/images/gt_favicon.png">
 
@@ -25,7 +25,7 @@
     <script src="/assets/js/jQuery.headroom.min.js"></script>
     <script src="/assets/js/template.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-    <script src="/javascript/mainscript.js"></script>
+    <script src="/javascript/followerValidation.js"></script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -47,10 +47,9 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav pull-left">
                 <li><a href="/home">Home</a></li>
-                <li class="active"><a href="/userprofile" >Profile</a></li>
+                <li><a href="/userprofile" >Profile</a></li>
                 <li><a href="/userfollowing">Following</a></li>
-                <li><a href="/jobs">Jobs</a></li>
-                <li><a href="/applications">Applications</a></li>
+                <li><a href="/search">Search</a></li>
             </ul>
 
             <ul class="nav navbar-nav pull-right">
@@ -80,17 +79,14 @@
                     <hr>
 
                     <div class="imgup">
-                        <form method="post" action="/imgupload" enctype="multipart/form-data">
                             <div class="thumbnail pull-left" >
 
                                 <img id="companypic" class="companypic" src="<%=data.logo%>" width="200 px" height="200 px" >
 
                             </div>
-                        </form>
                     </div>
                     <div class="col-sm-1 text-left">
                     </div>
-                    <form method="post" action="/companyprofile" >
                         <div class="media-body">
                             <div class="editable">
                                 <lable><b>Company Name</b></lable>
@@ -112,12 +108,16 @@
                                 <p><span class="label label-warning pull-left"><%=data.followerCount%> followers</span></p>
                             </div>
                             <br>
-                            <form>
-                                <input type="submit" value="Follow">
+                            <form method="post" action="/follow">
+                                <input type="text" hidden="hidden" id="thisID" name="thisID" >
+                                <input type="text" hidden="hidden" id="sampleID" name="sampleID" value=<%=c_id%>|<%=data.logo%>|<%=page%>|<%=data.company_name%>>
+                                <input type="text" hidden="hidden" id="followerCount" name="followerCount" value=<%=data.followerCount%>>
+
+                                <button id="foll" class="btn btn-xs btn-action btn-primary pull-right" type="submit"><span class="glyphicon glyphicon-circle"></span><%=data.follow%></button>
                             </form>
 
                         </div>
-                    </form>
+
                 </div>
             </div>
 
@@ -140,23 +140,32 @@
             <br>
             <div class="div_style">
 
-                <form>
+                <div class="panel-body">
+
                     <div class="row">
-                        <div class="col-md-12">
-                            <div class="well well-sm" width="1140px" height="99px">
-                                <div class="media">
-                                </div>
-                                <div class="media-body editable">
-
-                                    <div class="editable">
-                                        <br>
-                                        <h4><b>Recent Posts</b></h4>
-                                        <span class="textarea ed" name="postfield">Recent Posts</span>
-                                    </div>
-
-                                </div>
-                            </div>
+                        <div class="editable">
+                            <br>
+                            <h3 class="page-title" align="center">Recent Posts</h3>
+                            <hr>
                         </div>
                     </div>
-                </form>
+
+                    <% for(var i=0; i < data.feeds.length; i++) { %>
+                    <div class="container" margin-top="40px" width="700px">
+                        <form method="post" action="/deletefeeds/<%=data.feeds[i].id%>">
+                            <div>
+
+                                <h4><b><%=data.feeds[i].email%></b></h4>
+                                <h5><%=data.feeds[i].password%></h5>
+                                 <br>
+                            </div>
+                        </form>
+                    </div>
+                    <hr>
+                    <%   }
+                    %>
+                </div>
             </div>
+        </article>
+    </div>
+</div>
