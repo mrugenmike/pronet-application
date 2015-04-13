@@ -177,7 +177,7 @@ function renderUserListings(userListings,searchTerm,totalTerms) {
         searchTemplate.children("h4").html("Found "+totalTerms+" results for <i>"+searchTerm+"</i>");
         userListingContainer.append(searchTemplate);
         userListings.forEach(function(listing){
-            var div = '<div class="row" name="listing" class="listingTemplate"><div class="blockquote-box blockquote-primary clearfix col-md-offset-2"> <div class="square pull-left" name="company-img-div"> <img src='+listing.logo+' class="img-thumbnail"/> </div> <h4 name="position-title"><a href="/users/'+listing.id+'">'+listing.name+'</a></h4> <p name="region">'+listing.region+'</p> </div> </div>';
+            var div = '<div class="row" name="listing" class="listingTemplate"><div class="blockquote-box blockquote-primary clearfix col-md-offset-2"> <div class="square pull-left" name="company-img-div"> <img src='+listing.logo+' class="img-thumbnail"/> </div> <h4 name="position-title"><a href="/user/'+listing.id+'">'+listing.name+'</a></h4> <p name="region">'+listing.region+'</p> </div> </div>';
             userListingContainer.append(div);
         });
     }
