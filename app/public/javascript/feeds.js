@@ -28,12 +28,14 @@ $(document).ready(function(){
             namehref = '<a href="/user/'+ data1[i].user_id+'">';
         }
 
-
         var del="";
         if(ID == data1[i].user_id)
         {
-            del='<div class="btn-group glyphicon glyphicon-trash pull-right"></div>'
+            del='<div>' +
+            '<button  class="btn btn-xs btn-primary btn-action pull-right" id="deletebutton" type="submit"' +
+            ' name="feedID" value ="' + data1[i].feed_id + '" id="' + data1[i].feed_id +'"><span class="glyphicon glyphicon-trash"></span></button></div>'
         }
+        console.log(data1[i].feed_id);
         var divTag = '<div class="media block-update-card">' + ahref +
             '<img class="media-object update-card-MDimentions" src="'+ data1[i].user_img +'" alt="..."></a>' +
             '<div class="media-body update-card-body">'+ namehref +
@@ -43,6 +45,6 @@ $(document).ready(function(){
             '</div>' +
             '<div class="card-action-pellet btn-toolbar pull-right" role="toolbar"> '+del+
             '</div> </div> <div class="row"> </div> <br> <div> </div>';
-            $("#postsfeeds").append(divTag);
+        $("#postsfeeds").append(divTag);
     }
 });

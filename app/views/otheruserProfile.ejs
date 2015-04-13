@@ -24,8 +24,7 @@
             <script src="/assets/js/jQuery.headroom.min.js"></script>
             <script src="/assets/js/template.js"></script>
             <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
-            <script src="/javascript/followerValidation.js"></script>
-
+            <script src="/javascript/userfollowerValidation.js"></script>
 
             <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
             <!--[if lt IE 9]>
@@ -46,16 +45,13 @@
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav pull-left">
-                            <li><a href="/feeds">Home</a></li>
-                            <li><a href="/userprofile">Profile</a></li>
-                            <li><a href="/userfollowing">Following</a></li>
-                            <li><a href="/search">search</a></li>
-                            <li><a href="/applications">Applications</a></li>
-                        </ul>
-
-
+                            <li><a href="/home">Home</a></li>
+                            <li ><a href="/userprofile" >Profile</a></li>
+                            <li ><a href="/userfollowing">Following</a></li>
+                            <li class="active"><a href="/search">Search</a></li>
+                            <li><a href="/applications">Applications</a></li> </ul>
                         <ul class="nav navbar-nav pull-right">
-                            <li>
+                            <!--<li>
                                 <div class="span12">
                                     <form id="custom-search-form" class="form-search form-horizontal pull-right">
                                         <div class="input-append span12">
@@ -65,6 +61,7 @@
                                     </form>
                                 </div>
                             </li>
+                            -->
                             <li><a class="btn" href="/signout">Sign out</a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
@@ -124,7 +121,7 @@
                                 </p>
                                 <br>
                                 <br>
-                                <p><span id="displayfc"class="label label-warning pull-right"><%=data.followerCount%> followers</span></p>
+                                <p><span id="displayfc"class="label label-warning pull-right"><%=data.followerCount%> connections</span></p>
                             </div>
                         </div>
                     </div>

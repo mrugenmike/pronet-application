@@ -80,43 +80,53 @@ router.post('/signin',function(req,res1){
             req.session.ID = data.id;
             req.session.page = data.page;
             req.session.lastseen = data.last_login;
+
             if (req.session.page == 'U') {
                 res1.redirect('/user/'+data.id);
             }
             else {
                 res1.redirect('/company/' + data.id);
             }
-
         }
-    }).on("error",function(err){
+    });
+    /*.on("error",function(err){
         console.info("error occured"+err);
         res1.redirect("/signin");//redirect on sign in failure
-    });
+    });*/
 });
 
 router.get("/signup",function(req,res){
-    res.render('signup.ejs', {"error1":"", "name" :"" , "email" :"", "password" :"" ,  "role" :""});
+    res.render('signup.ejs', {"error1":"", "firstname": "" , "lastname" :"" , "companyname" :"" , "email" :"", "password" :"" ,  "role" :""});
 });
 
 router.post("/signup",function(req,res1){
+    var name;
+    if(req.body.role == "U")
+    {
+        name =  req.body.firstName + " " + req.body.lastName;
+    }
+    else
+    {
+        name =  req.body.companyName;
+    }
+
     args={
-        data:{ user_name:req.body.name, email:req.body.email, password:req.body.password, role:req.body.role},
+        data:{ user_name:name , email:req.body.email, password:req.body.password, role:req.body.role},
         headers:{"Content-Type": "application/json"}
     };
-
     client.post(backendroute+"/signup",args,function(data,res)
     {
         if(res.statusCode == 201){
             res1.redirect('/signin'); // redirect user to sign in
-        } else // send him back to sign in page
+        } else
         {
-            res1.render('signup.ejs', {"error1":data.message, "name" :req.body.name , "email" :req.body.email, "password" :req.body.password ,  "role" :req.body.role});
+            res1.render('signup.ejs', {"error1":data.message, "firstname": req.body.firstName , "lastname" :req.body.lastName , "companyname" :req.body.companyName , "email" :req.body.email, "password" :req.body.password ,  "role" :req.body.role});
         }
-    }).on("error",function(err){
-        console.log("Error occured while signing up user");
-         res1.redirect("/signup");
     });
-
+    /*.on("error",function(err){
+     console.log("Error occured while signing up user");
+     res1.redirect("/signup");
+     });*/
 });
 
 router.get("/user/:userID",requireLogin,function(req,res1){
@@ -127,12 +137,13 @@ router.get("/user/:userID",requireLogin,function(req,res1){
         console.log(res.statusCode);
         if(res.statusCode != 400)
         {
-            //for feeds
-            req.session.name = data.name;
-            req.session.userImage = data.img;
-
-            if((id == req.session.ID) && (req.session.page =='U') )
+            if((id == req.session.ID) && (req.session.page =='U'))
+            {
+                //for feeds
+                req.session.name = data.name;
+                req.session.userImage = data.img;
                 res1.render("userProfile.ejs", {"data": data , lastseen:req.session.lastseen });
+            }
             else
                 res1.render("otheruserProfile.ejs" , {"data" : data});
         }
@@ -760,5 +771,20 @@ router.post("/userposts",function(req,res1){
 
         });
     });
+
+
+router.post("/deleteuserposts",function(req,res1) {
+    console.log("in delete post");
+    console.log(req.body.feedID);
+    var feedID = req.body.feedID;
+    args = {
+        headers: {"Content-Type": "application/json"}
+    };
+    client.delete(backendroute+"/feeds/"+feedID,args,function (data, res) {
+        if(res.statusCode == 200) {
+            res1.redirect("/home/"+req.session.ID);
+        }
+    });
+});
 
 module.exports = router;
