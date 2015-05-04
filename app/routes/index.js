@@ -17,8 +17,8 @@ var eventOnUpload = new EventEmitter();
 
 aws.config.loadFromPath(path.join(__dirname, 'conf/AccDetails.json'));
 
-var backendroute = "http://52.8.8.245:8080/api/v1";
-//var backendroute = "http://localhost:8080/api/v1";
+//var backendroute = "http://52.8.8.245:8080/api/v1";
+var backendroute = "http://localhost:8080/api/v1";
 function requireLogin (req, res, next) {
     console.log("requirelogin");
     if (!(req.session.ID && req.session.page && req.session.lastseen)) {
@@ -63,6 +63,9 @@ router.get("/home",function(req,res1){
     res1.redirect('/home/'+req.session.ID);
 });
 
+router.get("/recommendation",function(req,res1){
+    res1.redirect('/recommendation/'+req.session.ID);
+});
 
 router.post('/signin',function(req,res1){
     args={
@@ -218,7 +221,10 @@ router.post("/companyprofile",function(req,res2){
         }
     });
 });
-//--------------------------------------------------------------------------------------------------
+//------------------------------
+//
+//
+// --------------------------------------------------------------------
 
 //ADD NEWS FEEDS(GET//POST)
 
@@ -443,7 +449,6 @@ router.get("/jobs/:jobId",function(req,res1){
 //GET COMPANY HOME BY USER
 //--------------------------
 
-
 router.get("/viewcompany/:companyId",function(req,res){
     var company_id=req.params.companyId;
     //console.log("company_id"+company_id);
@@ -464,6 +469,7 @@ router.get("/following/:userID",function(req,res1){
     client.get(backendroute+"/following/"+followerid,function(data,res){
         console.log(data);
         //res.send(data);
+        res1.header("Access-Control-Allow-Origin", "*");
         res1.render("following.ejs",{data:data , lastseen:req.session.lastseen });
     });
 });
@@ -588,7 +594,11 @@ router.post("/follow",requireLogin,function(req,res1) {
     else
     {
         args = {
-            data: { followerId : value[0]},
+            data:
+            {
+                followerId : value[0],
+                followerRole : value[2]
+            },
             headers: {"Content-Type": "application/json"}
         };
         client.delete(backendroute+"/follow/"+req.session.ID,args,function (data, res) {
@@ -801,4 +811,16 @@ router.post("/deleteuserposts",function(req,res1) {
     });
 });
 
+router.get("/recommendation/:userID",requireLogin,function(req,res1){
+        var id = req.param("userID");
+        console.log(id);
+        client.get(backendroute+"/skills/recommendation/"+req.session.ID,function (data, res) {
+        console.log(res.statusCode);
+        console.log("DATA REC:"+data);
+
+       if(res.statusCode==200)
+            res1.render("skillrecommendation.ejs",{"data": data,lastseen: req.session.lastseen});
+    });
+
+});
 module.exports = router;

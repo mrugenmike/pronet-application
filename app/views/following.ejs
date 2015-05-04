@@ -26,6 +26,7 @@
     <script src="/javascript/following.js"> </script>
     <script type="text/javascript">
         var data1 =<%-JSON.stringify(data)%>;
+
     </script>
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -43,19 +44,20 @@
 			<div class="navbar-header">
 				<!-- Button for smallest screens -->
 				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-				<a class="navbar-brand" href="/"><img src="/assets/images/logo.png" width="50 px" height="50 px" alt="Pronet" ></a>
+				<a class="navbar-brand" href="/"><img src="/assets/images/logo.png" width="50 px" height="50 px" alt="Pronet"></a>
 			</div>
 			<div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav pull-left">
                     <li><a href="/home">Home</a></li>
-                    <li ><a href="/userprofile" >Profile</a></li>
+                    <li ><a href="/userprofile">Profile</a></li>
                     <li class="active"><a href="/userfollowing">Following</a></li>
                     <li><a href="/search">Search</a></li>
+                    <li><a href="/recommendation">Recommended Skills</a></li>
                 </ul>
-
                 <ul class="nav navbar-nav pull-right">
                     <li>
                         <a href="#"><span class="label label-default active" name="lastseen" id="lastSeen" >Last Seen: <%=lastseen%></span></a>
+
                     </li>
                     <li>
                         <a class="btn" href="/signout">Sign out</a>
@@ -72,72 +74,65 @@
 <!--Card with Media-->    
 
     <div class="container" margin-top="30px">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="well well-sm">
-            <div class="media" id="addcompanyfollow">
-                <div class="row">
-                    <div class="col-lg-12 pull-left">
-                        <h2>
-                        <span class="textarea" name="education">Companies followed : </span>
-                        </h2>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well well-sm">
+                        <div class="media" id="addcompanyfollow">
+                            <div class="row">
+                                <div class="col-lg-12 pull-left">
+                                    <h2>
+                                        <span class="textarea" name="education">Companies followed : </span>
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-               <!-- <div class="col-lg-2 col-sm-5 text-center">
-                    <img class="img-circle img-responsive img-center" style = "width: 100px; height:100px;" src="assets/images/varuna.jpg" alt="">
-                    <h5>Company Name</h5>
-                </div>
-
-
-                <div class="col-lg-2 col-sm-5 text-center">
-                    <img class="img-circle img-responsive img-center" style = "width: 100px; height:100px;" src="assets/images/varuna.jpg" alt="">
-                    <h5>Company Name</h5>
-                </div>
--->
             </div>
+
+            <div class="row">
             </div>
-        </div>
-    </div>
 
-    <div class="row">
-    </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well well-sm">
+                        <div class="media" id="adduserfollow">
+                            <div class="row">
+                                <div class="col-lg-12 pull-left">
+                                    <h2>
+                                        <span class="textarea" name="education">Users followed : </span>
+                                    </h2>
+                                </div>
+                            </div>
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="well well-sm">
-            <div class="media" id="adduserfollow">
-                <div class="row">
-                    <div class="col-lg-12 pull-left">
-                        <h2>
-                        <span class="textarea" name="education">People followed : </span>
-                        </h2>
+                        </div>
                     </div>
                 </div>
-                <!--
-                <div class="col-lg-2 col-sm-5 text-center">
-                    <img class="img-circle img-responsive img-center" style = "width: 100px; height:100px;" src="assets/images/varuna.jpg" alt="">
-                    <h5>Company Name</h5>
-                </div>
-
-
-                <div class="col-lg-2 col-sm-5 text-center">
-                    <img class="img-circle img-responsive img-center" style = "width: 100px; height:100px;" src="assets/images/varuna.jpg" alt="">
-                    <h5>Company Name</h5>
-                </div>
-
-
-                <div class="col-lg-2 col-sm-5 text-center">
-                    <img class="img-circle img-responsive img-center" style = "width: 100px; height:100px;" src="assets/images/varuna.jpg" alt="">
-                    <h5>Company Name</h5>
-                </div>
-            -->
-
             </div>
+
+
+            <div class="row">
             </div>
-        </div>
-    </div>         
-</div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well well-sm">
+                        <div class="media" id="reco">
+                            <div class="row">
+                                <div class="col-lg-12 pull-left">
+                                    <h2>
+                                        <span class="textarea" name="education">Recommended Users : </span>
+                                    </h2>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    </div>
 
 
 	<!-- JavaScript libs are placed at the end of the document so the pages load faster -->

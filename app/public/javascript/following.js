@@ -1,23 +1,25 @@
 $(document).ready(
-
     function() {
-        for(i=0 ; i<data1.length ; i++)
-        {
+        console.log($("#currentID").val());
+        for (i = 0; i < data1.length; i++) {
             var ahref;
-            if(data1[i].followeeRole == 'C')
-                ahref = ' <a href="/viewcompany/'+ data1[i].followeeID+'">';
+            if (data1[i].followeeRole == 'C')
+                ahref = ' <a href="/viewcompany/' + data1[i].followeeID + '">';
             else
-                ahref = ' <a href="/user/'+ data1[i].followeeID+'">';
+                ahref = ' <a href="/user/' + data1[i].followeeID + '">';
 
 
             var divTag = '<div class="col-lg-2 col-sm-5 text-center">' + ahref +
-                '<img class="img-circle img-responsive img-center" style = "width: 100px; height:100px;" src="'+ data1[i].followeeImgURL + '" alt=""></a>' +
+                '<img class="img-circle img-responsive img-center" style = "width: 100px; height:100px;" src="' + data1[i].followeeImgURL + '" alt=""></a>' +
                 '<h4> ' + data1[i].followeeName + '</h4>' +
                 '</div>';
 
-            if(data1[i].followeeRole == 'C')
+            if (data1[i].followeeRole == 'C')
                 $("#addcompanyfollow").append(divTag);
-            else
+            else if(data1[i].followeeRole == 'U')
                 $("#adduserfollow").append(divTag);
+            else if(data1[i].followeeRole == 'R')
+                $("#reco").append(divTag);
         }
-   });
+
+});

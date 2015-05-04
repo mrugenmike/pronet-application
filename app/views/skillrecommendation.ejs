@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"    content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author"      content="Sergey Pozhilov (GetTemplate.com)">
+
+    <title>Job List</title>
+
+    <link rel="shortcut icon" href="/assets/images/gt_favicon.png">
+
+    <link rel="stylesheet" media="screen" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/css/divstyle.css">
+
+    <!-- Custom styles for our template -->
+    <link rel="stylesheet" href="/assets/css/bootstrap-theme.css" media="screen" >
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <link rel="stylesheet" href="/assets/css/buttonstyle.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="/assets/js/html5shiv.js"></script>
+    <script src="/assets/js/respond.min.js"></script>
+    <![endif]-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            var data=<%- JSON.stringify(data)%>;
+            var recArray=[];
+
+           for(i=0;i<data.length;i++){
+               var temp=[];
+               temp.push(data[i].skillName);
+               temp.push(data[i].value);
+             //  alert(temp);
+               recArray.push(temp);
+             //  alert(recArray[i]);
+
+           }
+            $('#container').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: 0,
+                    plotShadow: true
+                },
+                title: {
+                    text: 'Skills<br>Recommended',
+                    color:'grey',
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    y: 50
+                },
+                tooltip: {
+                    pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+                },
+                plotOptions: {
+                    pie: {
+                        dataLabels: {
+                            enabled: true,
+                            distance: -50,
+                            style: {
+                                fontWeight: 'bold',
+
+                                textShadow: '0px 1px 2px black'
+                            }
+                        },
+                        startAngle: -90,
+                        endAngle: 90,
+                        center: ['50%', '75%']
+                    }
+                },
+                series: [{
+                    type: 'pie',
+                    name: 'Skill to be learned',
+                    innerSize: '50%',
+                    data: [
+                            recArray[0],
+                            recArray[1],
+                            recArray[2],
+                            recArray[3],
+                            recArray[4],
+                    ]
+                }]
+            });
+        });
+    </script>
+</head>
+
+<body>
+<!-- Fixed navbar -->
+<div class="navbar navbar-inverse navbar-fixed-top headroom" >
+    <div class="container">
+        <div class="navbar-header">
+            <!-- Button for smallest screens -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+            <a class="navbar-brand" href="/"><img src="/assets/images/logo.png" width="50 px" height="50 px" alt="Pronet" ></a>
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav pull-left">
+                <li><a href="/home">Home</a></li>
+                <li ><a href="/userprofile" >Profile</a></li>
+                <li><a href="/userfollowing">Following</a></li>
+                <li><a href="/search">Search</a></li>
+                <li class="active"><a href="/search">Recommended Skills</a></li>
+            </ul>
+
+            <ul class="nav navbar-nav pull-right">
+                <li>
+                    <a href="#"><span class="label label-default active" name="lastseen" id="lastSeen" ></span></a>
+                </li>
+                <li>
+                    <a class="btn" href="/signout">Sign out</a>
+                </li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</div>
+<!-- /.navbar -->
+
+
+<header id="head" class="secondary"></header>
+
+<!-- container -->
+<div class="container">
+    <!--place code here-->
+    <div class="row">
+
+        <!-- Article main content -->
+        <article class="col-xs-12 maincontent">
+            <header class="page-header">
+                <h1 class="page-title">Skill Recommendation</h1>
+            </header>
+            <div class="div_style" align="center">
+                <div class="panel-body">
+                    <h3 class="thin text-center">Recommended skills based on your current skills</h3>
+                    <hr>
+                    <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
+
+                </div>
+            </div>
+        </article>
+    </div>
+
+    </article>
+    <!-- /Article -->
+
+</div>
+</div>
+<!-- /.container -->
+</div>
+
+
+
+
+<!-- JavaScript libs are placed at the end of the document so the pages load faster -->
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="/assets/js/headroom.min.js"></script>
+<script src="/assets/js/jQuery.headroom.min.js"></script>
+<script src="/assets/js/template.js"></script>
+</body>
+</html>
